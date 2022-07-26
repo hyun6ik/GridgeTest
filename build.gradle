@@ -38,6 +38,16 @@ dependencies {
 
     //Jasypt
     implementation group: 'com.github.ulisesbocchio', name: 'jasypt-spring-boot-starter', version: '3.0.4'
+
+    //JWT
+    implementation group: 'io.jsonwebtoken', name: 'jjwt', version: '0.2'
+
+    //Redis
+    implementation 'org.springframework.boot:spring-boot-starter-data-redis'
+
+    //SMS
+    implementation group: 'net.nurigo', name: 'javaSDK', version: '2.2'
+
 }
 
 tasks.named('test') {
