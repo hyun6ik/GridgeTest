@@ -1,6 +1,21 @@
 spring:
 
+  jpa:
+    show-sql: true
+    properties:
+      hibernate:
+        dialects: org.hibernate.dialect.MySQL57Dialect
+        format_sql: true
+        default_batch_fetch_size: 1000
+    hibernate:
+      ddl-auto: create
 
+  datasource:
+    hikari:
+      driver-class-name: org.mariadb.jdbc.Driver
+      url: jdbc:mysql://localhost:63306/gridge-test-db?serverTimezone=UTC&characterEncoding=UTF-8
+      username: root
+      password: root-pass
 
   redis:
     pool:

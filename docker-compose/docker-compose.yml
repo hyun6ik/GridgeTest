@@ -1,0 +1,21 @@
+version: "3.7"
+
+services:
+  gridge-test-db:
+    image: mariadb
+    container_name: ${CONTAINER_NAME}
+    ports:
+      - "${MYSQL_PORT}:${MYSQL_DOCKER_PORT}"
+    environment:
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_HOST: ${MYSQL_HOST}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      TZ: UTC
+    command: # 명령어 실행
+      - --character-set-server=utf8mb4
+      - --collation-server=utf8mb4_unicode_ci
+      - --lower_case_table_names=1
+    volumes:
+      - ./master:/var/lib/mysql
+    env_file:
+      - .env
