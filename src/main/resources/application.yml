@@ -3,3 +3,9 @@ jasypt:
     algorithm: PBEWithMD5AndTripleDES
     iv-generator-classname: org.jasypt.iv.NoIvGenerator
 
+kakao:
+  client:
+    id: ENC(Huq7OzVS7/Nttx9gSX+b9djqHoYFmqBVumZrQn63KTz5OvgUYawtp6yAvWL33igh)
+    secret: ENC(ylKuoRG0eaRukuX/eGHlFPixud82hyV69edXHj2gu0G05SvIua+xkDU5LyDF0MPg)
+    redirect-url: http://localhost:8080/auth/kakao/callback
+    grant-type: authorization_code
