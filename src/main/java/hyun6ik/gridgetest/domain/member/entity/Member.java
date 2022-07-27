@@ -1,10 +1,12 @@
 package hyun6ik.gridgetest.domain.member.entity;
 
 import hyun6ik.gridgetest.domain.base.BaseTimeEntity;
+import hyun6ik.gridgetest.domain.member.constant.MemberType;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -47,4 +49,14 @@ public class Member extends BaseTimeEntity {
         this.memberToken = memberToken;
     }
 
+    public String getNickName() {
+        return this.getProfile().getNickName();
+    }
+
+    public void encodePassword(PasswordEncoder passwordEncoder) {
+        if (!this.memberStatus.getMemberType().equals(MemberType.GENERAL)) {
+            return;
+        }
+        this.password = passwordEncoder.encode(password);
+    }
 }

@@ -23,8 +23,6 @@ public class KakaoUserInfo {
             "email_needs_agreement", "is_email_valid", "is_email_verified"})
     public static class KakaoAccount {
 
-        private String email;
-
         private Profile profile;
 
         @Getter

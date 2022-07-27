@@ -6,9 +6,13 @@ import lombok.Getter;
 public enum ErrorCode {
 
     // 인증
-    ALREADY_REGISTERED_MEMBER(400, "이미 가입된 회원 입니다."),
+    DUPLICATED_MEMBER(400, " 을(를) 사용할 수 없습니다."),
     MISMATCHED_PASSWORD(401, "패스워드가 일치하지 않습니다."),
     LOGIN_ERROR(401, "아이디 또는 비밀번호를 확인해주세요"),
+    REGEX_CHECK_NICKNAME(400, "아이디는 영어,숫자, '_', '.'만 사용 가능합니다."),
+    REGEX_CHECK_PASSWORD(400,"비밀번호에는 특수문자가 1개 이상 포함되어야 합니다."),
+    NOT_FOUND_SOCIAL_USER(400,"회원 가입이 필요합니다."),
+
 
     INVALID_MEMBER_TYPE(400, "잘못된 회원 타입 입니다.(memberType : KAKAO)"),
     NOT_EXISTS_AUTHORIZATION(401, "Authorization Header가 빈값입니다."),
