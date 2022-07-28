@@ -3,6 +3,7 @@ package hyun6ik.gridgetest.domain.post;
 import hyun6ik.gridgetest.domain.base.BaseTimeEntity;
 import hyun6ik.gridgetest.domain.comment.entity.Comments;
 import hyun6ik.gridgetest.domain.member.entity.Member;
+import hyun6ik.gridgetest.domain.post.constant.PostStatus;
 import hyun6ik.gridgetest.domain.post.content.PostContent;
 import hyun6ik.gridgetest.domain.post.image.Images;
 import hyun6ik.gridgetest.domain.post.like.Likes;
@@ -38,6 +39,9 @@ public class Post extends BaseTimeEntity {
     @Embedded
     private Comments comments;
 
+    @Enumerated(EnumType.STRING)
+    private PostStatus postStatus;
+
     @Builder
     public Post(Member member, Images images, PostContent postContent, Likes likes, Comments comments) {
         this.member = member;
@@ -45,6 +49,7 @@ public class Post extends BaseTimeEntity {
         this.postContent = postContent;
         this.likes = likes;
         this.comments = comments;
+        this.postStatus = PostStatus.USE;
 
         images.belongTo(this);
     }
