@@ -75,4 +75,8 @@ public class Member extends BaseTimeEntity {
         }
         this.password = passwordEncoder.encode(password);
     }
+
+    public void removeRefreshToken() {
+        this.memberToken.removeRefreshToken();;
+    }
 }

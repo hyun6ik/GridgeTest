@@ -59,4 +59,11 @@ public class LoginFacade {
                 .accessTokenExpireTime(newAccessTokenExpireTime)
                 .build();
     }
+
+    @Transactional
+    public String logout(Long memberId) {
+        final Member member = memberService.getMemberBy(memberId);
+        member.removeRefreshToken();
+        return "logout success";
+    }
 }

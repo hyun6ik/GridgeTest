@@ -51,4 +51,10 @@ public class LoginController {
     public ResponseEntity<TokenAccessDto> refreshAccessToken(@MemberId Long memberId) {
         return ResponseEntity.ok(loginFacade.createAccessTokenByRefreshToken(memberId, LocalDateTime.now()));
     }
+
+    @LoginUser
+    @PostMapping("/logout")
+    public ResponseEntity<String> logout(@MemberId Long memberId) {
+        return ResponseEntity.ok(loginFacade.logout(memberId));
+    }
 }

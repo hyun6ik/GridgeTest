@@ -25,6 +25,11 @@ public class MemberToken {
         this.tokenExpirationTime = tokenExpirationTime;
     }
 
+    public void removeRefreshToken() {
+        this.refreshToken = null;
+        this.tokenExpirationTime = null;
+    }
+
     public static MemberToken of(String refreshToken, Date refreshTokenExpireTime) {
         return MemberToken.builder()
                 .refreshToken(refreshToken)
