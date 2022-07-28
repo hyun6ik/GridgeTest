@@ -14,11 +14,13 @@ public class PostRegisterDto {
         private String content;
     }
 
+    @Getter
+    @Setter
     public static class Response {
-        private Long id;
+        private Long postId;
 
-        public Response(Long id) {
-            this.id = id;
+        public Response(Long postId) {
+            this.postId = postId;
         }
     }
 }
