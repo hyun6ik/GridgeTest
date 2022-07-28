@@ -87,4 +87,8 @@ public class Member extends BaseTimeEntity {
     public void updatePrivateAccount() {
         this.memberStatus.changePrivateAccount();
     }
+
+    public void resignMember() {
+        this.memberStatus.resignMember();
+    }
 }

@@ -67,4 +67,11 @@ public class MemberServiceImpl implements MemberService{
         final Member member = memberReader.getMemberBy(memberId);
         member.updatePrivateAccount();
     }
+
+    @Override
+    @Transactional
+    public void resignMember(Long memberId) {
+        final Member member = memberReader.getMemberBy(memberId);
+        member.resignMember();
+    }
 }

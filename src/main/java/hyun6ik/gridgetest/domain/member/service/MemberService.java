@@ -20,4 +20,6 @@ public interface MemberService {
     void changePassword(String memberId, String password, String password2);
 
     void updatePrivateAccount(Long memberId);
+
+    void resignMember(Long memberId);
 }

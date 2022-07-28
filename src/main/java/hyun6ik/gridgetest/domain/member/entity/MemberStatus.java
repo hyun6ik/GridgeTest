@@ -41,4 +41,8 @@ public class MemberStatus {
     public void changePrivateAccount() {
         this.memberScope = MemberScope.PRIVATE;
     }
+
+    public void resignMember() {
+        this.memberCondition = MemberCondition.RESIGNED;
+    }
 }

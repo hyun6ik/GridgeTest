@@ -28,4 +28,11 @@ public class MemberController {
         memberService.updatePrivateAccount(memberId);
         return ResponseEntity.ok(MemberConstraints.CHANGE_PRIVATE);
     }
+
+    @LoginUser
+    @PutMapping("/resign")
+    public ResponseEntity<String> resignMember(@MemberId Long memberId) {
+        memberService.resignMember(memberId);
+        return ResponseEntity.ok(MemberConstraints.RESIGN_MEMBER);
+    }
 }
