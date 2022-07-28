@@ -6,15 +6,16 @@ import lombok.Getter;
 public enum ErrorCode {
 
     // 인증
-    DUPLICATED_MEMBER(400, " 을(를) 사용할 수 없습니다."),
+    DUPLICATED_MEMBER(400, "을(를) 사용할 수 없습니다."),
     MISMATCHED_PASSWORD(401, "패스워드가 일치하지 않습니다."),
     LOGIN_ERROR(401, "아이디 또는 비밀번호를 확인해주세요"),
-    REGEX_CHECK_NICKNAME(400, "아이디는 영어,숫자, '_', '.'만 사용 가능합니다."),
+    REGEX_CHECK_NICKNAME(400, "아이디는 소문자 영어,숫자, '_', '.'만 사용 가능합니다."),
     REGEX_CHECK_PASSWORD(400,"비밀번호에는 특수문자가 1개 이상 포함되어야 합니다."),
     NOT_FOUND_SOCIAL_USER(400,"회원 가입이 필요합니다."),
 
     MAXIMUM_CONTENT_LENGTH(400,"게시글은 최대 500자 입니다." ),
     MAX_COMMENT_CONTENT_LENGTH(400, "댓글은 최대 100자입니다." ),
+    LENGTH_PASSWORD(400,"비밀번호는 6자 이상 20자 이하입니다." ),
 
     //POST
     NEED_AT_LEAST_ONE_IMAGE(400, "게시글 등록하기 위해선 최소 1개의 사진이 필요합니다."),

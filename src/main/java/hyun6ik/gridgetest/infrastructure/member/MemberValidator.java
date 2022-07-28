@@ -15,6 +15,9 @@ import java.util.regex.Pattern;
 @RequiredArgsConstructor
 public class MemberValidator {
 
+    final int MIN = 6;
+    final int MAX = 20;
+
     private final MemberRepository memberRepository;
 
     public void validateRegister(Member initMember) {
@@ -27,15 +30,20 @@ public class MemberValidator {
         if (password == null) {
             return;
         }
-        String regex = "[!@#$%^&*(),.?\\\":{}|<>]";
-        if (Pattern.matches(regex, password)) {
+        String specialCharacter = "[0-9|a-z|A-Z|ㄱ-ㅎ|ㅏ-ㅣ|가-힣|]*$";
+        if (Pattern.matches(specialCharacter, password)) {
             throw new LoginException(ErrorCode.REGEX_CHECK_PASSWORD);
+        }
+
+        final int length = password.length();
+        if (length < MIN || length > MAX) {
+            throw new LoginException(ErrorCode.LENGTH_PASSWORD);
         }
     }
 
     private void nickNameRegexCheck(String nickName) {
-        String regex = "[^0-9a-z_.]";
-        if (Pattern.matches(regex, nickName)) {
+        String regex = "[0-9|a-z|_.]*$";
+        if (!Pattern.matches(regex, nickName)) {
             throw new LoginException(ErrorCode.REGEX_CHECK_NICKNAME);
         }
     }
