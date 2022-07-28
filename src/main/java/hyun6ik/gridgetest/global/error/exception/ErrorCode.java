@@ -24,6 +24,7 @@ public enum ErrorCode {
 
     //LIKE
     DUPLICATED_LIKE(400,"이미 좋아요를 누르셨습니다."),
+    CANNOT_UNLIKE(400, "좋아요를 누르지 않으셨습니다."),
 
     INVALID_MEMBER_TYPE(400, "잘못된 회원 타입 입니다.(memberType : KAKAO)"),
     NOT_EXISTS_AUTHORIZATION(401, "Authorization Header가 빈값입니다."),

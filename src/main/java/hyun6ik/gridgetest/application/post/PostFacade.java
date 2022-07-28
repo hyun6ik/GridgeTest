@@ -32,4 +32,12 @@ public class PostFacade {
         post.like(member);
         return new LikeDto(post.getLikeCounts(), true);
     }
+
+    @Transactional
+    public LikeDto unlikePost(Long memberId, Long postId) {
+        final Member member = memberService.getMemberBy(memberId);
+        final Post post = postService.getPostBy(postId);
+        post.unlike(member);
+        return new LikeDto(post.getLikeCounts(), false);
+    }
 }

@@ -71,4 +71,9 @@ public class Post extends BaseTimeEntity {
     public Integer getLikeCounts() {
         return likes.getCounts();
     }
+
+    public void unlike(Member member) {
+        Like like = new Like(this, member);
+        likes.remove(like);
+    }
 }

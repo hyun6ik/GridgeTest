@@ -45,4 +45,11 @@ public class PostController {
     public ResponseEntity<LikeDto> likePost(@MemberId Long memberId, @PathVariable Long postId) {
         return ResponseEntity.ok(postFacade.likePost(memberId, postId));
     }
+
+    @LoginUser
+    @DeleteMapping("/likes/{postId}")
+    public ResponseEntity<LikeDto> unlikePost(@MemberId Long memberId, @PathVariable Long postId) {
+        return ResponseEntity.ok(postFacade.unlikePost(memberId, postId));
+    }
+
 }

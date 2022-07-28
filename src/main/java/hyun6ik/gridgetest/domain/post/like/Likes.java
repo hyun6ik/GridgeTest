@@ -1,5 +1,6 @@
 package hyun6ik.gridgetest.domain.post.like;
 
+import hyun6ik.gridgetest.global.error.exception.CannotUnlikeException;
 import hyun6ik.gridgetest.global.error.exception.DuplicatedLikeException;
 import hyun6ik.gridgetest.global.error.exception.ErrorCode;
 import lombok.AccessLevel;
@@ -34,5 +35,12 @@ public class Likes {
 
     public Integer getCounts() {
         return likes.size();
+    }
+
+    public void remove(Like like) {
+        if (!likes.contains(like)) {
+            throw new CannotUnlikeException(ErrorCode.CANNOT_UNLIKE);
+        }
+        likes.remove(like);
     }
 }
