@@ -41,7 +41,7 @@ public class PostController {
     }
 
     @LoginUser
-    @PostMapping("/likes/{postId}")
+    @PutMapping("/likes/{postId}")
     public ResponseEntity<LikeDto> likePost(@MemberId Long memberId, @PathVariable Long postId) {
         return ResponseEntity.ok(postFacade.likePost(memberId, postId));
     }
