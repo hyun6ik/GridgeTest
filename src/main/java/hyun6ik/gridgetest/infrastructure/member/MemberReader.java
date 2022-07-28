@@ -33,4 +33,9 @@ public class MemberReader {
         return memberRepository.findById(memberId)
                 .orElseThrow(() -> new NotFoundException(ErrorCode.MEMBER_NOT_EXISTS));
     }
+
+    public Member getMemberByPhoneNumber(String phoneNumber) {
+        return memberRepository.findByPhoneNumber(phoneNumber)
+                .orElseThrow(() -> new NotFoundException(ErrorCode.MEMBER_NOT_EXISTS));
+    }
 }

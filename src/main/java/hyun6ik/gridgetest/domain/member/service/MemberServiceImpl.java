@@ -2,8 +2,6 @@ package hyun6ik.gridgetest.domain.member.service;
 
 import hyun6ik.gridgetest.domain.login.vo.SocialUserInfo;
 import hyun6ik.gridgetest.domain.member.entity.Member;
-import hyun6ik.gridgetest.global.error.exception.ErrorCode;
-import hyun6ik.gridgetest.global.error.exception.LoginException;
 import hyun6ik.gridgetest.infrastructure.member.MemberReader;
 import hyun6ik.gridgetest.infrastructure.member.MemberStore;
 import hyun6ik.gridgetest.infrastructure.member.MemberValidator;
@@ -53,5 +51,13 @@ public class MemberServiceImpl implements MemberService{
         final Member member = memberReader.getMemberBy(nickName);
         memberValidator.isRightPassword(passwordEncoder, member.getPassword(), password);
         return member;
+    }
+
+    @Override
+    @Transactional
+    public void changePassword(String phoneNumber, String password, String password2) {
+        memberValidator.passwordCheck(password, password2);
+        final Member member = memberReader.getMemberByPhoneNumber(phoneNumber);
+        member.changePassword(passwordEncoder, password);
     }
 }

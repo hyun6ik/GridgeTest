@@ -68,4 +68,11 @@ public class MemberValidator {
             throw new LoginException(ErrorCode.MISMATCHED_PASSWORD);
         }
     }
+
+    public void passwordCheck(String password, String password2) {
+        if (!password.equals(password2)) {
+            throw new LoginException(ErrorCode.MISMATCHED_PASSWORD);
+        }
+        passwordCheck(password);
+    }
 }

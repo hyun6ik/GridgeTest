@@ -16,4 +16,6 @@ public interface MemberService {
     void validateRefreshTokenExpirationTime(LocalDateTime tokenExpirationTime, LocalDateTime now);
 
     Member login(String nickName, String password);
+
+    void changePassword(String memberId, String password, String password2);
 }
