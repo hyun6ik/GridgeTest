@@ -1,5 +1,6 @@
 package hyun6ik.gridgetest.domain.post.image;
 
+import hyun6ik.gridgetest.domain.post.Post;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -21,5 +22,9 @@ public class Images {
 
     public Images(List<Image> images) {
         this.images = images;
+    }
+
+    public void belongTo(Post post) {
+        images.forEach(image -> image.belongTo(post));
     }
 }
