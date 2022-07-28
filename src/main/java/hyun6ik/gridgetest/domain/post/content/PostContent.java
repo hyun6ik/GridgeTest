@@ -14,7 +14,7 @@ import javax.persistence.Lob;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class PostContent {
 
-    public static final int MAXIMUM_CONTENT_LENGTH = 500;
+    public static final int MAXIMUM_CONTENT_LENGTH = 1000;
 
     @Lob
     private String content;
