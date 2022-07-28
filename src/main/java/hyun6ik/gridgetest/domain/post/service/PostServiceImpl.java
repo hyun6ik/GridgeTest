@@ -32,4 +32,11 @@ public class PostServiceImpl implements PostService {
         final Post post = postReader.getPostBy(memberId, postId);
         post.deletePost();
     }
+
+    @Override
+    @Transactional
+    public void updatePost(Long memberId, Long postId, String content) {
+        final Post post = postReader.getPostBy(memberId, postId);
+        post.updatePost(content);
+    }
 }

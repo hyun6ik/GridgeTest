@@ -8,4 +8,6 @@ public interface PostService {
     PostRegisterDto.Response createPost(Post initPost);
 
     void deletePost(Long memberId, Long postId);
+
+    void updatePost(Long memberId, Long postId, String content);
 }

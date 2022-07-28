@@ -57,4 +57,8 @@ public class Post extends BaseTimeEntity {
     public void deletePost() {
         this.postStatus = PostStatus.DELETE;
     }
+
+    public void updatePost(String content) {
+        this.postContent = new PostContent(content);
+    }
 }

@@ -4,7 +4,9 @@ import hyun6ik.gridgetest.application.post.PostFacade;
 import hyun6ik.gridgetest.domain.post.service.PostService;
 import hyun6ik.gridgetest.global.annotation.LoginUser;
 import hyun6ik.gridgetest.global.annotation.MemberId;
+import hyun6ik.gridgetest.interfaces.post.constant.PostConstraints;
 import hyun6ik.gridgetest.interfaces.post.dto.PostRegisterDto;
+import hyun6ik.gridgetest.interfaces.post.dto.PostUpdateDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -27,6 +29,13 @@ public class PostController {
     @PutMapping("/delete/{postId}")
     public ResponseEntity<String> deletePost(@MemberId Long memberId, @PathVariable Long postId) {
         postService.deletePost(memberId, postId);
-        return ResponseEntity.ok("DELETE");
+        return ResponseEntity.ok(PostConstraints.DELETE);
+    }
+
+    @LoginUser
+    @PutMapping("/{postId}")
+    public ResponseEntity<String> updatePost(@MemberId Long memberId, @PathVariable Long postId, @RequestBody PostUpdateDto.Request request) {
+        postService.updatePost(memberId, postId, request.getContent());
+        return ResponseEntity.ok(PostConstraints.UPDATE);
     }
 }
