@@ -16,6 +16,9 @@ public enum ErrorCode {
     MAXIMUM_CONTENT_LENGTH(400,"게시글은 최대 500자 입니다." ),
     MAX_COMMENT_CONTENT_LENGTH(400, "댓글은 최대 100자입니다." ),
 
+    //POST
+    NEED_AT_LEAST_ONE_IMAGE(400, "게시글 등록하기 위해선 최소 1개의 사진이 필요합니다."),
+
     INVALID_MEMBER_TYPE(400, "잘못된 회원 타입 입니다.(memberType : KAKAO)"),
     NOT_EXISTS_AUTHORIZATION(401, "Authorization Header가 빈값입니다."),
     NOT_VALID_BEARER_GRANT_TYPE(401, "인증 타입이 Bearer 타입이 아닙니다."),

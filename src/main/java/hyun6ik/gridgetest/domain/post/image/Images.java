@@ -11,6 +11,7 @@ import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Embeddable
 @Getter
@@ -27,4 +28,11 @@ public class Images {
     public void belongTo(Post post) {
         images.forEach(image -> image.belongTo(post));
     }
+
+    public List<String> getImageUrls() {
+        return images.stream()
+                .map(Image::getUrl)
+                .collect(Collectors.toUnmodifiableList());
+    }
+
 }
