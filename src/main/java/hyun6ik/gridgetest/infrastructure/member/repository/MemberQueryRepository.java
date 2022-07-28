@@ -26,4 +26,13 @@ public class MemberQueryRepository {
                 .fetchOne());
 
     }
+
+    public Optional<Member> findById(Long memberId) {
+        return Optional.ofNullable(
+                queryFactory
+                        .selectFrom(member)
+                        .where(member.id.eq(memberId), member.memberStatus.memberCondition.ne(MemberCondition.RESIGNED))
+                        .fetchOne()
+        );
+    }
 }

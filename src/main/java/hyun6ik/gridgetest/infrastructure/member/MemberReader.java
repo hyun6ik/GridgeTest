@@ -30,7 +30,7 @@ public class MemberReader {
     }
 
     public Member getMemberBy(Long memberId) {
-        return memberRepository.findById(memberId)
+        return memberQueryRepository.findById(memberId)
                 .orElseThrow(() -> new NotFoundException(ErrorCode.MEMBER_NOT_EXISTS));
     }
 
