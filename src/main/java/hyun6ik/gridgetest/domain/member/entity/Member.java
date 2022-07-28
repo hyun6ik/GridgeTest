@@ -2,6 +2,7 @@ package hyun6ik.gridgetest.domain.member.entity;
 
 import hyun6ik.gridgetest.domain.base.BaseTimeEntity;
 import hyun6ik.gridgetest.domain.member.constant.MemberType;
+import hyun6ik.gridgetest.domain.post.Posts;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -10,6 +11,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 @Entity
 @Getter
@@ -36,6 +38,9 @@ public class Member extends BaseTimeEntity {
     @Embedded
     private MemberToken memberToken;
 
+    @Embedded
+    private Posts posts;
+
     @Builder
     public Member(Profile profile, String phoneNumber, String password, LocalDate birthDay, MemberStatus memberStatus) {
         this.profile = profile;
@@ -43,6 +48,7 @@ public class Member extends BaseTimeEntity {
         this.password = password;
         this.birthDay = birthDay;
         this.memberStatus = memberStatus;
+        this.posts = new Posts(new ArrayList<>());
     }
 
     public void addToken(MemberToken memberToken) {

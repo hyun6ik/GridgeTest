@@ -29,6 +29,7 @@ public class LoginFacade {
         return createToken(member);
     }
 
+    @Transactional
     public RegisterDto.Response register(Member initMember) {
         final Member member = memberService.registerMember(initMember);
         return createToken(member);

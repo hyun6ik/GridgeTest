@@ -13,6 +13,8 @@ public enum ErrorCode {
     REGEX_CHECK_PASSWORD(400,"비밀번호에는 특수문자가 1개 이상 포함되어야 합니다."),
     NOT_FOUND_SOCIAL_USER(400,"회원 가입이 필요합니다."),
 
+    MAXIMUM_CONTENT_LENGTH(400,"게시글은 최대 500자 입니다." ),
+    MAX_COMMENT_CONTENT_LENGTH(400, "댓글은 최대 100자입니다." ),
 
     INVALID_MEMBER_TYPE(400, "잘못된 회원 타입 입니다.(memberType : KAKAO)"),
     NOT_EXISTS_AUTHORIZATION(401, "Authorization Header가 빈값입니다."),
