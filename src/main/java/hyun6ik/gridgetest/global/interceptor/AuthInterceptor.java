@@ -2,7 +2,7 @@ package hyun6ik.gridgetest.global.interceptor;
 
 import hyun6ik.gridgetest.domain.jwt.constant.GrantType;
 import hyun6ik.gridgetest.domain.jwt.service.TokenManager;
-import hyun6ik.gridgetest.global.annotation.Auth;
+import hyun6ik.gridgetest.global.annotation.LoginUser;
 import hyun6ik.gridgetest.global.constant.AuthConstraints;
 import hyun6ik.gridgetest.global.error.exception.AuthenticationException;
 import hyun6ik.gridgetest.global.error.exception.ErrorCode;
@@ -86,8 +86,8 @@ public class AuthInterceptor implements HandlerInterceptor {
     }
 
     private boolean hasNotAuthAnnotation(HandlerMethod handlerMethod) {
-        final Auth auth = handlerMethod.getMethodAnnotation(Auth.class);
-        if (auth == null) {
+        final LoginUser loginUser = handlerMethod.getMethodAnnotation(LoginUser.class);
+        if (loginUser == null) {
             return true;
         }
         return false;
