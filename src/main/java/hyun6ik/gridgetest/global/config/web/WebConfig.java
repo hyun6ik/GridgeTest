@@ -1,4 +1,4 @@
-package hyun6ik.gridgetest.global.web;
+package hyun6ik.gridgetest.global.config.web;
 
 import hyun6ik.gridgetest.global.interceptor.AuthInterceptor;
 import lombok.RequiredArgsConstructor;

@@ -1,4 +1,4 @@
-package hyun6ik.gridgetest.global.feign;
+package hyun6ik.gridgetest.global.config.feign;
 
 import feign.Logger;
 import feign.codec.ErrorDecoder;
