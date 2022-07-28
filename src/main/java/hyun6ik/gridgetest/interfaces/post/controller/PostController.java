@@ -27,7 +27,7 @@ public class PostController {
     }
 
     @LoginUser
-    @PutMapping("/delete/{postId}")
+    @DeleteMapping("/delete/{postId}")
     public ResponseEntity<String> deletePost(@MemberId Long memberId, @PathVariable Long postId) {
         postService.deletePost(memberId, postId);
         return ResponseEntity.ok(PostConstraints.DELETE);
