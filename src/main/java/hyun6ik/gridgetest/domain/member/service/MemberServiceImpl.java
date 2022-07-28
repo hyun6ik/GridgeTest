@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.util.Optional;
 
 
 @Service
@@ -47,5 +48,12 @@ public class MemberServiceImpl implements MemberService{
     @Override
     public void validateRefreshTokenExpirationTime(LocalDateTime tokenExpirationTime, LocalDateTime now) {
         memberValidator.validateRefreshToken(tokenExpirationTime, now);
+    }
+
+    @Override
+    public Member login(String nickName, String password) {
+        final Member member = memberReader.getMemberBy(nickName);
+        memberValidator.isRightPassword(passwordEncoder, member.getPassword(), password);
+        return member;
     }
 }

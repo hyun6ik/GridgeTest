@@ -16,6 +16,7 @@ public enum ErrorCode {
     MAXIMUM_CONTENT_LENGTH(400,"게시글은 최대 500자 입니다." ),
     MAX_COMMENT_CONTENT_LENGTH(400, "댓글은 최대 100자입니다." ),
     LENGTH_PASSWORD(400,"비밀번호는 6자 이상 20자 이하입니다." ),
+    NOT_FOUND_USER(400, "해당 유저를 찾을 수 없습니다."),
 
     //POST
     NEED_AT_LEAST_ONE_IMAGE(400, "게시글 등록하기 위해선 최소 1개의 사진이 필요합니다."),

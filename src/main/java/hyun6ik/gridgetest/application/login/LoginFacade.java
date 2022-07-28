@@ -7,10 +7,7 @@ import hyun6ik.gridgetest.domain.login.vo.SocialUserInfo;
 import hyun6ik.gridgetest.domain.member.entity.Member;
 import hyun6ik.gridgetest.domain.member.entity.MemberToken;
 import hyun6ik.gridgetest.domain.member.service.MemberService;
-import hyun6ik.gridgetest.interfaces.login.dto.RegisterDto;
-import hyun6ik.gridgetest.interfaces.login.dto.SocialLoginDto;
-import hyun6ik.gridgetest.interfaces.login.dto.TokenAccessDto;
-import hyun6ik.gridgetest.interfaces.login.dto.TokenDto;
+import hyun6ik.gridgetest.interfaces.login.dto.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -28,7 +25,7 @@ public class LoginFacade {
     private final TokenManager tokenManager;
 
     @Transactional
-    public RegisterDto.Response socialLogin(String accessToken, SocialLoginDto request) {
+    public LoginDto.Response socialLogin(String accessToken, SocialLoginDto request) {
         final SocialUserInfo socialUserInfo = loginService.getSocialUserInfo(accessToken, request.getMemberType());
         final Member member = memberService.getSocialMemberBy(socialUserInfo);
         return createToken(member);
@@ -37,13 +34,13 @@ public class LoginFacade {
     @Transactional
     public RegisterDto.Response register(Member initMember) {
         final Member member = memberService.registerMember(initMember);
-        return createToken(member);
+        return new RegisterDto.Response(member.getId());
     }
 
-    private RegisterDto.Response createToken(Member member) {
+    private LoginDto.Response createToken(Member member) {
         final TokenDto tokenDto = tokenManager.createTokenDto(member.getId(), member.getMemberRole());
         member.addToken(MemberToken.of(tokenDto.getRefreshToken(), tokenDto.getRefreshTokenExpireTime()));
-        return RegisterDto.Response.of(tokenDto);
+        return LoginDto.Response.of(tokenDto);
     }
 
     public TokenAccessDto createAccessTokenByRefreshToken(Long memberId, LocalDateTime now) {
@@ -65,5 +62,10 @@ public class LoginFacade {
         final Member member = memberService.getMemberBy(memberId);
         member.removeRefreshToken();
         return "logout success";
+    }
+
+    public LoginDto.Response login(LoginDto.Request request) {
+        final Member member = memberService.login(request.getNickName(), request.getPassword());
+        return createToken(member);
     }
 }

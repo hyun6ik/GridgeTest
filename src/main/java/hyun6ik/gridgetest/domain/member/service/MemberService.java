@@ -14,4 +14,6 @@ public interface MemberService {
     Member getMemberBy(Long memberId);
 
     void validateRefreshTokenExpirationTime(LocalDateTime tokenExpirationTime, LocalDateTime now);
+
+    Member login(String nickName, String password);
 }

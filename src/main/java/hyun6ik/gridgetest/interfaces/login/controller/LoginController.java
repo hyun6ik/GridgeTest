@@ -5,10 +5,7 @@ import hyun6ik.gridgetest.domain.sms.constant.SmsConstraints;
 import hyun6ik.gridgetest.domain.sms.service.SmsService;
 import hyun6ik.gridgetest.global.annotation.LoginUser;
 import hyun6ik.gridgetest.global.annotation.MemberId;
-import hyun6ik.gridgetest.interfaces.login.dto.RegisterDto;
-import hyun6ik.gridgetest.interfaces.login.dto.PhoneNumberDto;
-import hyun6ik.gridgetest.interfaces.login.dto.SocialLoginDto;
-import hyun6ik.gridgetest.interfaces.login.dto.TokenAccessDto;
+import hyun6ik.gridgetest.interfaces.login.dto.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -37,8 +34,13 @@ public class LoginController {
     }
 
     @PostMapping("/oauth/login")
-    public ResponseEntity<RegisterDto.Response> socialLogin(@RequestHeader("Authorization") String accessToken, @RequestBody SocialLoginDto request) {
+    public ResponseEntity<LoginDto.Response> socialLogin(@RequestHeader("Authorization") String accessToken, @RequestBody SocialLoginDto request) {
         return ResponseEntity.ok(loginFacade.socialLogin(accessToken, request));
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<LoginDto.Response> login(@RequestBody LoginDto.Request request) {
+        return ResponseEntity.ok(loginFacade.login(request));
     }
 
     @PostMapping("/new")

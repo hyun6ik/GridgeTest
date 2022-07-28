@@ -6,6 +6,7 @@ import hyun6ik.gridgetest.global.error.exception.ErrorCode;
 import hyun6ik.gridgetest.global.error.exception.LoginException;
 import hyun6ik.gridgetest.infrastructure.member.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -59,6 +60,12 @@ public class MemberValidator {
     public void validateRefreshToken(LocalDateTime refreshTokenExpirationTime, LocalDateTime now) {
         if (refreshTokenExpirationTime.isBefore(now)) {
             throw new AuthenticationException(ErrorCode.REFRESH_TOKEN_EXPIRED);
+        }
+    }
+
+    public void isRightPassword(PasswordEncoder passwordEncoder, String memberPassword, String password) {
+        if (!passwordEncoder.matches(password, memberPassword)) {
+            throw new LoginException(ErrorCode.MISMATCHED_PASSWORD);
         }
     }
 }

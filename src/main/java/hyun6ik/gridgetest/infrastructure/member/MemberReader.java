@@ -18,8 +18,9 @@ public class MemberReader {
     private final MemberRepository memberRepository;
     private final MemberQueryRepository memberQueryRepository;
 
-    public Optional<Member> getMemberBy(String nickName) {
-        return memberRepository.findByProfile_NickName(nickName);
+    public Member getMemberBy(String nickName) {
+        return memberRepository.findByProfile_NickName(nickName)
+                .orElseThrow(() -> new NotFoundException(ErrorCode.NOT_FOUND_USER));
     }
 
     public Optional<Member> findSocialMemberBy(SocialUserInfo socialUserInfo) {
