@@ -17,4 +17,9 @@ public class PostReader {
         return postQueryRepository.findByIdAndMemberId(memberId, postId)
                 .orElseThrow(() -> new NotFoundException(ErrorCode.NOT_FOUND_POST));
     }
+
+    public Post getPostBy(Long postId) {
+        return postQueryRepository.findById(postId)
+                .orElseThrow(() -> new NotFoundException(ErrorCode.NOT_FOUND_POST));
+    }
 }

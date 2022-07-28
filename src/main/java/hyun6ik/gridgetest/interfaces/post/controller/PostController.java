@@ -5,6 +5,7 @@ import hyun6ik.gridgetest.domain.post.service.PostService;
 import hyun6ik.gridgetest.global.annotation.LoginUser;
 import hyun6ik.gridgetest.global.annotation.MemberId;
 import hyun6ik.gridgetest.interfaces.post.constant.PostConstraints;
+import hyun6ik.gridgetest.interfaces.post.dto.LikeDto;
 import hyun6ik.gridgetest.interfaces.post.dto.PostRegisterDto;
 import hyun6ik.gridgetest.interfaces.post.dto.PostUpdateDto;
 import lombok.RequiredArgsConstructor;
@@ -37,5 +38,11 @@ public class PostController {
     public ResponseEntity<String> updatePost(@MemberId Long memberId, @PathVariable Long postId, @RequestBody PostUpdateDto.Request request) {
         postService.updatePost(memberId, postId, request.getContent());
         return ResponseEntity.ok(PostConstraints.UPDATE);
+    }
+
+    @LoginUser
+    @PostMapping("/likes/{postId}")
+    public ResponseEntity<LikeDto> likePost(@MemberId Long memberId, @PathVariable Long postId) {
+        return ResponseEntity.ok(postFacade.likePost(memberId, postId));
     }
 }

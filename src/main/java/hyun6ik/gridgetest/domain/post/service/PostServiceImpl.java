@@ -39,4 +39,9 @@ public class PostServiceImpl implements PostService {
         final Post post = postReader.getPostBy(memberId, postId);
         post.updatePost(content);
     }
+
+    @Override
+    public Post getPostBy(Long postId) {
+        return postReader.getPostBy(postId);
+    }
 }

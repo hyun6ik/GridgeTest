@@ -3,12 +3,10 @@ package hyun6ik.gridgetest.domain.post.like;
 import hyun6ik.gridgetest.domain.base.BaseTimeEntity;
 import hyun6ik.gridgetest.domain.member.entity.Member;
 import hyun6ik.gridgetest.domain.post.Post;
-import lombok.AccessLevel;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @Table(name = "LIKES")
 @Getter
@@ -32,5 +30,23 @@ public class Like extends BaseTimeEntity {
     public Like(Post post, Member member) {
         this.post = post;
         this.member = member;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Like like = (Like) o;
+        return Objects.equals(post, like.getPost()) &&
+                Objects.equals(member, like.getMember());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(post, member);
     }
 }

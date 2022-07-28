@@ -6,6 +6,7 @@ import hyun6ik.gridgetest.domain.member.entity.Member;
 import hyun6ik.gridgetest.domain.post.constant.PostStatus;
 import hyun6ik.gridgetest.domain.post.content.PostContent;
 import hyun6ik.gridgetest.domain.post.image.Images;
+import hyun6ik.gridgetest.domain.post.like.Like;
 import hyun6ik.gridgetest.domain.post.like.Likes;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -60,5 +61,14 @@ public class Post extends BaseTimeEntity {
 
     public void updatePost(String content) {
         this.postContent = new PostContent(content);
+    }
+
+    public void like(Member member) {
+        final Like like = new Like(this, member);
+        likes.add(like);
+    }
+
+    public Integer getLikeCounts() {
+        return likes.getCounts();
     }
 }

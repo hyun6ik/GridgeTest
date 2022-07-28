@@ -10,4 +10,6 @@ public interface PostService {
     void deletePost(Long memberId, Long postId);
 
     void updatePost(Long memberId, Long postId, String content);
+
+    Post getPostBy(Long postId);
 }
