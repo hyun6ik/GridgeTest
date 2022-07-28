@@ -29,12 +29,12 @@ public class TokenManager {
     @Value("${token.secret}")
     private String tokenSecret;
 
-    public TokenDto createTokenDto(String email, MemberRole role) {
+    public TokenDto createTokenDto(Long memberId, MemberRole role) {
         Date accessTokenExpireTime = createAccessTokenExpireTime();
         Date refreshTokenExpireTime = createRefreshTokenExpireTime();
 
-        String accessToken = createAccessToken(email, role, accessTokenExpireTime);
-        String refreshToken = createRefreshToken(email, refreshTokenExpireTime);
+        String accessToken = createAccessToken(memberId, role, accessTokenExpireTime);
+        String refreshToken = createRefreshToken(memberId, refreshTokenExpireTime);
         return TokenDto.builder()
                 .grantType(GrantType.BEARRER.getType())
                 .accessToken(accessToken)
@@ -52,10 +52,10 @@ public class TokenManager {
         return new Date(System.currentTimeMillis() + Long.parseLong(refreshTokenExpirationTime));
     }
 
-    public String createAccessToken(String nickName, MemberRole role, Date expirationTime) {
+    public String createAccessToken(Long memberId, MemberRole role, Date expirationTime) {
         String accessToken = Jwts.builder()
                 .setSubject(TokenType.ACCESS.name())                // 토큰 제목
-                .setAudience(nickName)                                 // 토큰 대상자
+                .setAudience(String.valueOf(memberId))                                 // 토큰 대상자
                 .setIssuedAt(new Date())                            // 토큰 발급 시간
                 .setExpiration(expirationTime)                      // 토큰 만료 시간
                 .claim("role", role)                          // 유저 role
@@ -65,10 +65,10 @@ public class TokenManager {
         return accessToken;
     }
 
-    public String createRefreshToken(String email, Date expirationTime) {
+    public String createRefreshToken(Long memberId, Date expirationTime) {
         String refreshToken = Jwts.builder()
                 .setSubject(TokenType.REFRESH.name())               // 토큰 제목
-                .setAudience(email)                                 // 토큰 대상자
+                .setAudience(String.valueOf(memberId))                                 // 토큰 대상자
                 .setIssuedAt(new Date())                            // 토큰 발급 시간
                 .setExpiration(expirationTime)                      // 토큰 만료 시간
                 .signWith(SignatureAlgorithm.HS512, tokenSecret)
@@ -77,17 +77,17 @@ public class TokenManager {
         return refreshToken;
     }
 
-    public String getNickName(String accessToken) {
-        String email;
+    public Long getMemberId(String accessToken) {
+        Long memberId;
         try {
             Claims claims = Jwts.parser().setSigningKey(tokenSecret)
                     .parseClaimsJws(accessToken).getBody();
-            email = claims.getAudience();
+            memberId = Long.valueOf(claims.getAudience());
         } catch (Exception e){
             e.printStackTrace();
             throw new NotValidTokenException(ErrorCode.NOT_VALID_TOKEN);
         }
-        return email;
+        return memberId;
     }
 
     public boolean validateToken(String token){

@@ -36,7 +36,7 @@ public class LoginFacade {
     }
 
     private RegisterDto.Response createToken(Member member) {
-        final TokenDto tokenDto = tokenManager.createTokenDto(member.getProfile().getNickName(), member.getMemberStatus().getMemberRole());
+        final TokenDto tokenDto = tokenManager.createTokenDto(member.getId(), member.getMemberRole());
         member.addToken(MemberToken.of(tokenDto.getRefreshToken(), tokenDto.getRefreshTokenExpireTime()));
         return RegisterDto.Response.of(tokenDto);
     }

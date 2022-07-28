@@ -1,6 +1,7 @@
 package hyun6ik.gridgetest.domain.member.entity;
 
 import hyun6ik.gridgetest.domain.base.BaseTimeEntity;
+import hyun6ik.gridgetest.domain.member.constant.MemberRole;
 import hyun6ik.gridgetest.domain.member.constant.MemberType;
 import hyun6ik.gridgetest.domain.post.Posts;
 import lombok.AccessLevel;
@@ -57,6 +58,10 @@ public class Member extends BaseTimeEntity {
 
     public String getNickName() {
         return this.getProfile().getNickName();
+    }
+
+    public MemberRole getMemberRole() {
+        return this.getMemberStatus().getMemberRole();
     }
 
     public void encodePassword(PasswordEncoder passwordEncoder) {
