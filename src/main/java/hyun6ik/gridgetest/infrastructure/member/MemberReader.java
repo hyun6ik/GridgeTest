@@ -3,6 +3,7 @@ package hyun6ik.gridgetest.infrastructure.member;
 import hyun6ik.gridgetest.domain.login.vo.SocialUserInfo;
 import hyun6ik.gridgetest.domain.member.entity.Member;
 import hyun6ik.gridgetest.global.error.exception.ErrorCode;
+import hyun6ik.gridgetest.global.error.exception.LoginException;
 import hyun6ik.gridgetest.global.error.exception.NotFoundException;
 import hyun6ik.gridgetest.infrastructure.member.repository.MemberQueryRepository;
 import hyun6ik.gridgetest.infrastructure.member.repository.MemberRepository;
@@ -23,8 +24,9 @@ public class MemberReader {
                 .orElseThrow(() -> new NotFoundException(ErrorCode.NOT_FOUND_USER));
     }
 
-    public Optional<Member> findSocialMemberBy(SocialUserInfo socialUserInfo) {
-        return memberQueryRepository.findSocialMemberBy(socialUserInfo);
+    public Member findSocialMemberBy(SocialUserInfo socialUserInfo) {
+        return memberQueryRepository.findSocialMemberBy(socialUserInfo)
+                .orElseThrow(() -> new LoginException(ErrorCode.NOT_FOUND_SOCIAL_USER));
     }
 
     public Member getMemberBy(Long memberId) {

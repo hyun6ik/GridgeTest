@@ -13,7 +13,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
-import java.util.Optional;
 
 
 @Service
@@ -36,8 +35,7 @@ public class MemberServiceImpl implements MemberService{
 
     @Override
     public Member getSocialMemberBy(SocialUserInfo socialUserInfo) {
-        return memberReader.findSocialMemberBy(socialUserInfo)
-                .orElseThrow(() -> new LoginException(ErrorCode.NOT_FOUND_SOCIAL_USER));
+        return memberReader.findSocialMemberBy(socialUserInfo);
     }
 
     @Override
