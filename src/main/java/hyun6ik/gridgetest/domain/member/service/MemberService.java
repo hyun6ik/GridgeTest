@@ -8,4 +8,6 @@ public interface MemberService {
     Member registerMember(Member initMember);
 
     Member getSocialMemberBy(SocialUserInfo socialUserInfo);
+
+    Member getMemberBy(Long memberId);
 }

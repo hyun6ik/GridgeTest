@@ -36,4 +36,9 @@ public class MemberServiceImpl implements MemberService{
         return memberReader.findSocialMemberBy(socialUserInfo)
                 .orElseThrow(() -> new LoginException(ErrorCode.NOT_FOUND_SOCIAL_USER));
     }
+
+    @Override
+    public Member getMemberBy(Long memberId) {
+        return memberReader.getMemberBy(memberId);
+    }
 }
