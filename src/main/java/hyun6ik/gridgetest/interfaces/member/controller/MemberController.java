@@ -30,7 +30,7 @@ public class MemberController {
     }
 
     @LoginUser
-    @PutMapping("/resign")
+    @DeleteMapping("/resign")
     public ResponseEntity<String> resignMember(@MemberId Long memberId) {
         memberService.resignMember(memberId);
         return ResponseEntity.ok(MemberConstraints.RESIGN_MEMBER);
