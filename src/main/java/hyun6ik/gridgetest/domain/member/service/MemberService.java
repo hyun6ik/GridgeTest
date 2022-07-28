@@ -3,6 +3,8 @@ package hyun6ik.gridgetest.domain.member.service;
 import hyun6ik.gridgetest.domain.login.vo.SocialUserInfo;
 import hyun6ik.gridgetest.domain.member.entity.Member;
 
+import java.time.LocalDateTime;
+
 public interface MemberService {
 
     Member registerMember(Member initMember);
@@ -10,4 +12,6 @@ public interface MemberService {
     Member getSocialMemberBy(SocialUserInfo socialUserInfo);
 
     Member getMemberBy(Long memberId);
+
+    void validateRefreshTokenExpirationTime(LocalDateTime tokenExpirationTime, LocalDateTime now);
 }

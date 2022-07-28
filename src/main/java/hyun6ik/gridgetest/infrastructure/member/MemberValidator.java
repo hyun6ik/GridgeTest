@@ -1,6 +1,7 @@
 package hyun6ik.gridgetest.infrastructure.member;
 
 import hyun6ik.gridgetest.domain.member.entity.Member;
+import hyun6ik.gridgetest.global.error.exception.AuthenticationException;
 import hyun6ik.gridgetest.global.error.exception.ErrorCode;
 import hyun6ik.gridgetest.global.error.exception.LoginException;
 import hyun6ik.gridgetest.infrastructure.member.repository.MemberRepository;
@@ -8,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.regex.Pattern;
 
 @Component
@@ -51,6 +53,12 @@ public class MemberValidator {
     private void duplicateNickName(String nickName) {
         if (memberRepository.findByProfile_NickName(nickName).isPresent()) {
             throw new LoginException(String.format("사용자 이름 %s", nickName), ErrorCode.DUPLICATED_MEMBER);
+        }
+    }
+
+    public void validateRefreshToken(LocalDateTime refreshTokenExpirationTime, LocalDateTime now) {
+        if (refreshTokenExpirationTime.isBefore(now)) {
+            throw new AuthenticationException(ErrorCode.REFRESH_TOKEN_EXPIRED);
         }
     }
 }

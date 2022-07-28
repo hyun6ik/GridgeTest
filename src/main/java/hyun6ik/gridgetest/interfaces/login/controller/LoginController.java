@@ -3,14 +3,18 @@ package hyun6ik.gridgetest.interfaces.login.controller;
 import hyun6ik.gridgetest.application.login.LoginFacade;
 import hyun6ik.gridgetest.domain.sms.constant.SmsConstraints;
 import hyun6ik.gridgetest.domain.sms.service.SmsService;
+import hyun6ik.gridgetest.global.annotation.LoginUser;
+import hyun6ik.gridgetest.global.annotation.MemberId;
 import hyun6ik.gridgetest.interfaces.login.dto.RegisterDto;
 import hyun6ik.gridgetest.interfaces.login.dto.PhoneNumberDto;
 import hyun6ik.gridgetest.interfaces.login.dto.SocialLoginDto;
+import hyun6ik.gridgetest.interfaces.login.dto.TokenAccessDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.time.LocalDateTime;
 
 @RestController
 @RequestMapping("/api")
@@ -40,5 +44,11 @@ public class LoginController {
     @PostMapping("/new")
     public ResponseEntity<RegisterDto.Response> register(@RequestBody RegisterDto.Request request) {
         return ResponseEntity.ok(loginFacade.register(request.toEntity()));
+    }
+
+    @LoginUser
+    @PostMapping("/refresh-token")
+    public ResponseEntity<TokenAccessDto> refreshAccessToken(@MemberId Long memberId) {
+        return ResponseEntity.ok(loginFacade.createAccessTokenByRefreshToken(memberId, LocalDateTime.now()));
     }
 }

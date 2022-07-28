@@ -12,6 +12,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 @Entity
@@ -62,6 +63,10 @@ public class Member extends BaseTimeEntity {
 
     public MemberRole getMemberRole() {
         return this.getMemberStatus().getMemberRole();
+    }
+
+    public LocalDateTime getTokenExpirationTime() {
+        return this.getMemberToken().getTokenExpirationTime();
     }
 
     public void encodePassword(PasswordEncoder passwordEncoder) {
