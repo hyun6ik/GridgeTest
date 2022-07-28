@@ -60,4 +60,11 @@ public class MemberServiceImpl implements MemberService{
         final Member member = memberReader.getMemberByPhoneNumber(phoneNumber);
         member.changePassword(passwordEncoder, password);
     }
+
+    @Override
+    @Transactional
+    public void updatePrivateAccount(Long memberId) {
+        final Member member = memberReader.getMemberBy(memberId);
+        member.updatePrivateAccount();
+    }
 }

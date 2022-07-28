@@ -37,4 +37,8 @@ public class MemberStatus {
         this.memberCondition = memberCondition;
         this.memberType = memberType;
     }
+
+    public void changePrivateAccount() {
+        this.memberScope = MemberScope.PRIVATE;
+    }
 }

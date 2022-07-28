@@ -83,4 +83,8 @@ public class Member extends BaseTimeEntity {
     public void changePassword(PasswordEncoder passwordEncoder, String password) {
         this.password = passwordEncoder.encode(password);
     }
+
+    public void updatePrivateAccount() {
+        this.memberStatus.changePrivateAccount();
+    }
 }

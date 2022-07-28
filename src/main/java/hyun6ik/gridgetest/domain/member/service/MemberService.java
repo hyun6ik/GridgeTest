@@ -18,4 +18,6 @@ public interface MemberService {
     Member login(String nickName, String password);
 
     void changePassword(String memberId, String password, String password2);
+
+    void updatePrivateAccount(Long memberId);
 }
