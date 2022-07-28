@@ -6,4 +6,6 @@ import hyun6ik.gridgetest.interfaces.post.dto.PostRegisterDto;
 public interface PostService {
 
     PostRegisterDto.Response createPost(Post initPost);
+
+    void deletePost(Long memberId, Long postId);
 }

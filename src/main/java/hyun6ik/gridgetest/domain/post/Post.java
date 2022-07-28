@@ -53,4 +53,8 @@ public class Post extends BaseTimeEntity {
 
         images.belongTo(this);
     }
+
+    public void deletePost() {
+        this.postStatus = PostStatus.DELETE;
+    }
 }

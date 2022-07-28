@@ -25,4 +25,11 @@ public class PostServiceImpl implements PostService {
         final Post post = postStore.store(initPost);
         return new PostRegisterDto.Response(post.getId());
     }
+
+    @Override
+    @Transactional
+    public void deletePost(Long memberId, Long postId) {
+        final Post post = postReader.getPostBy(memberId, postId);
+        post.deletePost();
+    }
 }
