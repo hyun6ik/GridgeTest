@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.validation.constraints.NotBlank;
+import java.time.LocalDateTime;
 
 public class CommentDto {
 
@@ -24,13 +25,15 @@ public class CommentDto {
         private String profileImageUrl;
         private String nickName;
         private String content;
+        private LocalDateTime createdAt;
 
         @Builder
-        public Response(Long memberId, String profileImageUrl, String nickName, String content) {
+        public Response(Long memberId, String profileImageUrl, String nickName, String content, LocalDateTime createdAt) {
             this.memberId = memberId;
             this.profileImageUrl = profileImageUrl;
             this.nickName = nickName;
             this.content = content;
+            this.createdAt = createdAt;
         }
 
         public static Response of(Comment comment) {
@@ -39,6 +42,7 @@ public class CommentDto {
                     .profileImageUrl(comment.getMember().getProfile().getImage())
                     .nickName(comment.getMember().getNickName())
                     .content(comment.getCommentContent().getContent())
+                    .createdAt(comment.getCreateTime())
                     .build();
         }
     }

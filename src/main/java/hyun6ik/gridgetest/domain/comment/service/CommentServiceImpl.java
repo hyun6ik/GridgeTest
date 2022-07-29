@@ -7,9 +7,15 @@ import hyun6ik.gridgetest.domain.post.Post;
 import hyun6ik.gridgetest.infrastructure.comment.CommentReader;
 import hyun6ik.gridgetest.infrastructure.comment.CommentStore;
 import hyun6ik.gridgetest.interfaces.comment.dto.CommentDto;
+import hyun6ik.gridgetest.interfaces.comment.dto.PostCommentDto;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.Optional;
 
 @Service
 @Transactional(readOnly = true)
@@ -38,5 +44,11 @@ public class CommentServiceImpl implements CommentService{
     @Override
     public Comment getCommentBy(Long commentId) {
         return commentReader.getCommentBy(commentId);
+    }
+
+    @Override
+    public Page<PostCommentDto> getPostCommentDtosBy(Long postId, Optional<Integer> page) {
+        final Pageable pageable = PageRequest.of(page.orElse(0), 10);
+        return commentReader.getPostCommentDtosBy(postId, pageable);
     }
 }
