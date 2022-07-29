@@ -4,6 +4,7 @@ import hyun6ik.gridgetest.domain.comment.entity.Comment;
 import hyun6ik.gridgetest.domain.comment.entity.CommentContent;
 import hyun6ik.gridgetest.domain.member.entity.Member;
 import hyun6ik.gridgetest.domain.post.Post;
+import hyun6ik.gridgetest.infrastructure.comment.CommentReader;
 import hyun6ik.gridgetest.infrastructure.comment.CommentStore;
 import hyun6ik.gridgetest.interfaces.comment.dto.CommentDto;
 import lombok.RequiredArgsConstructor;
@@ -15,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 public class CommentServiceImpl implements CommentService{
 
+    private final CommentReader commentReader;
     private final CommentStore commentStore;
 
     @Override
@@ -24,5 +26,12 @@ public class CommentServiceImpl implements CommentService{
         final Comment initComment = new Comment(commentContent, member, post);
         final Comment comment = commentStore.store(initComment);
         return CommentDto.Response.of(comment);
+    }
+
+    @Override
+    @Transactional
+    public void deleteComment(Long memberId, Long commentId) {
+        final Comment comment = commentReader.getCommentBy(memberId, commentId);
+        comment.delete();
     }
 }

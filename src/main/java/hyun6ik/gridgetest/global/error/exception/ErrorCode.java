@@ -36,6 +36,9 @@ public enum ErrorCode {
     CANNOT_UNFOLLOW(400, "팔로우한 계정이 아니라서 언팔로우 할 수 없습니다."),
     ALREADY_FOLLOWING(400, "이미 팔로잉한 계정입니다"),
 
+    //COMMENT
+    NOT_FOUND_COMMENT(400, "해당 댓글을 찾을 수 없습니다."),
+
     INVALID_MEMBER_TYPE(400, "잘못된 회원 타입 입니다.(memberType : KAKAO)"),
     NOT_EXISTS_AUTHORIZATION(401, "Authorization Header가 빈값입니다."),
     NOT_VALID_BEARER_GRANT_TYPE(401, "인증 타입이 Bearer 타입이 아닙니다."),

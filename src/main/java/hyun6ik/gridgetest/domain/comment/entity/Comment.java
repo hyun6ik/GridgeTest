@@ -1,5 +1,6 @@
 package hyun6ik.gridgetest.domain.comment.entity;
 
+import hyun6ik.gridgetest.domain.comment.constant.CommentStatus;
 import hyun6ik.gridgetest.domain.member.entity.Member;
 import hyun6ik.gridgetest.domain.post.Post;
 import lombok.AccessLevel;
@@ -30,11 +31,15 @@ public class Comment {
     @JoinColumn(name = "post_id")
     private Post post;
 
+    @Enumerated(EnumType.STRING)
+    private CommentStatus commentStatus;
+
     @Builder
     public Comment(CommentContent commentContent, Member member, Post post) {
         this.commentContent = commentContent;
         this.member = member;
         this.post = post;
+        this.commentStatus = CommentStatus.USE;
     }
 
     @Override
@@ -52,5 +57,9 @@ public class Comment {
     @Override
     public int hashCode() {
         return Objects.hash(id);
+    }
+
+    public void delete() {
+        this.commentStatus = CommentStatus.DELETE;
     }
 }

@@ -6,4 +6,6 @@ import hyun6ik.gridgetest.interfaces.comment.dto.CommentDto;
 
 public interface CommentService {
     CommentDto.Response createComment(Member member, Post post, String content);
+
+    void deleteComment(Long memberId, Long commentId);
 }
