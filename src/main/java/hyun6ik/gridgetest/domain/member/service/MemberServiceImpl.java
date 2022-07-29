@@ -84,4 +84,14 @@ public class MemberServiceImpl implements MemberService{
         fromMember.follow(toMember);
         return new FollowDto(toMember.getFollowerCount(), true);
     }
+
+    @Override
+    @Transactional
+    public FollowDto unfollowMember(Long fromId, Long toId) {
+        final Member fromMember = memberReader.getMemberBy(fromId);
+        final Member toMember = memberReader.getMemberBy(toId);
+        fromMember.unfollow(toMember);
+        return new FollowDto(toMember.getFollowerCount(), false);
+
+    }
 }

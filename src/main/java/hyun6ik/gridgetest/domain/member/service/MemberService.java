@@ -25,4 +25,6 @@ public interface MemberService {
     void resignMember(Long memberId);
 
     FollowDto followMember(Long fromId, Long toId);
+
+    FollowDto unfollowMember(Long fromId, Long toId);
 }

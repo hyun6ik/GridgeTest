@@ -42,4 +42,11 @@ public class MemberController {
     public ResponseEntity<FollowDto> followMember(@MemberId Long fromId, @PathVariable("memberId") Long toId) {
         return ResponseEntity.ok(memberService.followMember(fromId, toId));
     }
+
+    @LoginUser
+    @PatchMapping("/followings/{memberId}")
+    public ResponseEntity<FollowDto> unfollowMember(@MemberId Long fromId, @PathVariable("memberId") Long toId) {
+        return ResponseEntity.ok(memberService.unfollowMember(fromId, toId));
+    }
+
 }
