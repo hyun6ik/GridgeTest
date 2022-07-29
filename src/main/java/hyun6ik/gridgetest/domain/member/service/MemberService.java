@@ -2,6 +2,7 @@ package hyun6ik.gridgetest.domain.member.service;
 
 import hyun6ik.gridgetest.domain.login.vo.SocialUserInfo;
 import hyun6ik.gridgetest.domain.member.entity.Member;
+import hyun6ik.gridgetest.interfaces.member.dto.FollowDto;
 
 import java.time.LocalDateTime;
 
@@ -22,4 +23,6 @@ public interface MemberService {
     void updatePrivateAccount(Long memberId);
 
     void resignMember(Long memberId);
+
+    FollowDto followMember(Long fromId, Long toId);
 }

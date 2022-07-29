@@ -5,6 +5,7 @@ import hyun6ik.gridgetest.domain.member.entity.Member;
 import hyun6ik.gridgetest.infrastructure.member.MemberReader;
 import hyun6ik.gridgetest.infrastructure.member.MemberStore;
 import hyun6ik.gridgetest.infrastructure.member.MemberValidator;
+import hyun6ik.gridgetest.interfaces.member.dto.FollowDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -73,5 +74,14 @@ public class MemberServiceImpl implements MemberService{
     public void resignMember(Long memberId) {
         final Member member = memberReader.getMemberBy(memberId);
         member.resignMember();
+    }
+
+    @Override
+    @Transactional
+    public FollowDto followMember(Long fromId, Long toId) {
+        final Member fromMember = memberReader.getMemberBy(fromId);
+        final Member toMember = memberReader.getMemberBy(toId);
+        fromMember.follow(toMember);
+        return new FollowDto(toMember.getFollowerCount(), true);
     }
 }

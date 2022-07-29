@@ -4,6 +4,7 @@ import hyun6ik.gridgetest.domain.member.service.MemberService;
 import hyun6ik.gridgetest.global.annotation.LoginUser;
 import hyun6ik.gridgetest.global.annotation.MemberId;
 import hyun6ik.gridgetest.interfaces.member.constant.MemberConstraints;
+import hyun6ik.gridgetest.interfaces.member.dto.FollowDto;
 import hyun6ik.gridgetest.interfaces.member.dto.PasswordDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -34,5 +35,11 @@ public class MemberController {
     public ResponseEntity<String> resignMember(@MemberId Long memberId) {
         memberService.resignMember(memberId);
         return ResponseEntity.ok(MemberConstraints.RESIGN_MEMBER);
+    }
+
+    @LoginUser
+    @PostMapping("/followings/{memberId}")
+    public ResponseEntity<FollowDto> followMember(@MemberId Long fromId, @PathVariable("memberId") Long toId) {
+        return ResponseEntity.ok(memberService.followMember(fromId, toId));
     }
 }

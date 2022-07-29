@@ -3,6 +3,9 @@ package hyun6ik.gridgetest.domain.member.entity;
 import hyun6ik.gridgetest.domain.base.BaseTimeEntity;
 import hyun6ik.gridgetest.domain.member.constant.MemberRole;
 import hyun6ik.gridgetest.domain.member.constant.MemberType;
+import hyun6ik.gridgetest.domain.member.follow.Follow;
+import hyun6ik.gridgetest.domain.member.follow.Followers;
+import hyun6ik.gridgetest.domain.member.follow.Followings;
 import hyun6ik.gridgetest.domain.post.Posts;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -43,6 +46,12 @@ public class Member extends BaseTimeEntity {
     @Embedded
     private Posts posts;
 
+    @Embedded
+    private Followers followers;
+
+    @Embedded
+    private Followings followings;
+
     @Builder
     public Member(Profile profile, String phoneNumber, String password, LocalDate birthDay, MemberStatus memberStatus) {
         this.profile = profile;
@@ -51,6 +60,8 @@ public class Member extends BaseTimeEntity {
         this.birthDay = birthDay;
         this.memberStatus = memberStatus;
         this.posts = new Posts(new ArrayList<>());
+        this.followers = new Followers(new ArrayList<>());
+        this.followings = new Followings(new ArrayList<>());
     }
 
     public void addToken(MemberToken memberToken) {
@@ -67,6 +78,10 @@ public class Member extends BaseTimeEntity {
 
     public LocalDateTime getTokenExpirationTime() {
         return this.getMemberToken().getTokenExpirationTime();
+    }
+
+    public Integer getFollowerCount() {
+        return followers.getCount();
     }
 
     public void encodePassword(PasswordEncoder passwordEncoder) {
@@ -90,5 +105,11 @@ public class Member extends BaseTimeEntity {
 
     public void resignMember() {
         this.memberStatus.resignMember();
+    }
+
+    public void follow(Member toMember) {
+        final Follow follow = new Follow(this, toMember);
+        this.followings.add(follow);
+        toMember.followers.add(follow);
     }
 }
