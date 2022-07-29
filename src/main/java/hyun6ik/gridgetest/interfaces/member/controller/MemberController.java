@@ -23,14 +23,14 @@ public class MemberController {
     }
 
     @LoginUser
-    @PutMapping("/private")
+    @PatchMapping("/private")
     public ResponseEntity<String> updatePrivateAccount(@MemberId Long memberId) {
         memberService.updatePrivateAccount(memberId);
         return ResponseEntity.ok(MemberConstraints.CHANGE_PRIVATE);
     }
 
     @LoginUser
-    @DeleteMapping("/resign")
+    @PatchMapping("/resign")
     public ResponseEntity<String> resignMember(@MemberId Long memberId) {
         memberService.resignMember(memberId);
         return ResponseEntity.ok(MemberConstraints.RESIGN_MEMBER);

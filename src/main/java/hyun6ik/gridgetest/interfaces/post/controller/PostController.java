@@ -28,27 +28,27 @@ public class PostController {
     }
 
     @LoginUser
-    @DeleteMapping("/delete/{postId}")
+    @PatchMapping("/delete/{postId}")
     public ResponseEntity<String> deletePost(@MemberId Long memberId, @PathVariable Long postId) {
         postService.deletePost(memberId, postId);
         return ResponseEntity.ok(PostConstraints.DELETE);
     }
 
     @LoginUser
-    @PutMapping("/{postId}")
+    @PatchMapping("/{postId}")
     public ResponseEntity<String> updatePost(@MemberId Long memberId, @PathVariable Long postId, @RequestBody PostUpdateDto.Request request) {
         postService.updatePost(memberId, postId, request.getContent());
         return ResponseEntity.ok(PostConstraints.UPDATE);
     }
 
     @LoginUser
-    @PutMapping("/likes/{postId}")
+    @PatchMapping("/likes/{postId}")
     public ResponseEntity<LikeDto> likePost(@MemberId Long memberId, @PathVariable Long postId) {
         return ResponseEntity.ok(postFacade.likePost(memberId, postId));
     }
 
     @LoginUser
-    @DeleteMapping("/likes/{postId}")
+    @PatchMapping("/unlikes/{postId}")
     public ResponseEntity<LikeDto> unlikePost(@MemberId Long memberId, @PathVariable Long postId) {
         return ResponseEntity.ok(postFacade.unlikePost(memberId, postId));
     }
