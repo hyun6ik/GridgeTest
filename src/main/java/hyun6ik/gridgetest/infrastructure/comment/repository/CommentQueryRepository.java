@@ -27,4 +27,13 @@ public class CommentQueryRepository {
                         .fetchOne()
         );
     }
+
+    public Optional<Comment> findById(Long commentId) {
+        return Optional.ofNullable(
+                queryFactory
+                        .selectFrom(comment)
+                        .where(comment.id.eq(commentId), comment.commentStatus.eq(CommentStatus.USE))
+                        .fetchOne()
+        );
+    }
 }

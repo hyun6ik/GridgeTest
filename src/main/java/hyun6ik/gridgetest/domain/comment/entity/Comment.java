@@ -1,14 +1,18 @@
 package hyun6ik.gridgetest.domain.comment.entity;
 
 import hyun6ik.gridgetest.domain.comment.constant.CommentStatus;
+import hyun6ik.gridgetest.domain.comment.report.CommentReport;
+import hyun6ik.gridgetest.domain.comment.report.CommentReports;
 import hyun6ik.gridgetest.domain.member.entity.Member;
 import hyun6ik.gridgetest.domain.post.Post;
+import hyun6ik.gridgetest.domain.post.report.constant.ReportReason;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Objects;
 
 @Entity
@@ -34,12 +38,16 @@ public class Comment {
     @Enumerated(EnumType.STRING)
     private CommentStatus commentStatus;
 
+    @Embedded
+    private CommentReports commentReports;
+
     @Builder
     public Comment(CommentContent commentContent, Member member, Post post) {
         this.commentContent = commentContent;
         this.member = member;
         this.post = post;
         this.commentStatus = CommentStatus.USE;
+        this.commentReports = new CommentReports(new ArrayList<>());
     }
 
     @Override
@@ -61,5 +69,18 @@ public class Comment {
 
     public void delete() {
         this.commentStatus = CommentStatus.DELETE;
+    }
+
+    public void report(Member member, ReportReason reportReason) {
+        final CommentReport commentReport = new CommentReport(reportReason, this, member);
+        commentReports.add(commentReport);
+    }
+
+    public void block() {
+        this.commentStatus = CommentStatus.BLOCK;
+    }
+
+    public Integer getReportCounts() {
+        return commentReports.getCounts();
     }
 }

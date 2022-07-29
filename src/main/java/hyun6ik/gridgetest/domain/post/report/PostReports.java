@@ -31,7 +31,7 @@ public class PostReports {
             throw new ReportException(ErrorCode.CANNOT_REPORT_MY_POST);
         }
         if (postReports.contains(postReport)) {
-            throw new ReportException(ErrorCode.CANNOT_REPORT_ALREADY);
+            throw new ReportException(ErrorCode.ALREADY_REPORT_POST);
         }
         postReports.add(postReport);
         if (postReports.size() > BLOCK_COUNT) {

@@ -28,7 +28,10 @@ public enum ErrorCode {
 
     //REPORT
     CANNOT_REPORT_MY_POST(400, "내 게시글은 신고할 수 없습니다."),
-    CANNOT_REPORT_ALREADY(400, "이미 신고한 게시글입니다."),
+    ALREADY_REPORT_POST(400, "이미 신고한 게시글입니다."),
+    CANNOT_REPORT_MY_COMMENT(400, "내 댓글은 신고할 수 없습니다."),
+    ALREADY_REPORT_COMMENT(400, "이미 신고한 댓글입니다."),
+
 
     //FOLLOW
     CANNOT_FOLLOW_MYSELF(400, "자기 자신은 팔로우 할 수 없습니다."),

@@ -34,4 +34,9 @@ public class CommentServiceImpl implements CommentService{
         final Comment comment = commentReader.getCommentBy(memberId, commentId);
         comment.delete();
     }
+
+    @Override
+    public Comment getCommentBy(Long commentId) {
+        return commentReader.getCommentBy(commentId);
+    }
 }

@@ -17,4 +17,9 @@ public class CommentReader {
         return commentQueryRepository.findByIdAndCommentId(memberId, commentId)
                 .orElseThrow(() -> new NotFoundException(ErrorCode.NOT_FOUND_COMMENT));
     }
+
+    public Comment getCommentBy(Long commentId) {
+        return commentQueryRepository.findById(commentId)
+                .orElseThrow(() -> new NotFoundException(ErrorCode.NOT_FOUND_COMMENT));
+    }
 }
