@@ -8,6 +8,7 @@ import hyun6ik.gridgetest.interfaces.post.constant.PostConstraints;
 import hyun6ik.gridgetest.interfaces.post.dto.LikeDto;
 import hyun6ik.gridgetest.interfaces.post.dto.PostRegisterDto;
 import hyun6ik.gridgetest.interfaces.post.dto.PostUpdateDto;
+import hyun6ik.gridgetest.interfaces.post.dto.ReportDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -50,6 +51,12 @@ public class PostController {
     @DeleteMapping("/likes/{postId}")
     public ResponseEntity<LikeDto> unlikePost(@MemberId Long memberId, @PathVariable Long postId) {
         return ResponseEntity.ok(postFacade.unlikePost(memberId, postId));
+    }
+
+    @LoginUser
+    @PostMapping("/reports/{postId}")
+    public ResponseEntity<ReportDto.Response> reportPost(@MemberId Long memberId, @PathVariable Long postId, @RequestBody ReportDto.Request request) {
+        return ResponseEntity.ok(postFacade.reportPost(memberId, postId, request.getReportReason()));
     }
 
 }

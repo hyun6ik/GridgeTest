@@ -26,6 +26,10 @@ public enum ErrorCode {
     DUPLICATED_LIKE(400,"이미 좋아요를 누르셨습니다."),
     CANNOT_UNLIKE(400, "좋아요를 누르지 않으셨습니다."),
 
+    //REPORT
+    CANNOT_REPORT_MY_POST(400, "내 게시글은 신고할 수 없습니다."),
+    CANNOT_REPORT_ALREADY(400, "이미 신고한 게시글입니다."),
+
     INVALID_MEMBER_TYPE(400, "잘못된 회원 타입 입니다.(memberType : KAKAO)"),
     NOT_EXISTS_AUTHORIZATION(401, "Authorization Header가 빈값입니다."),
     NOT_VALID_BEARER_GRANT_TYPE(401, "인증 타입이 Bearer 타입이 아닙니다."),

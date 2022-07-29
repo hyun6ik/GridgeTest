@@ -3,10 +3,12 @@ package hyun6ik.gridgetest.application.post;
 import hyun6ik.gridgetest.domain.member.entity.Member;
 import hyun6ik.gridgetest.domain.member.service.MemberService;
 import hyun6ik.gridgetest.domain.post.Post;
+import hyun6ik.gridgetest.domain.post.report.constant.ReportReason;
 import hyun6ik.gridgetest.domain.post.service.PostService;
 import hyun6ik.gridgetest.interfaces.post.dto.LikeDto;
 import hyun6ik.gridgetest.interfaces.post.dto.PostDtoAssembler;
 import hyun6ik.gridgetest.interfaces.post.dto.PostRegisterDto;
+import hyun6ik.gridgetest.interfaces.post.dto.ReportDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -39,5 +41,13 @@ public class PostFacade {
         final Post post = postService.getPostBy(postId);
         post.unlike(member);
         return new LikeDto(post.getLikeCounts(), false);
+    }
+
+    @Transactional
+    public ReportDto.Response reportPost(Long memberId, Long postId, ReportReason reportReason) {
+        final Member member = memberService.getMemberBy(memberId);
+        final Post post = postService.getPostBy(postId);
+        post.report(member, reportReason);
+        return new ReportDto.Response(post.getReportCounts());
     }
 }
