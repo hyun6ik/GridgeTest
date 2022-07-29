@@ -16,9 +16,9 @@ import java.util.Objects;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class CommentContent {
 
-    private static final int MAX_COMMENT_CONTENT_LENGTH = 100;
+    private static final int MAX_COMMENT_CONTENT_LENGTH = 200;
 
-    @Column(nullable = false, length = 100)
+    @Column(nullable = false, length = 200)
     @Lob
     private String content;
 
@@ -34,4 +34,5 @@ public class CommentContent {
                 || content.isBlank()
                 || content.length() >= MAX_COMMENT_CONTENT_LENGTH;
     }
+
 }
