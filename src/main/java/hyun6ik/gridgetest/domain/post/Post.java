@@ -17,6 +17,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 
 @Entity
 @Getter
@@ -50,14 +51,15 @@ public class Post extends BaseTimeEntity {
     private PostStatus postStatus;
 
     @Builder
-    public Post(Member member, Images images, PostContent postContent, Likes likes, Comments comments, PostReports postReports) {
+    public Post(Member member, Images images, PostContent postContent) {
         this.member = member;
         this.images = images;
         this.postContent = postContent;
-        this.likes = likes;
-        this.comments = comments;
         this.postStatus = PostStatus.USE;
-        this.postReports = postReports;
+
+        this.likes = new Likes(new ArrayList<>());
+        this.comments = new Comments(new ArrayList<>());
+        this.postReports = new PostReports(new ArrayList<>());
 
         images.belongTo(this);
     }
