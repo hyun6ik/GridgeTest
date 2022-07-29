@@ -6,12 +6,16 @@ import hyun6ik.gridgetest.infrastructure.member.MemberReader;
 import hyun6ik.gridgetest.infrastructure.member.MemberStore;
 import hyun6ik.gridgetest.infrastructure.member.MemberValidator;
 import hyun6ik.gridgetest.interfaces.member.dto.FollowDto;
+import hyun6ik.gridgetest.interfaces.member.dto.MyPageDto;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.util.Optional;
 
 
 @Service
@@ -93,5 +97,11 @@ public class MemberServiceImpl implements MemberService{
         fromMember.unfollow(toMember);
         return new FollowDto(toMember.getFollowerCount(), false);
 
+    }
+
+    @Override
+    public MyPageDto getMyPageDtoBy(Long memberId, Optional<Integer> page) {
+        final Pageable pageable = PageRequest.of(page.orElse(0), 9);
+        return memberReader.getMyPageDtoBy(memberId, pageable);
     }
 }

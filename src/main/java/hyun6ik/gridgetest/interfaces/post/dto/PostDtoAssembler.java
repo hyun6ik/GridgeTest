@@ -8,16 +8,23 @@ import hyun6ik.gridgetest.domain.post.image.Images;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
 import java.util.stream.Collectors;
 
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class PostDtoAssembler {
 
     public static Post toEntity(Member member, PostRegisterDto.Request request) {
-        final Images images = new Images(request.getImageUrls()
+        final Image image = new Image(request.getImageUrls().get(0), true);
+        final List<Image> imageList = request.getImageUrls()
                 .stream()
-                .map(Image::new)
-                .collect(Collectors.toList()));
+                .skip(1)
+                .map(url -> new Image(url, false))
+                .collect(Collectors.toList());
+
+        imageList.add(0, image);
+
+        final Images images = new Images(imageList);
 
         final PostContent postContent = new PostContent(request.getContent());
 

@@ -7,10 +7,11 @@ import hyun6ik.gridgetest.global.error.exception.LoginException;
 import hyun6ik.gridgetest.global.error.exception.NotFoundException;
 import hyun6ik.gridgetest.infrastructure.member.repository.MemberQueryRepository;
 import hyun6ik.gridgetest.infrastructure.member.repository.MemberRepository;
+import hyun6ik.gridgetest.interfaces.member.dto.MyPageDto;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
-
-import java.util.Optional;
 
 @Component
 @RequiredArgsConstructor
@@ -37,5 +38,12 @@ public class MemberReader {
     public Member getMemberByPhoneNumber(String phoneNumber) {
         return memberRepository.findByPhoneNumber(phoneNumber)
                 .orElseThrow(() -> new NotFoundException(ErrorCode.MEMBER_NOT_EXISTS));
+    }
+
+    public MyPageDto getMyPageDtoBy(Long memberId, Pageable pageable) {
+        final MyPageDto myPageDto = memberQueryRepository.findMyPageDtoBy(memberId)
+                .orElseThrow(() -> new NotFoundException(ErrorCode.MEMBER_NOT_EXISTS));
+        myPageDto.addPageDto(memberQueryRepository.findMyPagePostDtosBy(memberId, pageable));
+        return myPageDto;
     }
 }

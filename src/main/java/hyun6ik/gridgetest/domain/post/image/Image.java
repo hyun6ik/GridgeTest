@@ -24,11 +24,15 @@ public class Image extends BaseTimeEntity {
     @JoinColumn(name = "post_id")
     private Post post;
 
-    public Image(String url) {
+    private Boolean isRepImage;
+
+    public Image(String url, Boolean isRepImage) {
         this.url = url;
+        this.isRepImage = isRepImage;
     }
 
     public void belongTo(Post post) {
         this.post = post;
     }
+
 }

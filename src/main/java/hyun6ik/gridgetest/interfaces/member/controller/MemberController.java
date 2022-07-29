@@ -5,10 +5,13 @@ import hyun6ik.gridgetest.global.annotation.LoginUser;
 import hyun6ik.gridgetest.global.annotation.MemberId;
 import hyun6ik.gridgetest.interfaces.member.constant.MemberConstraints;
 import hyun6ik.gridgetest.interfaces.member.dto.FollowDto;
+import hyun6ik.gridgetest.interfaces.member.dto.MyPageDto;
 import hyun6ik.gridgetest.interfaces.member.dto.PasswordDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/members")
@@ -47,6 +50,12 @@ public class MemberController {
     @PatchMapping("/followings/{memberId}")
     public ResponseEntity<FollowDto> unfollowMember(@MemberId Long fromId, @PathVariable("memberId") Long toId) {
         return ResponseEntity.ok(memberService.unfollowMember(fromId, toId));
+    }
+
+    @LoginUser
+    @GetMapping("/mypage")
+    public ResponseEntity<MyPageDto> getMyPage(@MemberId Long memberId, Optional<Integer> page) {
+        return ResponseEntity.ok(memberService.getMyPageDtoBy(memberId, page));
     }
 
 }
