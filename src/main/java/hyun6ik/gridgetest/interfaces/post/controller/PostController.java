@@ -5,10 +5,7 @@ import hyun6ik.gridgetest.domain.post.service.PostService;
 import hyun6ik.gridgetest.global.annotation.LoginUser;
 import hyun6ik.gridgetest.global.annotation.MemberId;
 import hyun6ik.gridgetest.interfaces.post.constant.PostConstraints;
-import hyun6ik.gridgetest.interfaces.post.dto.LikeDto;
-import hyun6ik.gridgetest.interfaces.post.dto.PostRegisterDto;
-import hyun6ik.gridgetest.interfaces.post.dto.PostUpdateDto;
-import hyun6ik.gridgetest.interfaces.post.dto.ReportDto;
+import hyun6ik.gridgetest.interfaces.post.dto.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -59,4 +56,8 @@ public class PostController {
         return ResponseEntity.ok(postFacade.reportPost(memberId, postId, request.getReportReason()));
     }
 
+    @GetMapping("/{postId}")
+    public ResponseEntity<PostFeedDto> getPostFeed(@PathVariable Long postId) {
+        return ResponseEntity.ok(postService.getPostFeedDtoBy(postId));
+    }
 }

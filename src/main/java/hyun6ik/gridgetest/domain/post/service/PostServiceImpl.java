@@ -4,6 +4,7 @@ import hyun6ik.gridgetest.domain.post.Post;
 import hyun6ik.gridgetest.infrastructure.post.PostReader;
 import hyun6ik.gridgetest.infrastructure.post.PostStore;
 import hyun6ik.gridgetest.infrastructure.post.PostValidator;
+import hyun6ik.gridgetest.interfaces.post.dto.PostFeedDto;
 import hyun6ik.gridgetest.interfaces.post.dto.PostRegisterDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -43,5 +44,10 @@ public class PostServiceImpl implements PostService {
     @Override
     public Post getPostBy(Long postId) {
         return postReader.getPostBy(postId);
+    }
+
+    @Override
+    public PostFeedDto getPostFeedDtoBy(Long postId) {
+        return postReader.getPostFeedDtoBy(postId);
     }
 }

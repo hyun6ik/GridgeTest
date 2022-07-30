@@ -4,8 +4,11 @@ import hyun6ik.gridgetest.domain.post.Post;
 import hyun6ik.gridgetest.global.error.exception.ErrorCode;
 import hyun6ik.gridgetest.global.error.exception.NotFoundException;
 import hyun6ik.gridgetest.infrastructure.post.repository.PostQueryRepository;
+import hyun6ik.gridgetest.interfaces.post.dto.PostFeedDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
+
+import java.util.List;
 
 @Component
 @RequiredArgsConstructor
@@ -21,5 +24,13 @@ public class PostReader {
     public Post getPostBy(Long postId) {
         return postQueryRepository.findById(postId)
                 .orElseThrow(() -> new NotFoundException(ErrorCode.NOT_FOUND_POST));
+    }
+
+    public PostFeedDto getPostFeedDtoBy(Long postId) {
+        final PostFeedDto postFeedDto = postQueryRepository.findPostFeedDtoBy(postId)
+                .orElseThrow(() -> new NotFoundException(ErrorCode.NOT_FOUND_POST));
+        final List<String> images = postQueryRepository.findPostFeedDtoImagesBy(postId);
+        postFeedDto.addImages(images);
+        return postFeedDto;
     }
 }
