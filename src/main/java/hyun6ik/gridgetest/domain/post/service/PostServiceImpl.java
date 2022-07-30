@@ -7,8 +7,13 @@ import hyun6ik.gridgetest.infrastructure.post.PostValidator;
 import hyun6ik.gridgetest.interfaces.post.dto.PostFeedDto;
 import hyun6ik.gridgetest.interfaces.post.dto.PostRegisterDto;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.Optional;
 
 @Service
 @Transactional(readOnly = true)
@@ -49,5 +54,11 @@ public class PostServiceImpl implements PostService {
     @Override
     public PostFeedDto getPostFeedDtoBy(Long postId) {
         return postReader.getPostFeedDtoBy(postId);
+    }
+
+    @Override
+    public Page<PostFeedDto> getHomeFeedDtosBy(Long memberId, Optional<Integer> page) {
+        final Pageable pageable = PageRequest.of(page.orElse(0), 10);
+        return postReader.getHomeFeedDtosBy(memberId, pageable);
     }
 }

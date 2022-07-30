@@ -6,6 +6,8 @@ import hyun6ik.gridgetest.global.error.exception.NotFoundException;
 import hyun6ik.gridgetest.infrastructure.post.repository.PostQueryRepository;
 import hyun6ik.gridgetest.interfaces.post.dto.PostFeedDto;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -32,5 +34,11 @@ public class PostReader {
         final List<String> images = postQueryRepository.findPostFeedDtoImagesBy(postId);
         postFeedDto.addImages(images);
         return postFeedDto;
+    }
+
+    public Page<PostFeedDto> getHomeFeedDtosBy(Long memberId, Pageable pageable) {
+        final Page<PostFeedDto> homeFeedDtos = postQueryRepository.findHomeFeedDtosBy(memberId, pageable);
+        homeFeedDtos.forEach(homeFeedDto -> homeFeedDto.addImages(postQueryRepository.findPostFeedDtoImagesBy(homeFeedDto.getPostId())));
+        return homeFeedDtos;
     }
 }

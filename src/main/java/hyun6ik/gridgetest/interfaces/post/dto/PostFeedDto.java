@@ -10,6 +10,7 @@ import java.util.List;
 @Setter
 public class PostFeedDto {
 
+    private Long postId;
     private List<String> images;
     private String nickName;
     private String profileImage;
@@ -17,7 +18,8 @@ public class PostFeedDto {
     private Integer commentCount;
 
     @QueryProjection
-    public PostFeedDto(String nickName, String profileImage, Integer likeCount, Integer commentCount) {
+    public PostFeedDto(Long postId, String nickName, String profileImage, Integer likeCount, Integer commentCount) {
+        this.postId = postId;
         this.nickName = nickName;
         this.profileImage = profileImage;
         this.likeCount = likeCount;

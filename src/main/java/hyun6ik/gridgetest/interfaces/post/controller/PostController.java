@@ -7,8 +7,11 @@ import hyun6ik.gridgetest.global.annotation.MemberId;
 import hyun6ik.gridgetest.interfaces.post.constant.PostConstraints;
 import hyun6ik.gridgetest.interfaces.post.dto.*;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/posts")
@@ -60,4 +63,11 @@ public class PostController {
     public ResponseEntity<PostFeedDto> getPostFeed(@PathVariable Long postId) {
         return ResponseEntity.ok(postService.getPostFeedDtoBy(postId));
     }
+
+    @LoginUser
+    @GetMapping("/home")
+    public ResponseEntity<Page<PostFeedDto>> getHomeFeeds(@MemberId Long memberId, Optional<Integer> page) {
+        return ResponseEntity.ok(postService.getHomeFeedDtosBy(memberId, page));
+    }
+
 }
