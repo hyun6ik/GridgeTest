@@ -99,4 +99,9 @@ public class Comment extends BaseTimeEntity {
         final CommentLike commentLike = new CommentLike(this, member);
         commentLikes.add(commentLike);
     }
+
+    public void unlike(Member member) {
+        final CommentLike commentLike = new CommentLike(this, member);
+        commentLikes.remove(commentLike);
+    }
 }

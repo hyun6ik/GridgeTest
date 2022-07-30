@@ -45,4 +45,12 @@ public class CommentFacade {
         comment.like(member);
         return new LikeDto(comment.getLikeCounts(), true);
     }
+
+    @Transactional
+    public LikeDto unlikeComment(Long memberId, Long commentId) {
+        final Member member = memberService.getMemberBy(memberId);
+        final Comment comment = commentService.getCommentBy(commentId);
+        comment.unlike(member);
+        return new LikeDto(comment.getLikeCounts(), false);
+    }
 }

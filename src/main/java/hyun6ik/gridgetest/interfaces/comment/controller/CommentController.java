@@ -53,4 +53,10 @@ public class CommentController {
     public ResponseEntity<LikeDto> likeComment(@MemberId Long memberId, @PathVariable Long commentId) {
         return ResponseEntity.ok(commentFacade.likeComment(memberId, commentId));
     }
+
+    @LoginUser
+    @PatchMapping("/unlikes/{commentId}")
+    public ResponseEntity<LikeDto> unlikeComment(@MemberId Long memberId, @PathVariable Long commentId) {
+        return ResponseEntity.ok(commentFacade.unlikeComment(memberId, commentId));
+    }
 }
