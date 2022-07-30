@@ -21,6 +21,13 @@ public class ProfileDto {
         private String introduce;
     }
 
+    @Getter
+    @Setter
+    public static class Image {
+        private String image;
+    }
+
+
 
 
 

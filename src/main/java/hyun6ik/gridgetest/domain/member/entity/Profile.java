@@ -41,4 +41,8 @@ public class Profile {
     public void updateIntroduce(String introduce) {
         this.introduce = introduce;
     }
+
+    public void updateImage(String image) {
+        this.image = image;
+    }
 }

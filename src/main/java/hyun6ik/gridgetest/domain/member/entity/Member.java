@@ -126,4 +126,8 @@ public class Member extends BaseTimeEntity {
     public void updateIntroduce(String introduce) {
         this.profile.updateIntroduce(introduce);
     }
+
+    public void updateProfileImage(String image) {
+        this.profile.updateImage(image);
+    }
 }

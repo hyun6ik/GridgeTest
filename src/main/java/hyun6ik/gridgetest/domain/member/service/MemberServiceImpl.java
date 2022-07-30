@@ -118,4 +118,11 @@ public class MemberServiceImpl implements MemberService{
         final Member member = memberReader.getMemberBy(memberId);
         member.updateIntroduce(introduce);
     }
+
+    @Override
+    @Transactional
+    public void updateProfileImage(Long memberId, String image) {
+        final Member member = memberReader.getMemberBy(memberId);
+        member.updateProfileImage(image);
+    }
 }

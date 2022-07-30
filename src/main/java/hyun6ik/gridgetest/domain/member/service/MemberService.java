@@ -35,4 +35,6 @@ public interface MemberService {
     void updateProfileWebsite(Long memberId, String websiteUrl);
 
     void updateProfileIntroduce(Long memberId, String introduce);
+
+    void updateProfileImage(Long memberId, String image);
 }

@@ -73,4 +73,11 @@ public class MemberController {
         return ResponseEntity.ok(MemberConstraints.UPDATE_INTRODUCE);
     }
 
+    @LoginUser
+    @PatchMapping("/profiles/image")
+    public ResponseEntity<String> updateProfileImage(@MemberId Long memberId, @RequestBody ProfileDto.Image request) {
+        memberService.updateProfileImage(memberId, request.getImage());
+        return ResponseEntity.ok(MemberConstraints.UPDATE_IMAGE);
+    }
+
 }
