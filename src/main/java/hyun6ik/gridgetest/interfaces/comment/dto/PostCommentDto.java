@@ -12,15 +12,17 @@ public class PostCommentDto {
 
     private Long memberId;
     private Long commentId;
+    private Integer likeCount;
     private String profileImageUrl;
     private String nickName;
     private String content;
     private LocalDateTime createdAt;
 
     @QueryProjection
-    public PostCommentDto(Long memberId, Long commentId, String profileImageUrl, String nickName, String content, LocalDateTime createdAt) {
+    public PostCommentDto(Long memberId, Long commentId, Integer likeCount, String profileImageUrl, String nickName, String content, LocalDateTime createdAt) {
         this.memberId = memberId;
         this.commentId = commentId;
+        this.likeCount = likeCount;
         this.profileImageUrl = profileImageUrl;
         this.nickName = nickName;
         this.content = content;

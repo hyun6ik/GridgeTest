@@ -51,6 +51,7 @@ public class CommentQueryRepository {
                 .select(new QPostCommentDto(
                         comment.member.id,
                         comment.id,
+                        comment.commentLikes.commentLikes.size(),
                         comment.member.profile.image,
                         comment.member.profile.nickName,
                         comment.commentContent.content,
