@@ -1,4 +1,4 @@
-package hyun6ik.gridgetest.interfaces.post.dto;
+package hyun6ik.gridgetest.interfaces.common.dto;
 
 import lombok.AccessLevel;
 import lombok.Getter;

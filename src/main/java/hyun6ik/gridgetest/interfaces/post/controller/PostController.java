@@ -4,6 +4,8 @@ import hyun6ik.gridgetest.application.post.PostFacade;
 import hyun6ik.gridgetest.domain.post.service.PostService;
 import hyun6ik.gridgetest.global.annotation.LoginUser;
 import hyun6ik.gridgetest.global.annotation.MemberId;
+import hyun6ik.gridgetest.interfaces.common.dto.LikeDto;
+import hyun6ik.gridgetest.interfaces.common.dto.ReportDto;
 import hyun6ik.gridgetest.interfaces.post.constant.PostConstraints;
 import hyun6ik.gridgetest.interfaces.post.dto.*;
 import lombok.RequiredArgsConstructor;
