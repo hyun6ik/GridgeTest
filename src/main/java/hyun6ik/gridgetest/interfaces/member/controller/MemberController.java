@@ -7,7 +7,7 @@ import hyun6ik.gridgetest.interfaces.member.constant.MemberConstraints;
 import hyun6ik.gridgetest.interfaces.member.dto.FollowDto;
 import hyun6ik.gridgetest.interfaces.member.dto.MyPageDto;
 import hyun6ik.gridgetest.interfaces.member.dto.PasswordDto;
-import hyun6ik.gridgetest.interfaces.member.dto.ProfileWebsiteDto;
+import hyun6ik.gridgetest.interfaces.member.dto.ProfileDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -61,8 +61,9 @@ public class MemberController {
 
     @LoginUser
     @PatchMapping("/profiles/website")
-    public ResponseEntity<String> updateProfileWebsite(@MemberId Long memberId, @RequestBody ProfileWebsiteDto request) {
+    public ResponseEntity<String> updateProfileWebsite(@MemberId Long memberId, @RequestBody ProfileDto.Website request) {
         memberService.updateProfileWebsite(memberId, request.getWebsiteUrl());
         return ResponseEntity.ok(MemberConstraints.UPDATE_WEBSITE);
     }
+
 }
