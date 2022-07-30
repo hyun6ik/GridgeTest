@@ -45,6 +45,7 @@ public class PostQueryRepository {
                 queryFactory
                         .select(new QPostFeedDto(
                                 post.member.profile.nickName,
+                                post.member.profile.image,
                                 post.likes.likes.size(),
                                 post.comments.comments.size()
                         ))
