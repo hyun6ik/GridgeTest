@@ -104,4 +104,11 @@ public class MemberServiceImpl implements MemberService{
         final Pageable pageable = PageRequest.of(page.orElse(0), 9);
         return memberReader.getMyPageDtoBy(memberId, pageable);
     }
+
+    @Override
+    @Transactional
+    public void updateProfileWebsite(Long memberId, String websiteUrl) {
+        final Member member = memberReader.getMemberBy(memberId);
+        member.updateWebSite(websiteUrl);
+    }
 }

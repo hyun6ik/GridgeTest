@@ -118,4 +118,8 @@ public class Member extends BaseTimeEntity {
         this.followings.remove(follow);
         toMember.followers.remove(follow);
     }
+
+    public void updateWebSite(String websiteUrl) {
+        this.profile.updateWebSite(websiteUrl);
+    }
 }

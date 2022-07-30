@@ -7,6 +7,7 @@ import hyun6ik.gridgetest.interfaces.member.constant.MemberConstraints;
 import hyun6ik.gridgetest.interfaces.member.dto.FollowDto;
 import hyun6ik.gridgetest.interfaces.member.dto.MyPageDto;
 import hyun6ik.gridgetest.interfaces.member.dto.PasswordDto;
+import hyun6ik.gridgetest.interfaces.member.dto.ProfileWebsiteDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -23,14 +24,14 @@ public class MemberController {
     @PostMapping("/password")
     public ResponseEntity<String> changePassword(@RequestBody PasswordDto request) {
         memberService.changePassword(request.getPhoneNumber(), request.getPassword(), request.getPassword2());
-        return ResponseEntity.ok(MemberConstraints.CHANGE_PASSWORD);
+        return ResponseEntity.ok(MemberConstraints.UPDATE_PASSWORD);
     }
 
     @LoginUser
     @PatchMapping("/private")
     public ResponseEntity<String> updatePrivateAccount(@MemberId Long memberId) {
         memberService.updatePrivateAccount(memberId);
-        return ResponseEntity.ok(MemberConstraints.CHANGE_PRIVATE);
+        return ResponseEntity.ok(MemberConstraints.UPDATE_PRIVATE);
     }
 
     @LoginUser
@@ -58,4 +59,10 @@ public class MemberController {
         return ResponseEntity.ok(memberService.getMyPageDtoBy(memberId, page));
     }
 
+    @LoginUser
+    @PatchMapping("/profiles/website")
+    public ResponseEntity<String> updateProfileWebsite(@MemberId Long memberId, @RequestBody ProfileWebsiteDto request) {
+        memberService.updateProfileWebsite(memberId, request.getWebsiteUrl());
+        return ResponseEntity.ok(MemberConstraints.UPDATE_WEBSITE);
+    }
 }

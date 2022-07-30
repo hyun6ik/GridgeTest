@@ -31,4 +31,6 @@ public interface MemberService {
     FollowDto unfollowMember(Long fromId, Long toId);
 
     MyPageDto getMyPageDtoBy(Long memberId, Optional<Integer> page);
+
+    void updateProfileWebsite(Long memberId, String websiteUrl);
 }
