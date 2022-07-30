@@ -13,13 +13,13 @@ public class MyPageDto {
     private String nickName;
     private String profileImage;
     private String name;
-    private Long postCount;
-    private Long followerCount;
-    private Long followingCount;
+    private Integer postCount;
+    private Integer followerCount;
+    private Integer followingCount;
     private Page<PostDto> postDtos;
 
     @QueryProjection
-    public MyPageDto(String nickName, String profileImage, String name, Long postCount, Long followerCount, Long followingCount) {
+    public MyPageDto(String nickName, String profileImage, String name, Integer postCount, Integer followerCount, Integer followingCount) {
         this.nickName = nickName;
         this.profileImage = profileImage;
         this.name = name;
