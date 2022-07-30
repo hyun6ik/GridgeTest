@@ -21,6 +21,7 @@ public class PostFacade {
     private final MemberService memberService;
     private final PostService postService;
 
+    @Transactional
     public PostRegisterDto.Response createPost(Long memberId, PostRegisterDto.Request request) {
         final Member member = memberService.getMemberBy(memberId);
         final Post initPost = PostDtoAssembler.toEntity(member, request);
