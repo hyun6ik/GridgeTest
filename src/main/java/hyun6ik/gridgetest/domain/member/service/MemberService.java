@@ -33,4 +33,6 @@ public interface MemberService {
     MyPageDto getMyPageDtoBy(Long memberId, Optional<Integer> page);
 
     void updateProfileWebsite(Long memberId, String websiteUrl);
+
+    void updateProfileIntroduce(Long memberId, String introduce);
 }

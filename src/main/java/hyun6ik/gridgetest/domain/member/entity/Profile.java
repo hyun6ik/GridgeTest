@@ -37,4 +37,8 @@ public class Profile {
     public void updateWebSite(String website) {
         this.webSite = website;
     }
+
+    public void updateIntroduce(String introduce) {
+        this.introduce = introduce;
+    }
 }

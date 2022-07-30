@@ -122,4 +122,8 @@ public class Member extends BaseTimeEntity {
     public void updateWebSite(String websiteUrl) {
         this.profile.updateWebSite(websiteUrl);
     }
+
+    public void updateIntroduce(String introduce) {
+        this.profile.updateIntroduce(introduce);
+    }
 }

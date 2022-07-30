@@ -111,4 +111,11 @@ public class MemberServiceImpl implements MemberService{
         final Member member = memberReader.getMemberBy(memberId);
         member.updateWebSite(websiteUrl);
     }
+
+    @Override
+    @Transactional
+    public void updateProfileIntroduce(Long memberId, String introduce) {
+        final Member member = memberReader.getMemberBy(memberId);
+        member.updateIntroduce(introduce);
+    }
 }

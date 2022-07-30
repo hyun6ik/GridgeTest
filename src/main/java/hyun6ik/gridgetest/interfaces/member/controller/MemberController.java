@@ -66,4 +66,11 @@ public class MemberController {
         return ResponseEntity.ok(MemberConstraints.UPDATE_WEBSITE);
     }
 
+    @LoginUser
+    @PatchMapping("/profiles/introduce")
+    public ResponseEntity<String> updateProfileIntroduce(@MemberId Long memberId, @RequestBody ProfileDto.Introduce request) {
+        memberService.updateProfileIntroduce(memberId, request.getIntroduce());
+        return ResponseEntity.ok(MemberConstraints.UPDATE_INTRODUCE);
+    }
+
 }
