@@ -8,6 +8,7 @@ import hyun6ik.gridgetest.domain.post.Post;
 import hyun6ik.gridgetest.domain.post.report.constant.ReportReason;
 import hyun6ik.gridgetest.domain.post.service.PostService;
 import hyun6ik.gridgetest.interfaces.comment.dto.CommentDto;
+import hyun6ik.gridgetest.interfaces.post.dto.LikeDto;
 import hyun6ik.gridgetest.interfaces.post.dto.ReportDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -35,5 +36,13 @@ public class CommentFacade {
         final Comment comment = commentService.getCommentBy(commentId);
         comment.report(member, reportReason);
         return new ReportDto.Response(comment.getReportCounts());
+    }
+
+    @Transactional
+    public LikeDto likeComment(Long memberId, Long commentId) {
+        final Member member = memberService.getMemberBy(memberId);
+        final Comment comment = commentService.getCommentBy(commentId);
+        comment.like(member);
+        return new LikeDto(comment.getLikeCounts(), true);
     }
 }

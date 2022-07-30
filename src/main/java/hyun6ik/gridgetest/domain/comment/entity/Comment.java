@@ -2,6 +2,8 @@ package hyun6ik.gridgetest.domain.comment.entity;
 
 import hyun6ik.gridgetest.domain.base.BaseTimeEntity;
 import hyun6ik.gridgetest.domain.comment.constant.CommentStatus;
+import hyun6ik.gridgetest.domain.comment.like.CommentLike;
+import hyun6ik.gridgetest.domain.comment.like.CommentLikes;
 import hyun6ik.gridgetest.domain.comment.report.CommentReport;
 import hyun6ik.gridgetest.domain.comment.report.CommentReports;
 import hyun6ik.gridgetest.domain.member.entity.Member;
@@ -42,6 +44,9 @@ public class Comment extends BaseTimeEntity {
     @Embedded
     private CommentReports commentReports;
 
+    @Embedded
+    private CommentLikes commentLikes;
+
     @Builder
     public Comment(CommentContent commentContent, Member member, Post post) {
         this.commentContent = commentContent;
@@ -49,6 +54,7 @@ public class Comment extends BaseTimeEntity {
         this.post = post;
         this.commentStatus = CommentStatus.USE;
         this.commentReports = new CommentReports(new ArrayList<>());
+        this.commentLikes = new CommentLikes(new ArrayList<>());
     }
 
     @Override
@@ -83,5 +89,14 @@ public class Comment extends BaseTimeEntity {
 
     public Integer getReportCounts() {
         return commentReports.getCounts();
+    }
+
+    public Integer getLikeCounts() {
+        return commentLikes.getCounts();
+    }
+
+    public void like(Member member) {
+        final CommentLike commentLike = new CommentLike(this, member);
+        commentLikes.add(commentLike);
     }
 }

@@ -7,6 +7,7 @@ import hyun6ik.gridgetest.global.annotation.MemberId;
 import hyun6ik.gridgetest.interfaces.comment.constant.CommentConstraints;
 import hyun6ik.gridgetest.interfaces.comment.dto.CommentDto;
 import hyun6ik.gridgetest.interfaces.comment.dto.PostCommentDto;
+import hyun6ik.gridgetest.interfaces.post.dto.LikeDto;
 import hyun6ik.gridgetest.interfaces.post.dto.ReportDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -45,5 +46,11 @@ public class CommentController {
     @GetMapping("/posts/{postId}")
     public ResponseEntity<Page<PostCommentDto>> getPostCommentDtos(@PathVariable Long postId, Optional<Integer> page) {
         return ResponseEntity.ok(commentService.getPostCommentDtosBy(postId, page));
+    }
+
+    @LoginUser
+    @PostMapping("/likes/{commentId}")
+    public ResponseEntity<LikeDto> likeComment(@MemberId Long memberId, @PathVariable Long commentId) {
+        return ResponseEntity.ok(commentFacade.likeComment(memberId, commentId));
     }
 }
