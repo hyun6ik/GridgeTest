@@ -58,10 +58,9 @@ public class LoginFacade {
     }
 
     @Transactional
-    public String logout(Long memberId) {
+    public void logout(Long memberId) {
         final Member member = memberService.getMemberBy(memberId);
         member.removeRefreshToken();
-        return "logout success";
     }
 
     public LoginDto.Response login(LoginDto.Request request) {

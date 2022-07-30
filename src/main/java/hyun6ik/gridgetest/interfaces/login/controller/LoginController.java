@@ -5,6 +5,7 @@ import hyun6ik.gridgetest.domain.sms.constant.SmsConstraints;
 import hyun6ik.gridgetest.domain.sms.service.SmsService;
 import hyun6ik.gridgetest.global.annotation.LoginUser;
 import hyun6ik.gridgetest.global.annotation.MemberId;
+import hyun6ik.gridgetest.interfaces.login.constant.LoginConstraints;
 import hyun6ik.gridgetest.interfaces.login.dto.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -28,9 +29,9 @@ public class LoginController {
     }
 
     @PostMapping("/sms/verify")
-    public ResponseEntity<PhoneNumberDto.Response> verifySms(@Valid @RequestBody PhoneNumberDto.Verify request) {
+    public ResponseEntity<String> verifySms(@Valid @RequestBody PhoneNumberDto.Verify request) {
         smsService.verifySms(request.getFromPhoneNumber(), request.getRandomCode());
-        return ResponseEntity.ok(new PhoneNumberDto.Response(true));
+        return ResponseEntity.ok(SmsConstraints.VERIFY_SUCCESS);
     }
 
     @PostMapping("/oauth/login")
@@ -57,6 +58,7 @@ public class LoginController {
     @LoginUser
     @PostMapping("/logout")
     public ResponseEntity<String> logout(@MemberId Long memberId) {
-        return ResponseEntity.ok(loginFacade.logout(memberId));
+        loginFacade.logout(memberId);
+        return ResponseEntity.ok(LoginConstraints.LOGOUT_SUCCESS);
     }
 }

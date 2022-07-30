@@ -19,14 +19,4 @@ public class PhoneNumberDto {
         private String fromPhoneNumber;
         private String randomCode;
     }
-
-    @Getter
-    @Setter
-    public static class Response {
-        private Boolean isAuthenticated;
-
-        public Response(Boolean isAuthenticated) {
-            this.isAuthenticated = isAuthenticated;
-        }
-    }
 }
