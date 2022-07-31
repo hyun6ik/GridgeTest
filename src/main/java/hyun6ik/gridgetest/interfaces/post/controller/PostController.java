@@ -13,6 +13,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.Optional;
 
 @RestController
@@ -25,7 +26,7 @@ public class PostController {
 
     @LoginUser
     @PostMapping("/new")
-    public ResponseEntity<PostRegisterDto.Response> createPost(@MemberId Long memberId, @RequestBody PostRegisterDto.Request request) {
+    public ResponseEntity<PostRegisterDto.Response> createPost(@MemberId Long memberId, @Valid @RequestBody PostRegisterDto.Request request) {
         return ResponseEntity.ok(postFacade.createPost(memberId, request));
     }
 
@@ -38,7 +39,7 @@ public class PostController {
 
     @LoginUser
     @PatchMapping("/{postId}")
-    public ResponseEntity<String> updatePost(@MemberId Long memberId, @PathVariable Long postId, @RequestBody PostUpdateDto.Request request) {
+    public ResponseEntity<String> updatePost(@MemberId Long memberId, @PathVariable Long postId, @Valid @RequestBody PostUpdateDto.Request request) {
         postService.updatePost(memberId, postId, request.getContent());
         return ResponseEntity.ok(PostConstraints.UPDATE);
     }
@@ -57,7 +58,7 @@ public class PostController {
 
     @LoginUser
     @PostMapping("/reports/{postId}")
-    public ResponseEntity<ReportDto.Response> reportPost(@MemberId Long memberId, @PathVariable Long postId, @RequestBody ReportDto.Request request) {
+    public ResponseEntity<ReportDto.Response> reportPost(@MemberId Long memberId, @PathVariable Long postId, @Valid @RequestBody ReportDto.Request request) {
         return ResponseEntity.ok(postFacade.reportPost(memberId, postId, request.getReportReason()));
     }
 

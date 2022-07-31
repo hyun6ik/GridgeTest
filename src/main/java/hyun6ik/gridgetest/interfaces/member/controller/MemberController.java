@@ -12,6 +12,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.Optional;
 
 @RestController
@@ -22,7 +23,7 @@ public class MemberController {
     private final MemberService memberService;
 
     @PostMapping("/password")
-    public ResponseEntity<String> changePassword(@RequestBody PasswordDto request) {
+    public ResponseEntity<String> changePassword(@Valid @RequestBody PasswordDto request) {
         memberService.changePassword(request.getPhoneNumber(), request.getPassword(), request.getPassword2());
         return ResponseEntity.ok(MemberConstraints.UPDATE_PASSWORD);
     }
@@ -61,28 +62,28 @@ public class MemberController {
 
     @LoginUser
     @PatchMapping("/profiles/website")
-    public ResponseEntity<String> updateProfileWebsite(@MemberId Long memberId, @RequestBody ProfileDto.Website request) {
+    public ResponseEntity<String> updateProfileWebsite(@MemberId Long memberId, @Valid @RequestBody ProfileDto.Website request) {
         memberService.updateProfileWebsite(memberId, request.getWebsiteUrl());
         return ResponseEntity.ok(MemberConstraints.UPDATE_WEBSITE);
     }
 
     @LoginUser
     @PatchMapping("/profiles/introduce")
-    public ResponseEntity<String> updateProfileIntroduce(@MemberId Long memberId, @RequestBody ProfileDto.Introduce request) {
+    public ResponseEntity<String> updateProfileIntroduce(@MemberId Long memberId, @Valid @RequestBody ProfileDto.Introduce request) {
         memberService.updateProfileIntroduce(memberId, request.getIntroduce());
         return ResponseEntity.ok(MemberConstraints.UPDATE_INTRODUCE);
     }
 
     @LoginUser
     @PatchMapping("/profiles/image")
-    public ResponseEntity<String> updateProfileImage(@MemberId Long memberId, @RequestBody ProfileDto.Image request) {
+    public ResponseEntity<String> updateProfileImage(@MemberId Long memberId, @Valid @RequestBody ProfileDto.Image request) {
         memberService.updateProfileImage(memberId, request.getImage());
         return ResponseEntity.ok(MemberConstraints.UPDATE_IMAGE);
     }
 
     @LoginUser
     @PatchMapping("/profiles/name")
-    public ResponseEntity<String> updateProfileName(@MemberId Long memberId, @RequestBody ProfileDto.Name request) {
+    public ResponseEntity<String> updateProfileName(@MemberId Long memberId, @Valid @RequestBody ProfileDto.Name request) {
         memberService.updateProfileName(memberId, request.getName());
         return ResponseEntity.ok(MemberConstraints.UPDATE_NAME);
     }

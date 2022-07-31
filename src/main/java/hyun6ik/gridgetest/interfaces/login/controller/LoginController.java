@@ -35,17 +35,17 @@ public class LoginController {
     }
 
     @PostMapping("/oauth/login")
-    public ResponseEntity<LoginDto.Response> socialLogin(@RequestHeader("Authorization") String accessToken, @RequestBody SocialLoginDto request) {
+    public ResponseEntity<LoginDto.Response> socialLogin(@RequestHeader("Authorization") String accessToken, @Valid @RequestBody SocialLoginDto request) {
         return ResponseEntity.ok(loginFacade.socialLogin(accessToken, request));
     }
 
     @PostMapping("/login")
-    public ResponseEntity<LoginDto.Response> login(@RequestBody LoginDto.Request request) {
+    public ResponseEntity<LoginDto.Response> login(@Valid @RequestBody LoginDto.Request request) {
         return ResponseEntity.ok(loginFacade.login(request));
     }
 
     @PostMapping("/new")
-    public ResponseEntity<RegisterDto.Response> register(@RequestBody RegisterDto.Request request) {
+    public ResponseEntity<RegisterDto.Response> register(@Valid @RequestBody RegisterDto.Request request) {
         return ResponseEntity.ok(loginFacade.register(request.toEntity()));
     }
 
