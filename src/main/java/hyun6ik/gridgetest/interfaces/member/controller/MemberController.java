@@ -80,4 +80,10 @@ public class MemberController {
         return ResponseEntity.ok(MemberConstraints.UPDATE_IMAGE);
     }
 
+    @LoginUser
+    @PatchMapping("/profiles/name")
+    public ResponseEntity<String> updateProfileName(@MemberId Long memberId, @RequestBody ProfileDto.Name request) {
+        memberService.updateProfileName(memberId, request.getName());
+        return ResponseEntity.ok(MemberConstraints.UPDATE_NAME);
+    }
 }

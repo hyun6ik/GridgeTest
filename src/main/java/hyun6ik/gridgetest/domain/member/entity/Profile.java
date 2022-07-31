@@ -1,5 +1,7 @@
 package hyun6ik.gridgetest.domain.member.entity;
 
+import hyun6ik.gridgetest.global.error.exception.ErrorCode;
+import hyun6ik.gridgetest.global.error.exception.ProfileException;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -7,6 +9,8 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
+import java.time.LocalDate;
+import java.time.Period;
 
 @Embeddable
 @Getter
@@ -25,6 +29,14 @@ public class Profile {
 
     private String introduce;
 
+    private Integer nameCount;
+
+    private Integer nickNameCount;
+
+    private LocalDate nameUpdateAt;
+
+    private LocalDate nickNameUpdateAt;
+
     @Builder
     public Profile(String name, String nickName, String image, String webSite, String introduce) {
         this.name = name;
@@ -32,6 +44,8 @@ public class Profile {
         this.image = image;
         this.webSite = webSite;
         this.introduce = introduce;
+        this.nameCount = 0;
+        this.nickNameCount = 0;
     }
 
     public void updateWebSite(String website) {
@@ -44,5 +58,34 @@ public class Profile {
 
     public void updateImage(String image) {
         this.image = image;
+    }
+
+    public void updateName(String name) {
+        if (nameUpdateAt == null) {
+            this.name = name;
+            this.nameCount++;
+            this.nameUpdateAt = LocalDate.now();
+            return;
+        }
+        if (withinFourteenDays(nameUpdateAt, LocalDate.now())) {
+            validateCount(nameCount);
+            this.name = name;
+            this.nameCount++;
+            return;
+        }
+        this.name = name;
+        this.nameCount = 1;
+        this.nameUpdateAt = LocalDate.now();
+    }
+
+    private void validateCount(Integer nameCount) {
+        if (nameCount == 2) {
+            throw new ProfileException(ErrorCode.PROFILE_NAME_COUNT);
+        }
+    }
+
+    private boolean withinFourteenDays(LocalDate updateAt, LocalDate now) {
+        final int days = Period.between(updateAt, now).getDays();
+        return days <= 14;
     }
 }

@@ -3,6 +3,7 @@ package hyun6ik.gridgetest.interfaces.member.dto;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
 public class ProfileDto {
@@ -26,6 +27,15 @@ public class ProfileDto {
     public static class Image {
         private String image;
     }
+
+    @Getter
+    @Setter
+    public static class Name {
+        @Size(max = 20, message = "이름은 최대 20자 까지 입니다.")
+        @NotBlank(message = "이름을 입력해주세요.")
+        private String name;
+    }
+
 
 
 

@@ -125,4 +125,12 @@ public class MemberServiceImpl implements MemberService{
         final Member member = memberReader.getMemberBy(memberId);
         member.updateProfileImage(image);
     }
+
+    @Override
+    @Transactional
+    public void updateProfileName(Long memberId, String name) {
+        memberValidator.regexCheck(name);
+        final Member member = memberReader.getMemberBy(memberId);
+        member.updateProfileName(name);
+    }
 }
