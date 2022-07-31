@@ -24,12 +24,13 @@ public class MemberValidator {
     private final MemberRepository memberRepository;
 
     public void validateRegister(Member initMember) {
-        passwordCheck(initMember.getPassword());
+        passwordRegexCheck(initMember.getPassword());
         duplicateNickName(initMember.getNickName());
-        nickNameRegexCheck(initMember.getNickName());
+        regexCheck(initMember.getName());
+        regexCheck(initMember.getNickName());
     }
 
-    private void passwordCheck(String password) {
+    private void passwordRegexCheck(String password) {
         if (password == null) {
             return;
         }
@@ -44,14 +45,14 @@ public class MemberValidator {
         }
     }
 
-    private void nickNameRegexCheck(String nickName) {
+    public void regexCheck(String nickName) {
         String regex = "[0-9|a-z|_.]*$";
         if (!Pattern.matches(regex, nickName)) {
             throw new LoginException(ErrorCode.REGEX_CHECK_NICKNAME);
         }
     }
 
-    private void duplicateNickName(String nickName) {
+    public void duplicateNickName(String nickName) {
         if (memberRepository.findByProfile_NickName(nickName).isPresent()) {
             throw new LoginException(String.format("사용자 이름 %s", nickName), ErrorCode.DUPLICATED_MEMBER);
         }
@@ -73,6 +74,6 @@ public class MemberValidator {
         if (!password.equals(password2)) {
             throw new LoginException(ErrorCode.MISMATCHED_PASSWORD);
         }
-        passwordCheck(password);
+        passwordRegexCheck(password);
     }
 }

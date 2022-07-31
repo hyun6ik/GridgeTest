@@ -68,6 +68,10 @@ public class Member extends BaseTimeEntity {
         this.memberToken = memberToken;
     }
 
+    public String getName() {
+        return this.getProfile().getName();
+    }
+
     public String getNickName() {
         return this.getProfile().getNickName();
     }
@@ -129,5 +133,9 @@ public class Member extends BaseTimeEntity {
 
     public void updateProfileImage(String image) {
         this.profile.updateImage(image);
+    }
+
+    public void updateProfileName(String name) {
+        this.profile.updateName(name);
     }
 }
