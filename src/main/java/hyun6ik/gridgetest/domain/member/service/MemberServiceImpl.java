@@ -133,4 +133,13 @@ public class MemberServiceImpl implements MemberService{
         final Member member = memberReader.getMemberBy(memberId);
         member.updateProfileName(name);
     }
+
+    @Override
+    @Transactional
+    public void updateProfileNickName(Long memberId, String nickName) {
+        memberValidator.regexCheck(nickName);
+        memberValidator.duplicateNickName(nickName);
+        final Member member = memberReader.getMemberBy(memberId);
+        member.updateProfileNickName(nickName);
+    }
 }

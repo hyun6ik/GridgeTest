@@ -138,4 +138,8 @@ public class Member extends BaseTimeEntity {
     public void updateProfileName(String name) {
         this.profile.updateName(name);
     }
+
+    public void updateProfileNickName(String nickName) {
+        this.profile.updateNickName(nickName);
+    }
 }

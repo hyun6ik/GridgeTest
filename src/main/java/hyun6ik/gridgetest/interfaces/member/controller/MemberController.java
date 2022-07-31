@@ -87,4 +87,11 @@ public class MemberController {
         memberService.updateProfileName(memberId, request.getName());
         return ResponseEntity.ok(MemberConstraints.UPDATE_NAME);
     }
+
+    @LoginUser
+    @PatchMapping("/profiles/nickName")
+    public ResponseEntity<String> updateProfileNickName(@MemberId Long memberId, @Valid @RequestBody ProfileDto.NickName request) {
+        memberService.updateProfileNickName(memberId, request.getNickName());
+        return ResponseEntity.ok(MemberConstraints.UPDATE_NICKNAME);
+    }
 }

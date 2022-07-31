@@ -78,6 +78,24 @@ public class Profile {
         this.nameUpdateAt = LocalDate.now();
     }
 
+    public void updateNickName(String nickName) {
+        if (nickNameUpdateAt == null) {
+            this.nickName = nickName;
+            this.nickNameCount++;
+            this.nickNameUpdateAt = LocalDate.now();
+            return;
+        }
+        if (withinFourteenDays(nickNameUpdateAt, LocalDate.now())) {
+            validateCount(nickNameCount);
+            this.nickName = nickName;
+            this.nickNameCount++;
+            return;
+        }
+        this.nickName = nickName;
+        this.nickNameCount = 1;
+        this.nickNameUpdateAt = LocalDate.now();
+    }
+
     private void validateCount(Integer nameCount) {
         if (nameCount == 2) {
             throw new ProfileException(ErrorCode.PROFILE_NAME_COUNT);

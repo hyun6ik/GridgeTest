@@ -39,4 +39,6 @@ public interface MemberService {
     void updateProfileImage(Long memberId, String image);
 
     void updateProfileName(Long memberId, String name);
+
+    void updateProfileNickName(Long memberId, String nickName);
 }

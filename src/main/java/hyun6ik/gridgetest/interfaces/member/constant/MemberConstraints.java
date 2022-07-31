@@ -9,4 +9,5 @@ public interface MemberConstraints {
     String UPDATE_INTRODUCE = "소개글 수정이 완료되었습니다.";
     String UPDATE_IMAGE = "프로필 사진 수정이 완료되었습니다.";
     String UPDATE_NAME = "프로필 이름 수정이 완료되었습니다.";
+    String UPDATE_NICKNAME = "프로필 사용자 이름 수정이 완료되었습니다";
 }

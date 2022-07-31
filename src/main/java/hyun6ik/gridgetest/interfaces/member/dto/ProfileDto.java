@@ -36,6 +36,15 @@ public class ProfileDto {
         private String name;
     }
 
+    @Getter
+    @Setter
+    public static class NickName {
+        @Size(max = 20, message = "사용자 이름은 최대 20자 까지 입니다.")
+        @NotBlank(message = "사용자 이름은 필수 입니다.")
+        private String nickName;
+    }
+
+
 
 
 
