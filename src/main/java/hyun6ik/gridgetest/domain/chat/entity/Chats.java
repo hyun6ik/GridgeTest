@@ -13,20 +13,20 @@ import java.util.List;
 @Embeddable
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class ChatContents {
+public class Chats {
 
     @OneToMany(mappedBy = "chatRoom", fetch = FetchType.LAZY, cascade = CascadeType.PERSIST, orphanRemoval = true)
-    private List<ChatContent> chatContents;
+    private List<Chat> chats;
 
-    public ChatContents(List<ChatContent> chatContents) {
-        this.chatContents = chatContents;
+    public Chats(List<Chat> chats) {
+        this.chats = chats;
     }
 
-    public void add(ChatContent chatContent) {
-        chatContents.add(chatContent);
+    public void add(Chat chat) {
+        chats.add(chat);
     }
 
-    public void remove(ChatContent chatContent) {
-        chatContents.remove(chatContent);
+    public void remove(Chat chat) {
+        chats.remove(chat);
     }
 }
