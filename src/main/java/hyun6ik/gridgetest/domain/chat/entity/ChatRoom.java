@@ -4,6 +4,7 @@ import hyun6ik.gridgetest.domain.base.BaseTimeEntity;
 import hyun6ik.gridgetest.domain.chat.constant.ChatRoomStatus;
 import hyun6ik.gridgetest.domain.member.entity.Member;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -34,4 +35,11 @@ public class ChatRoom extends BaseTimeEntity {
 
     @Enumerated(EnumType.STRING)
     private ChatRoomStatus chatRoomStatus;
+
+    @Builder
+    public ChatRoom(Member host, Member guest) {
+        this.host = host;
+        this.guest = guest;
+        this.chatRoomStatus = ChatRoomStatus.USE;
+    }
 }

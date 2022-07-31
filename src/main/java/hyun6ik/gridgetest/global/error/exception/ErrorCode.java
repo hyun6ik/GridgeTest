@@ -45,6 +45,9 @@ public enum ErrorCode {
     //PROFILE
     PROFILE_NAME_COUNT(400, "이름 변경은 14일에 최대 2번까지 가능합니다."),
 
+    //CHAT
+    ALREADY_CHATROOM(400, "채팅방이 이미 존재합니다."),
+
     INVALID_MEMBER_TYPE(400, "잘못된 회원 타입 입니다.(memberType : KAKAO)"),
     NOT_EXISTS_AUTHORIZATION(401, "Authorization Header가 빈값입니다."),
     NOT_VALID_BEARER_GRANT_TYPE(401, "인증 타입이 Bearer 타입이 아닙니다."),
