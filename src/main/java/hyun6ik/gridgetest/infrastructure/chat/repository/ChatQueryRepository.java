@@ -7,6 +7,7 @@ import hyun6ik.gridgetest.domain.member.entity.Member;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 
 import static hyun6ik.gridgetest.domain.chat.entity.QChatRoom.*;
@@ -19,12 +20,15 @@ public class ChatQueryRepository {
     private final JPAQueryFactory queryFactory;
 
     public Optional<ChatRoom> findBy(Member host, Member guest) {
+        final List<Member> members = List.of(host, guest);
         return Optional.ofNullable(
                 queryFactory
                         .selectFrom(chatRoom)
                         .innerJoin(chatRoom.host, member)
+                        .fetchJoin()
                         .innerJoin(chatRoom.guest, member)
-                        .where(chatRoom.host.eq(host), chatRoom.guest.eq(guest), chatRoom.chatRoomStatus.eq(ChatRoomStatus.USE))
+                        .fetchJoin()
+                        .where(chatRoom.host.in(members), chatRoom.guest.in(members), chatRoom.chatRoomStatus.eq(ChatRoomStatus.USE))
                         .fetchOne()
         );
     }
