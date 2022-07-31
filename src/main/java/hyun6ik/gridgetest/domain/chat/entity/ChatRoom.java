@@ -9,6 +9,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 
 @Entity
 @Getter
@@ -28,7 +29,7 @@ public class ChatRoom extends BaseTimeEntity {
     private Member guest;
 
     @Embedded
-    private ChatContents chatContents;
+    private Chats chats;
 
     @Column(length = 200)
     private String lastMessage;
@@ -41,5 +42,12 @@ public class ChatRoom extends BaseTimeEntity {
         this.host = host;
         this.guest = guest;
         this.chatRoomStatus = ChatRoomStatus.USE;
+        this.chats = new Chats(new ArrayList<>());
+    }
+
+    public void sendMessage(Member host, Member guest, String message) {
+        final Chat chat = new Chat(this, host, guest, message);
+        chats.add(chat);
+        this.lastMessage = message;
     }
 }

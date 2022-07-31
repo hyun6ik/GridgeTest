@@ -27,4 +27,10 @@ public class ChatServiceImpl implements ChatService{
         final ChatRoom chatRoom = chatStore.store(initChatRoom);
         return new ChatCreateDto.Response(chatRoom.getId());
     }
+
+    @Override
+    public ChatRoom getChatRoomBy(Member host, Member guest) {
+        return chatReader.getChatRoomBy(host, guest);
+    }
+
 }

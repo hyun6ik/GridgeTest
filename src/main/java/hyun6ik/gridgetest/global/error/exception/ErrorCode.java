@@ -47,6 +47,7 @@ public enum ErrorCode {
 
     //CHAT
     ALREADY_CHATROOM(400, "채팅방이 이미 존재합니다."),
+    NOT_FOUND_CHAT_ROOM(400, "채팅방을 찾을 수 없습니다."),
 
     INVALID_MEMBER_TYPE(400, "잘못된 회원 타입 입니다.(memberType : KAKAO)"),
     NOT_EXISTS_AUTHORIZATION(401, "Authorization Header가 빈값입니다."),
