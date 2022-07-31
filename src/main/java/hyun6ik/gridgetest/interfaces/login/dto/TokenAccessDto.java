@@ -1,6 +1,7 @@
 package hyun6ik.gridgetest.interfaces.login.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import hyun6ik.gridgetest.domain.jwt.constant.GrantType;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
@@ -23,5 +24,13 @@ public class TokenAccessDto {
         this.grantType = grantType;
         this.accessToken = accessToken;
         this.accessTokenExpireTime = accessTokenExpireTime;
+    }
+
+    public static TokenAccessDto of(String newAccessToken, Date newAccessTokenExpireTime) {
+        return TokenAccessDto.builder()
+                .grantType(GrantType.BEARRER.getType())
+                .accessToken(newAccessToken)
+                .accessTokenExpireTime(newAccessTokenExpireTime)
+                .build();
     }
 }

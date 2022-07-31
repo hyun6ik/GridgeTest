@@ -50,11 +50,7 @@ public class LoginFacade {
         final Date newAccessTokenExpireTime = tokenManager.createAccessTokenExpireTime();
         final String newAccessToken = tokenManager.createAccessToken(memberId, member.getMemberRole(), newAccessTokenExpireTime);
 
-        return TokenAccessDto.builder()
-                .grantType(GrantType.BEARRER.getType())
-                .accessToken(newAccessToken)
-                .accessTokenExpireTime(newAccessTokenExpireTime)
-                .build();
+        return TokenAccessDto.of(newAccessToken, newAccessTokenExpireTime);
     }
 
     @Transactional
