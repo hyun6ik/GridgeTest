@@ -1,7 +1,7 @@
 package hyun6ik.gridgetest.domain.comment.like;
 
-import hyun6ik.gridgetest.global.error.exception.CannotUnlikeException;
-import hyun6ik.gridgetest.global.error.exception.DuplicatedLikeException;
+import hyun6ik.gridgetest.global.error.exception.CannotException;
+import hyun6ik.gridgetest.global.error.exception.DuplicatedException;
 import hyun6ik.gridgetest.global.error.exception.ErrorCode;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -27,14 +27,14 @@ public class CommentLikes {
 
     public void add(CommentLike commentLike) {
         if (commentLikes.contains(commentLike)) {
-            throw new DuplicatedLikeException(ErrorCode.DUPLICATED_LIKE);
+            throw new DuplicatedException(ErrorCode.DUPLICATED_LIKE);
         }
         commentLikes.add(commentLike);
     }
 
     public void remove(CommentLike commentLike) {
         if (!commentLikes.contains(commentLike)) {
-            throw new CannotUnlikeException(ErrorCode.CANNOT_UNLIKE);
+            throw new CannotException(ErrorCode.CANNOT_UNLIKE);
         }
         commentLikes.remove(commentLike);
     }
