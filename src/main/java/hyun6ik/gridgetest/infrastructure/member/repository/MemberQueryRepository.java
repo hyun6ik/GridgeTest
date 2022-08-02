@@ -1,9 +1,13 @@
 package hyun6ik.gridgetest.infrastructure.member.repository;
 
+import com.querydsl.jpa.JPAExpressions;
+import com.querydsl.jpa.JPQLQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import hyun6ik.gridgetest.domain.login.vo.SocialUserInfo;
 import hyun6ik.gridgetest.domain.member.constant.MemberCondition;
 import hyun6ik.gridgetest.domain.member.entity.Member;
+import hyun6ik.gridgetest.domain.member.follow.QFollow;
+import hyun6ik.gridgetest.domain.member.follow.constant.FollowStatus;
 import hyun6ik.gridgetest.domain.post.constant.PostStatus;
 import hyun6ik.gridgetest.interfaces.member.dto.MyPageDto;
 import hyun6ik.gridgetest.interfaces.member.dto.QMyPageDto;
@@ -18,6 +22,7 @@ import java.util.List;
 import java.util.Optional;
 
 import static hyun6ik.gridgetest.domain.member.entity.QMember.*;
+import static hyun6ik.gridgetest.domain.member.follow.QFollow.*;
 import static hyun6ik.gridgetest.domain.post.QPost.*;
 import static hyun6ik.gridgetest.domain.post.image.QImage.*;
 
@@ -54,8 +59,8 @@ public class MemberQueryRepository {
                                 member.profile.image,
                                 member.profile.name,
                                 member.posts.posts.size(),
-                                member.followers.followers.size(),
-                                member.followings.followings.size()
+                                getFollowerCount(memberId),
+                                getFollowingCount(memberId)
                         ))
                         .from(member)
                         .where(member.id.eq(memberId), member.memberStatus.memberCondition.eq(MemberCondition.NORMAL))
@@ -86,5 +91,21 @@ public class MemberQueryRepository {
                 .fetch()
                 .size();
         return new PageImpl<>(content, pageable, size);
+    }
+
+    private JPQLQuery<Long> getFollowingCount(Long memberId) {
+        return JPAExpressions
+                .select(follow.count())
+                .from(follow)
+                .innerJoin(follow.from, member)
+                .where(follow.from.id.eq(memberId), follow.followStatus.eq(FollowStatus.APPROVED));
+    }
+
+    private JPQLQuery<Long> getFollowerCount(Long memberId) {
+        return JPAExpressions
+                .select(follow.count())
+                .from(follow)
+                .innerJoin(follow.to, member)
+                .where(follow.to.id.eq(memberId), follow.followStatus.eq(FollowStatus.APPROVED));
     }
 }
