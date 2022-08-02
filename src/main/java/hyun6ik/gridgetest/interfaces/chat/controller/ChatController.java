@@ -9,6 +9,7 @@ import hyun6ik.gridgetest.interfaces.chat.dto.request.ChatMessageRequestDto;
 import hyun6ik.gridgetest.interfaces.chat.dto.response.ChatCreateResponseDto;
 import hyun6ik.gridgetest.interfaces.chat.dto.response.ChatMessageResponseDto;
 import hyun6ik.gridgetest.interfaces.chat.dto.response.ChatRoomDto;
+import hyun6ik.gridgetest.interfaces.common.ApiResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import lombok.RequiredArgsConstructor;
@@ -30,21 +31,21 @@ public class ChatController {
     @Operation(summary = "채팅방을 만드는 API", security = {@SecurityRequirement(name = "BearerKey")})
     @LoginUser
     @PostMapping("/new")
-    public ResponseEntity<ChatCreateResponseDto> createChatRoom(@MemberId Long memberId, @Valid @RequestBody ChatCreateRequestDto request) {
-        return ResponseEntity.ok(chatFacade.createChatRoom(memberId, request.getGuestId()));
+    public ApiResponse<ChatCreateResponseDto> createChatRoom(@MemberId Long memberId, @Valid @RequestBody ChatCreateRequestDto request) {
+        return ApiResponse.success(chatFacade.createChatRoom(memberId, request.getGuestId()));
     }
 
     @Operation(summary = "채팅 메시지를 보내는 API", security = {@SecurityRequirement(name = "BearerKey")})
     @LoginUser
     @PostMapping("/send")
-    public ResponseEntity<ChatMessageResponseDto> sendMessage(@MemberId Long memberId, @Valid @RequestBody ChatMessageRequestDto request) {
-        return ResponseEntity.ok(chatFacade.sendMessage(memberId, request.getToId(), request.getMessage()));
+    public ApiResponse<ChatMessageResponseDto> sendMessage(@MemberId Long memberId, @Valid @RequestBody ChatMessageRequestDto request) {
+        return ApiResponse.success(chatFacade.sendMessage(memberId, request.getToId(), request.getMessage()));
     }
 
     @Operation(summary = "채팅방의 채팅 내역들을 조회하는 API", security = {@SecurityRequirement(name = "BearerKey")})
     @LoginUser
     @GetMapping("/{chatRoomId}")
-    public ResponseEntity<List<ChatRoomDto>> getChatRoomChats(@MemberId Long memberId, @PathVariable Long chatRoomId) {
-        return ResponseEntity.ok(chatService.getChatRoomDtosBy(memberId, chatRoomId));
+    public ApiResponse<List<ChatRoomDto>> getChatRoomChats(@MemberId Long memberId, @PathVariable Long chatRoomId) {
+        return ApiResponse.success(chatService.getChatRoomDtosBy(memberId, chatRoomId));
     }
 }
