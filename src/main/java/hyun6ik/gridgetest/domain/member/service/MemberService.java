@@ -30,6 +30,8 @@ public interface MemberService {
 
     void unfollowMember(Long fromId, Long toId);
 
+    void privateApproveFollowMember(Long followId);
+
     MyPageDto getMyPageDtoBy(Long memberId, Optional<Integer> page);
 
     void updateProfileWebsite(Long memberId, String websiteUrl);
@@ -41,4 +43,5 @@ public interface MemberService {
     void updateProfileName(Long memberId, String name);
 
     void updateProfileNickName(Long memberId, String nickName);
+
 }

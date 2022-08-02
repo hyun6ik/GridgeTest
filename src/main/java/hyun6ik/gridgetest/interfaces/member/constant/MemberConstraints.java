@@ -13,5 +13,6 @@ public interface MemberConstraints {
     String UPDATE_NAME = "프로필 이름 수정이 완료되었습니다.";
     String UPDATE_NICKNAME = "프로필 사용자 이름 수정이 완료되었습니다";
     String UNFOLLOW_MEMBER = "팔로우 취소가 완료되었습니다.";
+    String PRIVATE_APPROVE_MEMBER = "팔로우 요청이 승인되었습니다.";
 
 }

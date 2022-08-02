@@ -5,8 +5,9 @@ import com.querydsl.jpa.JPQLQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import hyun6ik.gridgetest.domain.login.vo.SocialUserInfo;
 import hyun6ik.gridgetest.domain.member.constant.MemberCondition;
+import hyun6ik.gridgetest.domain.member.constant.MemberScope;
 import hyun6ik.gridgetest.domain.member.entity.Member;
-import hyun6ik.gridgetest.domain.member.follow.QFollow;
+import hyun6ik.gridgetest.domain.member.follow.Follow;
 import hyun6ik.gridgetest.domain.member.follow.constant.FollowStatus;
 import hyun6ik.gridgetest.domain.post.constant.PostStatus;
 import hyun6ik.gridgetest.interfaces.member.dto.MyPageDto;
@@ -107,5 +108,14 @@ public class MemberQueryRepository {
                 .from(follow)
                 .innerJoin(follow.to, member)
                 .where(follow.to.id.eq(memberId), follow.followStatus.eq(FollowStatus.APPROVED));
+    }
+
+    public Optional<Follow> findPrivateMemberWithFollowBy(Long followId) {
+        return Optional.ofNullable(
+                queryFactory
+                        .selectFrom(follow)
+                        .where(follow.id.eq(followId))
+                        .fetchOne()
+        );
     }
 }

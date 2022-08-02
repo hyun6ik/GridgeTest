@@ -2,6 +2,7 @@ package hyun6ik.gridgetest.infrastructure.member;
 
 import hyun6ik.gridgetest.domain.login.vo.SocialUserInfo;
 import hyun6ik.gridgetest.domain.member.entity.Member;
+import hyun6ik.gridgetest.domain.member.follow.Follow;
 import hyun6ik.gridgetest.global.error.exception.ErrorCode;
 import hyun6ik.gridgetest.global.error.exception.LoginException;
 import hyun6ik.gridgetest.global.error.exception.NotFoundException;
@@ -9,7 +10,6 @@ import hyun6ik.gridgetest.infrastructure.member.repository.MemberQueryRepository
 import hyun6ik.gridgetest.infrastructure.member.repository.MemberRepository;
 import hyun6ik.gridgetest.interfaces.member.dto.MyPageDto;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 
@@ -45,5 +45,10 @@ public class MemberReader {
                 .orElseThrow(() -> new NotFoundException(ErrorCode.MEMBER_NOT_EXISTS));
         myPageDto.addPageDto(memberQueryRepository.findMyPagePostDtosBy(memberId, pageable));
         return myPageDto;
+    }
+
+    public Follow getFollowBy(Long followId) {
+        return memberQueryRepository.findPrivateMemberWithFollowBy(followId)
+                .orElseThrow(() -> new NotFoundException(ErrorCode.FOLLOW_NOT_EXISTS));
     }
 }

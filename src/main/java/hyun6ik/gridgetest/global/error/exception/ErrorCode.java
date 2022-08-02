@@ -38,6 +38,7 @@ public enum ErrorCode {
     ALREADY_FOLLOW(400, "이미 팔로우 한 계정입니다."),
     CANNOT_UNFOLLOW(400, "팔로우한 계정이 아니라서 언팔로우 할 수 없습니다."),
     ALREADY_FOLLOWING(400, "이미 팔로잉한 계정입니다"),
+    FOLLOW_NOT_EXISTS(400, "해당 팔로우 요청을 찾을 수 없습니다."),
 
     //COMMENT
     NOT_FOUND_COMMENT(400, "해당 댓글을 찾을 수 없습니다."),

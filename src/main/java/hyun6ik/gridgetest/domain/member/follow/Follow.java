@@ -72,4 +72,8 @@ public class Follow {
     public int hashCode() {
         return Objects.hash(from, to);
     }
+
+    public void approve() {
+        this.followStatus = FollowStatus.APPROVED;
+    }
 }

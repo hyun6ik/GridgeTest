@@ -99,6 +99,13 @@ public class MemberServiceImpl implements MemberService{
     }
 
     @Override
+    @Transactional
+    public void privateApproveFollowMember(Long followId) {
+        final Follow follow = memberReader.getFollowBy(followId);
+        follow.approve();
+    }
+
+    @Override
     public MyPageDto getMyPageDtoBy(Long memberId, Optional<Integer> page) {
         final Pageable pageable = PageRequest.of(page.orElse(0), 9);
         return memberReader.getMyPageDtoBy(memberId, pageable);

@@ -56,6 +56,13 @@ public class MemberController {
     }
 
     @LoginUser
+    @PatchMapping("/followings/private/{followId}")
+    public ResponseEntity<String> privateApproveFollowMember(@PathVariable Long followId) {
+        memberService.privateApproveFollowMember(followId);
+        return ResponseEntity.ok(MemberConstraints.PRIVATE_APPROVE_MEMBER);
+    }
+
+    @LoginUser
     @GetMapping("/mypage")
     public ResponseEntity<MyPageDto> getMyPage(@MemberId Long memberId, Optional<Integer> page) {
         return ResponseEntity.ok(memberService.getMyPageDtoBy(memberId, page));
