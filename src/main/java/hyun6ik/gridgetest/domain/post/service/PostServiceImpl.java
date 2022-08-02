@@ -4,8 +4,8 @@ import hyun6ik.gridgetest.domain.post.Post;
 import hyun6ik.gridgetest.infrastructure.post.PostReader;
 import hyun6ik.gridgetest.infrastructure.post.PostStore;
 import hyun6ik.gridgetest.infrastructure.post.PostValidator;
-import hyun6ik.gridgetest.interfaces.post.dto.PostFeedDto;
-import hyun6ik.gridgetest.interfaces.post.dto.PostRegisterDto;
+import hyun6ik.gridgetest.interfaces.post.dto.response.PostFeedDto;
+import hyun6ik.gridgetest.interfaces.post.dto.response.PostRegisterResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -26,10 +26,10 @@ public class PostServiceImpl implements PostService {
 
     @Override
     @Transactional
-    public PostRegisterDto.Response createPost(Post initPost) {
+    public PostRegisterResponseDto createPost(Post initPost) {
         postValidator.validatePost(initPost);
         final Post post = postStore.store(initPost);
-        return new PostRegisterDto.Response(post.getId());
+        return new PostRegisterResponseDto(post.getId());
     }
 
     @Override

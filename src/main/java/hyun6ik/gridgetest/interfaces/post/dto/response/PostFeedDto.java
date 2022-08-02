@@ -1,4 +1,4 @@
-package hyun6ik.gridgetest.interfaces.post.dto;
+package hyun6ik.gridgetest.interfaces.post.dto.response;
 
 import com.querydsl.core.annotations.QueryProjection;
 import lombok.Getter;

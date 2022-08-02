@@ -5,7 +5,7 @@ import hyun6ik.gridgetest.domain.jwt.constant.TokenType;
 import hyun6ik.gridgetest.domain.member.constant.MemberRole;
 import hyun6ik.gridgetest.global.error.exception.ErrorCode;
 import hyun6ik.gridgetest.global.error.exception.NotValidTokenException;
-import hyun6ik.gridgetest.interfaces.login.dto.TokenDto;
+import hyun6ik.gridgetest.interfaces.login.dto.response.TokenDto;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;

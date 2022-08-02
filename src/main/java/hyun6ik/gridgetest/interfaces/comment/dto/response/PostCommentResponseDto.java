@@ -1,4 +1,4 @@
-package hyun6ik.gridgetest.interfaces.comment.dto;
+package hyun6ik.gridgetest.interfaces.comment.dto.response;
 
 import com.querydsl.core.annotations.QueryProjection;
 import lombok.Getter;
@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 
 @Getter
 @Setter
-public class PostCommentDto {
+public class PostCommentResponseDto {
 
     private Long memberId;
     private Long commentId;
@@ -19,7 +19,7 @@ public class PostCommentDto {
     private LocalDateTime createdAt;
 
     @QueryProjection
-    public PostCommentDto(Long memberId, Long commentId, Integer likeCount, String profileImageUrl, String nickName, String content, LocalDateTime createdAt) {
+    public PostCommentResponseDto(Long memberId, Long commentId, Integer likeCount, String profileImageUrl, String nickName, String content, LocalDateTime createdAt) {
         this.memberId = memberId;
         this.commentId = commentId;
         this.likeCount = likeCount;

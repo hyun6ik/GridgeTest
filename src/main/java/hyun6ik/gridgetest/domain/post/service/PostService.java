@@ -1,15 +1,15 @@
 package hyun6ik.gridgetest.domain.post.service;
 
 import hyun6ik.gridgetest.domain.post.Post;
-import hyun6ik.gridgetest.interfaces.post.dto.PostFeedDto;
-import hyun6ik.gridgetest.interfaces.post.dto.PostRegisterDto;
+import hyun6ik.gridgetest.interfaces.post.dto.response.PostFeedDto;
+import hyun6ik.gridgetest.interfaces.post.dto.response.PostRegisterResponseDto;
 import org.springframework.data.domain.Page;
 
 import java.util.Optional;
 
 public interface PostService {
 
-    PostRegisterDto.Response createPost(Post initPost);
+    PostRegisterResponseDto createPost(Post initPost);
 
     void deletePost(Long memberId, Long postId);
 

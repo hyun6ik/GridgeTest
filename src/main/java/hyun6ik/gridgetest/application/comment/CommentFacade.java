@@ -7,7 +7,7 @@ import hyun6ik.gridgetest.domain.member.service.MemberService;
 import hyun6ik.gridgetest.domain.post.Post;
 import hyun6ik.gridgetest.domain.post.report.constant.ReportReason;
 import hyun6ik.gridgetest.domain.post.service.PostService;
-import hyun6ik.gridgetest.interfaces.comment.dto.CommentDto;
+import hyun6ik.gridgetest.interfaces.comment.dto.response.CommentResponseDto;
 import hyun6ik.gridgetest.interfaces.common.dto.LikeDto;
 import hyun6ik.gridgetest.interfaces.common.dto.ReportDto;
 import lombok.RequiredArgsConstructor;
@@ -24,7 +24,7 @@ public class CommentFacade {
     private final CommentService commentService;
 
     @Transactional
-    public CommentDto.Response createComment(Long memberId, Long postId, String content) {
+    public CommentResponseDto createComment(Long memberId, Long postId, String content) {
         final Member member = memberService.getMemberBy(memberId);
         final Post post = postService.getPostBy(postId);
         return commentService.createComment(member, post, content);

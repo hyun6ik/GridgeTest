@@ -4,7 +4,7 @@ import hyun6ik.gridgetest.domain.post.Post;
 import hyun6ik.gridgetest.global.error.exception.ErrorCode;
 import hyun6ik.gridgetest.global.error.exception.NotFoundException;
 import hyun6ik.gridgetest.infrastructure.post.repository.PostQueryRepository;
-import hyun6ik.gridgetest.interfaces.post.dto.PostFeedDto;
+import hyun6ik.gridgetest.interfaces.post.dto.response.PostFeedDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

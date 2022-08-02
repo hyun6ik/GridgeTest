@@ -1,4 +1,4 @@
-package hyun6ik.gridgetest.interfaces.login.dto;
+package hyun6ik.gridgetest.interfaces.login.dto.response;
 
 import lombok.Getter;
 import lombok.Setter;

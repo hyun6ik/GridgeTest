@@ -6,8 +6,8 @@ import hyun6ik.gridgetest.domain.member.entity.Member;
 import hyun6ik.gridgetest.domain.post.Post;
 import hyun6ik.gridgetest.infrastructure.comment.CommentReader;
 import hyun6ik.gridgetest.infrastructure.comment.CommentStore;
-import hyun6ik.gridgetest.interfaces.comment.dto.CommentDto;
-import hyun6ik.gridgetest.interfaces.comment.dto.PostCommentDto;
+import hyun6ik.gridgetest.interfaces.comment.dto.response.PostCommentResponseDto;
+import hyun6ik.gridgetest.interfaces.comment.dto.response.CommentResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -27,11 +27,11 @@ public class CommentServiceImpl implements CommentService{
 
     @Override
     @Transactional
-    public CommentDto.Response createComment(Member member, Post post, String content) {
+    public CommentResponseDto createComment(Member member, Post post, String content) {
         final CommentContent commentContent = new CommentContent(content);
         final Comment initComment = new Comment(commentContent, member, post);
         final Comment comment = commentStore.store(initComment);
-        return CommentDto.Response.of(comment);
+        return CommentResponseDto.of(comment);
     }
 
     @Override
@@ -47,7 +47,7 @@ public class CommentServiceImpl implements CommentService{
     }
 
     @Override
-    public Page<PostCommentDto> getPostCommentDtosBy(Long postId, Optional<Integer> page) {
+    public Page<PostCommentResponseDto> getPostCommentDtosBy(Long postId, Optional<Integer> page) {
         final Pageable pageable = PageRequest.of(page.orElse(0), 10);
         return commentReader.getPostCommentDtosBy(postId, pageable);
     }

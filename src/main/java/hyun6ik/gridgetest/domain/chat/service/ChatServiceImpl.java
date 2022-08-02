@@ -5,8 +5,8 @@ import hyun6ik.gridgetest.domain.member.entity.Member;
 import hyun6ik.gridgetest.infrastructure.chat.ChatReader;
 import hyun6ik.gridgetest.infrastructure.chat.ChatStore;
 import hyun6ik.gridgetest.infrastructure.chat.ChatValidator;
-import hyun6ik.gridgetest.interfaces.chat.dto.ChatCreateDto;
-import hyun6ik.gridgetest.interfaces.chat.dto.ChatRoomDto;
+import hyun6ik.gridgetest.interfaces.chat.dto.response.ChatCreateResponseDto;
+import hyun6ik.gridgetest.interfaces.chat.dto.response.ChatRoomDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,11 +24,11 @@ public class ChatServiceImpl implements ChatService{
 
     @Override
     @Transactional
-    public ChatCreateDto.Response createChatRoom(Member host, Member guest) {
+    public ChatCreateResponseDto createChatRoom(Member host, Member guest) {
         chatValidator.hasAlreadyChatRoom(host, guest);
         final ChatRoom initChatRoom = new ChatRoom(host, guest);
         final ChatRoom chatRoom = chatStore.store(initChatRoom);
-        return new ChatCreateDto.Response(chatRoom.getId());
+        return new ChatCreateResponseDto(chatRoom.getId());
     }
 
     @Override

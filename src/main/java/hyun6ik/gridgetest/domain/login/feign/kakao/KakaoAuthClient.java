@@ -1,6 +1,6 @@
 package hyun6ik.gridgetest.domain.login.feign.kakao;
 
-import hyun6ik.gridgetest.interfaces.login.dto.KakaoTokenDto;
+import hyun6ik.gridgetest.interfaces.login.dto.response.KakaoTokenDto;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.PostMapping;

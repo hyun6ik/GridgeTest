@@ -1,14 +1,11 @@
 package hyun6ik.gridgetest.infrastructure.chat.repository;
 
-import com.querydsl.jpa.JPAExpressions;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import hyun6ik.gridgetest.domain.chat.constant.ChatRoomStatus;
 import hyun6ik.gridgetest.domain.chat.entity.ChatRoom;
-import hyun6ik.gridgetest.domain.chat.entity.QChat;
-import hyun6ik.gridgetest.domain.member.constant.MemberCondition;
 import hyun6ik.gridgetest.domain.member.entity.Member;
-import hyun6ik.gridgetest.interfaces.chat.dto.ChatRoomDto;
-import hyun6ik.gridgetest.interfaces.chat.dto.QChatRoomDto;
+import hyun6ik.gridgetest.interfaces.chat.dto.response.ChatRoomDto;
+import hyun6ik.gridgetest.interfaces.chat.dto.response.QChatRoomDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 

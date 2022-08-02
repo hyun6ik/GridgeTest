@@ -7,8 +7,9 @@ import hyun6ik.gridgetest.domain.post.report.constant.ReportReason;
 import hyun6ik.gridgetest.domain.post.service.PostService;
 import hyun6ik.gridgetest.interfaces.common.dto.LikeDto;
 import hyun6ik.gridgetest.interfaces.post.dto.PostDtoAssembler;
-import hyun6ik.gridgetest.interfaces.post.dto.PostRegisterDto;
 import hyun6ik.gridgetest.interfaces.common.dto.ReportDto;
+import hyun6ik.gridgetest.interfaces.post.dto.request.PostRegisterRequestDto;
+import hyun6ik.gridgetest.interfaces.post.dto.response.PostRegisterResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,7 +23,7 @@ public class PostFacade {
     private final PostService postService;
 
     @Transactional
-    public PostRegisterDto.Response createPost(Long memberId, PostRegisterDto.Request request) {
+    public PostRegisterResponseDto createPost(Long memberId, PostRegisterRequestDto request) {
         final Member member = memberService.getMemberBy(memberId);
         final Post initPost = PostDtoAssembler.toEntity(member, request);
         return postService.createPost(initPost);

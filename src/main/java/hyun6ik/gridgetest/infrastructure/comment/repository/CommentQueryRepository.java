@@ -3,10 +3,8 @@ package hyun6ik.gridgetest.infrastructure.comment.repository;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import hyun6ik.gridgetest.domain.comment.constant.CommentStatus;
 import hyun6ik.gridgetest.domain.comment.entity.Comment;
-import hyun6ik.gridgetest.domain.member.entity.QMember;
-import hyun6ik.gridgetest.domain.post.QPost;
-import hyun6ik.gridgetest.interfaces.comment.dto.PostCommentDto;
-import hyun6ik.gridgetest.interfaces.comment.dto.QPostCommentDto;
+import hyun6ik.gridgetest.interfaces.comment.dto.response.PostCommentResponseDto;
+import hyun6ik.gridgetest.interfaces.comment.dto.response.QPostCommentResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -46,9 +44,9 @@ public class CommentQueryRepository {
         );
     }
 
-    public Page<PostCommentDto> findPostCommentDtosBy(Long postId, Pageable pageable) {
-        final List<PostCommentDto> content = queryFactory
-                .select(new QPostCommentDto(
+    public Page<PostCommentResponseDto> findPostCommentDtosBy(Long postId, Pageable pageable) {
+        final List<PostCommentResponseDto> content = queryFactory
+                .select(new QPostCommentResponseDto(
                         comment.member.id,
                         comment.id,
                         comment.commentLikes.commentLikes.size(),

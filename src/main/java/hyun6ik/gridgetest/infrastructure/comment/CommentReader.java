@@ -4,7 +4,7 @@ import hyun6ik.gridgetest.domain.comment.entity.Comment;
 import hyun6ik.gridgetest.global.error.exception.ErrorCode;
 import hyun6ik.gridgetest.global.error.exception.NotFoundException;
 import hyun6ik.gridgetest.infrastructure.comment.repository.CommentQueryRepository;
-import hyun6ik.gridgetest.interfaces.comment.dto.PostCommentDto;
+import hyun6ik.gridgetest.interfaces.comment.dto.response.PostCommentResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -26,7 +26,7 @@ public class CommentReader {
                 .orElseThrow(() -> new NotFoundException(ErrorCode.NOT_FOUND_COMMENT));
     }
 
-    public Page<PostCommentDto> getPostCommentDtosBy(Long postId, Pageable pageable) {
+    public Page<PostCommentResponseDto> getPostCommentDtosBy(Long postId, Pageable pageable) {
         return commentQueryRepository.findPostCommentDtosBy(postId, pageable);
     }
 }

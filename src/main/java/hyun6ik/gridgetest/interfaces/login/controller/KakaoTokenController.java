@@ -2,7 +2,8 @@ package hyun6ik.gridgetest.interfaces.login.controller;
 
 import hyun6ik.gridgetest.domain.login.feign.kakao.KakaoAuthClient;
 import hyun6ik.gridgetest.domain.login.service.kakao.KakaoProperties;
-import hyun6ik.gridgetest.interfaces.login.dto.KakaoTokenDto;
+import hyun6ik.gridgetest.interfaces.login.dto.response.KakaoTokenDto;
+import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
@@ -35,6 +36,7 @@ public class KakaoTokenController {
         return "loginForm";
     }
 
+    @Operation(summary = "카카오 토큰을 받는 API")
     @ResponseBody
     @GetMapping("/auth/kakao/callback")
     public ResponseEntity<KakaoTokenDto> loginCallback(String code){

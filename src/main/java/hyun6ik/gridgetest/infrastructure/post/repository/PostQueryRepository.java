@@ -2,11 +2,10 @@ package hyun6ik.gridgetest.infrastructure.post.repository;
 
 import com.querydsl.jpa.JPAExpressions;
 import com.querydsl.jpa.impl.JPAQueryFactory;
-import hyun6ik.gridgetest.domain.member.follow.QFollow;
 import hyun6ik.gridgetest.domain.post.Post;
 import hyun6ik.gridgetest.domain.post.constant.PostStatus;
-import hyun6ik.gridgetest.interfaces.post.dto.PostFeedDto;
-import hyun6ik.gridgetest.interfaces.post.dto.QPostFeedDto;
+import hyun6ik.gridgetest.interfaces.post.dto.response.PostFeedDto;
+import hyun6ik.gridgetest.interfaces.post.dto.response.QPostFeedDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;

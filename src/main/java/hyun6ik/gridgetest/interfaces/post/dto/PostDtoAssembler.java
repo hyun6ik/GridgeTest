@@ -5,6 +5,7 @@ import hyun6ik.gridgetest.domain.post.Post;
 import hyun6ik.gridgetest.domain.post.content.PostContent;
 import hyun6ik.gridgetest.domain.post.image.Image;
 import hyun6ik.gridgetest.domain.post.image.Images;
+import hyun6ik.gridgetest.interfaces.post.dto.request.PostRegisterRequestDto;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 
@@ -14,7 +15,7 @@ import java.util.stream.Collectors;
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class PostDtoAssembler {
 
-    public static Post toEntity(Member member, PostRegisterDto.Request request) {
+    public static Post toEntity(Member member, PostRegisterRequestDto request) {
         final Image image = new Image(request.getImageUrls().get(0), true);
         final List<Image> imageList = request.getImageUrls()
                 .stream()

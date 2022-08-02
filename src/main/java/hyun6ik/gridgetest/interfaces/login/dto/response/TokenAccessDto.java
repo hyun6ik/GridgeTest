@@ -1,4 +1,4 @@
-package hyun6ik.gridgetest.interfaces.login.dto;
+package hyun6ik.gridgetest.interfaces.login.dto.response;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import hyun6ik.gridgetest.domain.jwt.constant.GrantType;
