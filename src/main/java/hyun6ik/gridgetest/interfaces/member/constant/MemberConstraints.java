@@ -1,5 +1,7 @@
 package hyun6ik.gridgetest.interfaces.member.constant;
 
+import hyun6ik.gridgetest.interfaces.member.dto.FollowerDto;
+
 public interface MemberConstraints {
 
     String UPDATE_PASSWORD = "비밀번호가 설정되었습니다.";
@@ -10,4 +12,6 @@ public interface MemberConstraints {
     String UPDATE_IMAGE = "프로필 사진 수정이 완료되었습니다.";
     String UPDATE_NAME = "프로필 이름 수정이 완료되었습니다.";
     String UPDATE_NICKNAME = "프로필 사용자 이름 수정이 완료되었습니다";
+    String UNFOLLOW_MEMBER = "팔로우 취소가 완료되었습니다.";
+
 }

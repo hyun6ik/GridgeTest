@@ -4,7 +4,7 @@ import hyun6ik.gridgetest.domain.member.service.MemberService;
 import hyun6ik.gridgetest.global.annotation.LoginUser;
 import hyun6ik.gridgetest.global.annotation.MemberId;
 import hyun6ik.gridgetest.interfaces.member.constant.MemberConstraints;
-import hyun6ik.gridgetest.interfaces.member.dto.FollowDto;
+import hyun6ik.gridgetest.interfaces.member.dto.FollowerDto;
 import hyun6ik.gridgetest.interfaces.member.dto.MyPageDto;
 import hyun6ik.gridgetest.interfaces.member.dto.PasswordDto;
 import hyun6ik.gridgetest.interfaces.member.dto.ProfileDto;
@@ -44,14 +44,15 @@ public class MemberController {
 
     @LoginUser
     @PostMapping("/followings/{memberId}")
-    public ResponseEntity<FollowDto> followMember(@MemberId Long fromId, @PathVariable("memberId") Long toId) {
+    public ResponseEntity<FollowerDto> followMember(@MemberId Long fromId, @PathVariable("memberId") Long toId) {
         return ResponseEntity.ok(memberService.followMember(fromId, toId));
     }
 
     @LoginUser
     @PatchMapping("/followings/{memberId}")
-    public ResponseEntity<FollowDto> unfollowMember(@MemberId Long fromId, @PathVariable("memberId") Long toId) {
-        return ResponseEntity.ok(memberService.unfollowMember(fromId, toId));
+    public ResponseEntity<String> unfollowMember(@MemberId Long fromId, @PathVariable("memberId") Long toId) {
+        memberService.unfollowMember(fromId, toId);
+        return ResponseEntity.ok(MemberConstraints.UNFOLLOW_MEMBER);
     }
 
     @LoginUser

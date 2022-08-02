@@ -2,10 +2,11 @@ package hyun6ik.gridgetest.domain.member.service;
 
 import hyun6ik.gridgetest.domain.login.vo.SocialUserInfo;
 import hyun6ik.gridgetest.domain.member.entity.Member;
+import hyun6ik.gridgetest.domain.member.follow.Follow;
 import hyun6ik.gridgetest.infrastructure.member.MemberReader;
 import hyun6ik.gridgetest.infrastructure.member.MemberStore;
 import hyun6ik.gridgetest.infrastructure.member.MemberValidator;
-import hyun6ik.gridgetest.interfaces.member.dto.FollowDto;
+import hyun6ik.gridgetest.interfaces.member.dto.FollowerDto;
 import hyun6ik.gridgetest.interfaces.member.dto.MyPageDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
@@ -82,21 +83,19 @@ public class MemberServiceImpl implements MemberService{
 
     @Override
     @Transactional
-    public FollowDto followMember(Long fromId, Long toId) {
+    public FollowerDto followMember(Long fromId, Long toId) {
         final Member fromMember = memberReader.getMemberBy(fromId);
         final Member toMember = memberReader.getMemberBy(toId);
-        fromMember.follow(toMember);
-        return new FollowDto(toMember.getFollowerCount(), true);
+        final Follow follow = fromMember.follow(toMember);
+        return new FollowerDto(follow.getFollowStatus());
     }
 
     @Override
     @Transactional
-    public FollowDto unfollowMember(Long fromId, Long toId) {
+    public void unfollowMember(Long fromId, Long toId) {
         final Member fromMember = memberReader.getMemberBy(fromId);
         final Member toMember = memberReader.getMemberBy(toId);
         fromMember.unfollow(toMember);
-        return new FollowDto(toMember.getFollowerCount(), false);
-
     }
 
     @Override

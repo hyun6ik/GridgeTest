@@ -2,7 +2,7 @@ package hyun6ik.gridgetest.domain.member.service;
 
 import hyun6ik.gridgetest.domain.login.vo.SocialUserInfo;
 import hyun6ik.gridgetest.domain.member.entity.Member;
-import hyun6ik.gridgetest.interfaces.member.dto.FollowDto;
+import hyun6ik.gridgetest.interfaces.member.dto.FollowerDto;
 import hyun6ik.gridgetest.interfaces.member.dto.MyPageDto;
 
 import java.time.LocalDateTime;
@@ -26,9 +26,9 @@ public interface MemberService {
 
     void resignMember(Long memberId);
 
-    FollowDto followMember(Long fromId, Long toId);
+    FollowerDto followMember(Long fromId, Long toId);
 
-    FollowDto unfollowMember(Long fromId, Long toId);
+    void unfollowMember(Long fromId, Long toId);
 
     MyPageDto getMyPageDtoBy(Long memberId, Optional<Integer> page);
 
