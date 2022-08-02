@@ -6,9 +6,12 @@ import hyun6ik.gridgetest.domain.member.entity.Member;
 import hyun6ik.gridgetest.domain.member.service.MemberService;
 import hyun6ik.gridgetest.interfaces.chat.dto.ChatCreateDto;
 import hyun6ik.gridgetest.interfaces.chat.dto.ChatMessageDto;
+import hyun6ik.gridgetest.interfaces.chat.dto.ChatRoomDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Service
 @Transactional(readOnly = true)

@@ -6,9 +6,12 @@ import hyun6ik.gridgetest.infrastructure.chat.ChatReader;
 import hyun6ik.gridgetest.infrastructure.chat.ChatStore;
 import hyun6ik.gridgetest.infrastructure.chat.ChatValidator;
 import hyun6ik.gridgetest.interfaces.chat.dto.ChatCreateDto;
+import hyun6ik.gridgetest.interfaces.chat.dto.ChatRoomDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Service
 @Transactional(readOnly = true)
@@ -31,6 +34,11 @@ public class ChatServiceImpl implements ChatService{
     @Override
     public ChatRoom getChatRoomBy(Member host, Member guest) {
         return chatReader.getChatRoomBy(host, guest);
+    }
+
+    @Override
+    public List<ChatRoomDto> getChatRoomDtosBy(Long memberId, Long chatRoomId) {
+        return chatReader.getChatRoomDtosBy(memberId, chatRoomId);
     }
 
 }

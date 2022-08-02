@@ -6,14 +6,13 @@ import hyun6ik.gridgetest.global.annotation.LoginUser;
 import hyun6ik.gridgetest.global.annotation.MemberId;
 import hyun6ik.gridgetest.interfaces.chat.dto.ChatCreateDto;
 import hyun6ik.gridgetest.interfaces.chat.dto.ChatMessageDto;
+import hyun6ik.gridgetest.interfaces.chat.dto.ChatRoomDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 
 @RestController
@@ -22,6 +21,7 @@ import javax.validation.Valid;
 public class ChatController {
 
     private final ChatFacade chatFacade;
+    private final ChatService chatService;
 
     @LoginUser
     @PostMapping("/new")
@@ -35,4 +35,9 @@ public class ChatController {
         return ResponseEntity.ok(chatFacade.sendMessage(memberId, request.getToId(), request.getMessage()));
     }
 
+    @LoginUser
+    @GetMapping("/{chatRoomId}")
+    public ResponseEntity<List<ChatRoomDto>> getChatRoomChats(@MemberId Long memberId, @PathVariable Long chatRoomId) {
+        return ResponseEntity.ok(chatService.getChatRoomDtosBy(memberId, chatRoomId));
+    }
 }
