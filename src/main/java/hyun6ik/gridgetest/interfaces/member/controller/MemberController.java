@@ -63,6 +63,14 @@ public class MemberController {
     }
 
     @LoginUser
+    @DeleteMapping("/followings/private/{followId}")
+    public ResponseEntity<String> privateRejectFollowMember(@MemberId Long memberId, @PathVariable Long followId) {
+        memberService.privateRejectFollowMember(memberId, followId);
+        return ResponseEntity.ok(MemberConstraints.PRIVATE_REJECT_MEMBER);
+
+    }
+
+    @LoginUser
     @GetMapping("/mypage")
     public ResponseEntity<MyPageDto> getMyPage(@MemberId Long memberId, Optional<Integer> page) {
         return ResponseEntity.ok(memberService.getMyPageDtoBy(memberId, page));

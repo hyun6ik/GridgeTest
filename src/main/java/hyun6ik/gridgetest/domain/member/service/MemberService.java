@@ -44,4 +44,5 @@ public interface MemberService {
 
     void updateProfileNickName(Long memberId, String nickName);
 
+    void privateRejectFollowMember(Long memberId, Long followId);
 }
