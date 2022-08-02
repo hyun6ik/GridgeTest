@@ -1,6 +1,8 @@
 package hyun6ik.gridgetest.domain.member.follow;
 
+import hyun6ik.gridgetest.domain.member.constant.MemberScope;
 import hyun6ik.gridgetest.domain.member.entity.Member;
+import hyun6ik.gridgetest.domain.member.follow.constant.FollowStatus;
 import hyun6ik.gridgetest.global.error.exception.ErrorCode;
 import hyun6ik.gridgetest.global.error.exception.FollowException;
 import lombok.AccessLevel;
@@ -32,10 +34,18 @@ public class Follow {
     @JoinColumn(name = "to_id")
     private Member to;
 
+    @Enumerated(EnumType.STRING)
+    private FollowStatus followStatus;
+
     public Follow(Member from, Member to) {
         validateDifferentSourceTarget(from, to);
         this.from = from;
         this.to = to;
+        this.followStatus = targetMemberScopeIsPublic(to) ? FollowStatus.APPROVED : FollowStatus.PENDING;
+    }
+
+    private Boolean targetMemberScopeIsPublic(Member to) {
+        return to.getMemberStatus().getMemberScope().equals(MemberScope.PUBLIC);
     }
 
 
