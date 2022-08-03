@@ -26,7 +26,7 @@ public class MemberController {
     private final MemberService memberService;
 
     @Operation(summary = "비밀번호를 변경하는 API")
-    @PostMapping("/password")
+    @PatchMapping("/password")
     public ApiResponse<String> changePassword(@Valid @RequestBody PasswordDto request) {
         memberService.changePassword(request.getPhoneNumber(), request.getPassword(), request.getPassword2());
         return ApiResponse.success(MemberConstraints.UPDATE_PASSWORD);
