@@ -1,0 +1,33 @@
+spring:
+
+  datasource:
+    hikari:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      jdbc-url: ENC(MleWa31WTLC8n1Ji3TK7X0g6Lj3PcG6ch0dzxPe02XFA5SLvovGo55Xhed8nVGo7BYwqJMzQ9AHwB08LnSxPwNOMqaNXYOZqtKu2MXDYzuJyWlmIjp+BaSCEmkWPINLWN2+gQh+HmrdoooYTDkkuc1+Sl2CFZ2yXASuAI3Rl0FsAJWPy4R1Jsw==)
+      username: ENC(cAC4Vt6+8XyBxtd5ws/AWw==)
+      password: ENC(sPO8FO2KS3Iqjy5IMK3x3ykbEi25MacK)
+
+  redis:
+    pool:
+      min-idle: 0
+      max-idle: 8
+      max-active: 8
+    port: 6379
+    host: ENC(earJ8EYa6ySc0OWI3bh0Jh3cEIaW5+LH)
+
+kakao:
+  client:
+    id: ENC(Huq7OzVS7/Nttx9gSX+b9djqHoYFmqBVumZrQn63KTz5OvgUYawtp6yAvWL33igh)
+    secret: ENC(ylKuoRG0eaRukuX/eGHlFPixud82hyV69edXHj2gu0G05SvIua+xkDU5LyDF0MPg)
+    redirect-url: ENC(D42VHTyaa+p6mTgG79vLDMR5CzdbIQxkYzMyb7tOUdupv2RtVOaQY4yO2wQyGIitVod+Lh43HgE=)
+    grant-type: authorization_code
+
+token:
+  secret: ENC(Pa9x0pV7pdfFTP2lpY6Y63TOeJP50xedpx5Y+P83OPc=)
+  access-token-expiration-time: 900000  # 15분
+  refresh-token-expiration-time: 1210500000 # 2주
+
+sms:
+  key: ENC(cnyiZ+ek7TsS9H2RXG/q3RxRbN+wYHdVDoNrLFiMzlI=)
+  secret: ENC(Y0F4Gu8z3Iq5DxQMZ+TRL/ay2v4YxiwKt10MwJLKV9sL7oQt9UsMVLHXK7JzrHDR)
+  to_phone_number: ENC(qnQHa4sUNlXpfitwq9ydwFZJko1O+x0a)
