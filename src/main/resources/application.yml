@@ -44,4 +44,4 @@ token:
 sms:
   key: ENC(cnyiZ+ek7TsS9H2RXG/q3RxRbN+wYHdVDoNrLFiMzlI=)
   secret: ENC(Y0F4Gu8z3Iq5DxQMZ+TRL/ay2v4YxiwKt10MwJLKV9sL7oQt9UsMVLHXK7JzrHDR)
-  to_phone_number: 010-3769-7129
+  to_phone_number: ENC(qnQHa4sUNlXpfitwq9ydwFZJko1O+x0a)
