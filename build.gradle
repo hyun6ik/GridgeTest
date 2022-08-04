@@ -59,6 +59,9 @@ dependencies {
     annotationProcessor("jakarta.annotation:jakarta.annotation-api")
     implementation 'org.springdoc:springdoc-openapi-ui:1.5.11'
 
+    //Flyway
+    implementation 'org.flywaydb:flyway-core:6.4.2'
+
 }
 
 tasks.named('test') {
