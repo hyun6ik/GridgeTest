@@ -1,8 +1,19 @@
+spring:
+  flyway:
+    enabled: false
+
+  redis:
+    pool:
+      min-idle: 0
+      max-idle: 8
+      max-active: 8
+    port: 6379
+    host: 127.0.0.1
 kakao:
   client:
     id: ENC(Huq7OzVS7/Nttx9gSX+b9djqHoYFmqBVumZrQn63KTz5OvgUYawtp6yAvWL33igh)
     secret: ENC(ylKuoRG0eaRukuX/eGHlFPixud82hyV69edXHj2gu0G05SvIua+xkDU5LyDF0MPg)
-    redirect-url: ENC(D42VHTyaa+p6mTgG79vLDMR5CzdbIQxkYzMyb7tOUdupv2RtVOaQY4yO2wQyGIitVod+Lh43HgE=)
+    redirect-url: http://localhost:8080/auth/kakao/callback
     grant-type: authorization_code
 
 token:
@@ -14,3 +25,4 @@ sms:
   key: ENC(cnyiZ+ek7TsS9H2RXG/q3RxRbN+wYHdVDoNrLFiMzlI=)
   secret: ENC(Y0F4Gu8z3Iq5DxQMZ+TRL/ay2v4YxiwKt10MwJLKV9sL7oQt9UsMVLHXK7JzrHDR)
   to_phone_number: ENC(qnQHa4sUNlXpfitwq9ydwFZJko1O+x0a)
+
