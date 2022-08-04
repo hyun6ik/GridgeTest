@@ -1,6 +1,3 @@
-spring:
-  flyway:
-    enabled: false
 kakao:
   client:
     id: ENC(Huq7OzVS7/Nttx9gSX+b9djqHoYFmqBVumZrQn63KTz5OvgUYawtp6yAvWL33igh)
