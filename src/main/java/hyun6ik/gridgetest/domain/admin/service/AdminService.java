@@ -6,5 +6,5 @@ import org.springframework.data.domain.Page;
 import java.util.Optional;
 
 public interface AdminService {
-    Page<PostReportDto> getBoardReportDtos(Optional<Integer> page);
+    Page<PostReportDto> getPostReportDtos(Optional<Integer> page);
 }

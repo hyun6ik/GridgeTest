@@ -13,7 +13,7 @@ public class AdminReader {
 
     private final AdminQueryRepository adminQueryRepository;
 
-    public Page<PostReportDto> getBoardReportDtos(Pageable page) {
-        return adminQueryRepository.findBoardReportDtosBy(page);
+    public Page<PostReportDto> getPostReportDtos(Pageable page) {
+        return adminQueryRepository.findPostReportDtosBy(page);
     }
 }

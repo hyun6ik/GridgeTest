@@ -19,8 +19,8 @@ public class AdminServiceImpl implements AdminService{
     private final AdminReader adminReader;
 
     @Override
-    public Page<PostReportDto> getBoardReportDtos(Optional<Integer> page) {
+    public Page<PostReportDto> getPostReportDtos(Optional<Integer> page) {
         final Pageable pageable = PageRequest.of(page.orElse(0), 10);
-        return adminReader.getBoardReportDtos(pageable);
+        return adminReader.getPostReportDtos(pageable);
     }
 }

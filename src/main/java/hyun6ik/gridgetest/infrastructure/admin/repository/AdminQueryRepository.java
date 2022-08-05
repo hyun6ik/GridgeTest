@@ -1,9 +1,6 @@
 package hyun6ik.gridgetest.infrastructure.admin.repository;
 
 import com.querydsl.jpa.impl.JPAQueryFactory;
-import hyun6ik.gridgetest.domain.member.entity.QMember;
-import hyun6ik.gridgetest.domain.post.QPost;
-import hyun6ik.gridgetest.domain.post.report.QPostReport;
 import hyun6ik.gridgetest.interfaces.admin.dto.PostReportDto;
 import hyun6ik.gridgetest.interfaces.admin.dto.QPostReportDto;
 import lombok.RequiredArgsConstructor;
@@ -24,7 +21,7 @@ public class AdminQueryRepository {
 
     private final JPAQueryFactory queryFactory;
 
-    public Page<PostReportDto> findBoardReportDtosBy(Pageable pageable) {
+    public Page<PostReportDto> findPostReportDtosBy(Pageable pageable) {
         final List<PostReportDto> content = queryFactory
                 .select(new QPostReportDto(
                         postReport.id,
