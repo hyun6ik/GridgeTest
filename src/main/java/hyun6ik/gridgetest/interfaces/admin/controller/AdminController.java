@@ -3,6 +3,7 @@ package hyun6ik.gridgetest.interfaces.admin.controller;
 import hyun6ik.gridgetest.application.admin.AdminFacade;
 import hyun6ik.gridgetest.domain.admin.service.AdminService;
 import hyun6ik.gridgetest.global.annotation.AdminUser;
+import hyun6ik.gridgetest.interfaces.admin.dto.response.CommentDeleteDto;
 import hyun6ik.gridgetest.interfaces.admin.dto.response.CommentReportDto;
 import hyun6ik.gridgetest.interfaces.admin.dto.response.PostDeleteDto;
 import hyun6ik.gridgetest.interfaces.admin.dto.response.PostReportDto;
@@ -41,5 +42,11 @@ public class AdminController {
     @GetMapping("/reports/comments")
     public ApiResponse<Page<CommentReportDto>> getCommentReports(Optional<Integer> page) {
         return ApiResponse.success(adminService.getCommentReportDtos(page));
+    }
+
+    @Operation(summary = "관리자 - 신고된 댓글 삭제하기 API", security = {@SecurityRequirement(name = "BearerKey")})
+    @PatchMapping("/reports/comments/{commentId}")
+    public ApiResponse<CommentDeleteDto> deleteComment(@PathVariable Long commentId) {
+        return ApiResponse.success(adminFacade.deleteComment(commentId));
     }
 }

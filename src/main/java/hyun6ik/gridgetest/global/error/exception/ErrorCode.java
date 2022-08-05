@@ -33,6 +33,7 @@ public enum ErrorCode {
     CANNOT_REPORT_MY_COMMENT(400, "내 댓글은 신고할 수 없습니다."),
     ALREADY_REPORT_COMMENT(400, "이미 신고한 댓글입니다."),
     NOT_REPORT_POST(400, "신고된 게시글이 아닙니다."),
+    NOT_REPORT_COMMENT(400, "신고된 댓글이 아닙니다"),
 
 
 
@@ -45,6 +46,7 @@ public enum ErrorCode {
 
     //COMMENT
     NOT_FOUND_COMMENT(400, "해당 댓글을 찾을 수 없습니다."),
+    ALREADY_DELETE_COMMENT(400, "이미 삭제된 댓글입니다"),
 
     //PROFILE
     PROFILE_NAME_COUNT(400, "이름 변경은 14일에 최대 2번까지 가능합니다."),

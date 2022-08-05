@@ -9,6 +9,9 @@ import hyun6ik.gridgetest.domain.comment.report.CommentReports;
 import hyun6ik.gridgetest.domain.member.entity.Member;
 import hyun6ik.gridgetest.domain.post.Post;
 import hyun6ik.gridgetest.domain.post.report.constant.ReportReason;
+import hyun6ik.gridgetest.global.error.exception.CommentException;
+import hyun6ik.gridgetest.global.error.exception.ErrorCode;
+import hyun6ik.gridgetest.global.error.exception.ReportException;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -75,6 +78,9 @@ public class Comment extends BaseTimeEntity {
     }
 
     public void delete() {
+        if (this.commentStatus == CommentStatus.DELETE) {
+            throw new CommentException(ErrorCode.ALREADY_DELETE_COMMENT);
+        }
         this.commentStatus = CommentStatus.DELETE;
     }
 
@@ -103,5 +109,11 @@ public class Comment extends BaseTimeEntity {
     public void unlike(Member member) {
         final CommentLike commentLike = new CommentLike(this, member);
         commentLikes.remove(commentLike);
+    }
+
+    public void validateIsReported() {
+        if (this.commentReports.getCounts() == 0) {
+            throw new ReportException(ErrorCode.NOT_REPORT_COMMENT);
+        }
     }
 }

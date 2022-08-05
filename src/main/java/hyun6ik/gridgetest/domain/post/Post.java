@@ -12,6 +12,7 @@ import hyun6ik.gridgetest.domain.post.report.PostReport;
 import hyun6ik.gridgetest.domain.post.report.PostReports;
 import hyun6ik.gridgetest.domain.post.report.constant.ReportReason;
 import hyun6ik.gridgetest.global.error.exception.ErrorCode;
+import hyun6ik.gridgetest.global.error.exception.PostException;
 import hyun6ik.gridgetest.global.error.exception.ReportException;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -68,7 +69,7 @@ public class Post extends BaseTimeEntity {
 
     public void deletePost() {
         if (this.postStatus == PostStatus.DELETE) {
-            throw new ReportException(ErrorCode.ALREADY_DELETE_POST);
+            throw new PostException(ErrorCode.ALREADY_DELETE_POST);
         }
         this.postStatus = PostStatus.DELETE;
     }
