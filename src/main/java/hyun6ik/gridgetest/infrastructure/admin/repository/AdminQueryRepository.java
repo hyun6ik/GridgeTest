@@ -1,11 +1,8 @@
 package hyun6ik.gridgetest.infrastructure.admin.repository;
 
 import com.querydsl.jpa.impl.JPAQueryFactory;
-import hyun6ik.gridgetest.domain.comment.entity.QComment;
-import hyun6ik.gridgetest.domain.comment.report.QCommentReport;
-import hyun6ik.gridgetest.domain.member.entity.QMember;
-import hyun6ik.gridgetest.interfaces.admin.dto.CommentReportDto;
-import hyun6ik.gridgetest.interfaces.admin.dto.PostReportDto;
+import hyun6ik.gridgetest.interfaces.admin.dto.response.CommentReportDto;
+import hyun6ik.gridgetest.interfaces.admin.dto.response.PostReportDto;
 import hyun6ik.gridgetest.interfaces.admin.dto.QCommentReportDto;
 import hyun6ik.gridgetest.interfaces.admin.dto.QPostReportDto;
 import lombok.RequiredArgsConstructor;

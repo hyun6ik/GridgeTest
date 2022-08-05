@@ -1,8 +1,8 @@
 package hyun6ik.gridgetest.domain.admin.service;
 
 import hyun6ik.gridgetest.infrastructure.admin.AdminReader;
-import hyun6ik.gridgetest.interfaces.admin.dto.CommentReportDto;
-import hyun6ik.gridgetest.interfaces.admin.dto.PostReportDto;
+import hyun6ik.gridgetest.interfaces.admin.dto.response.CommentReportDto;
+import hyun6ik.gridgetest.interfaces.admin.dto.response.PostReportDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;

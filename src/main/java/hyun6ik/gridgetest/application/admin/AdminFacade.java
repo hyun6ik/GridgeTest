@@ -3,7 +3,7 @@ package hyun6ik.gridgetest.application.admin;
 import hyun6ik.gridgetest.domain.admin.service.AdminService;
 import hyun6ik.gridgetest.domain.post.Post;
 import hyun6ik.gridgetest.domain.post.service.PostService;
-import hyun6ik.gridgetest.interfaces.admin.dto.PostDeleteDto;
+import hyun6ik.gridgetest.interfaces.admin.dto.response.PostDeleteDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

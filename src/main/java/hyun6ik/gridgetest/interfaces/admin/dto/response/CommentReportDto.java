@@ -1,4 +1,4 @@
-package hyun6ik.gridgetest.interfaces.admin.dto;
+package hyun6ik.gridgetest.interfaces.admin.dto.response;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.querydsl.core.annotations.QueryProjection;
