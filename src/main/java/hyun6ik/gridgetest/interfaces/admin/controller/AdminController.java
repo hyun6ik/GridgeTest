@@ -45,8 +45,11 @@ public class AdminController {
     }
 
     @Operation(summary = "관리자 - 신고된 댓글 삭제하기 API", security = {@SecurityRequirement(name = "BearerKey")})
+    @AdminUser
     @PatchMapping("/reports/comments/{commentId}")
     public ApiResponse<CommentDeleteDto> deleteComment(@PathVariable Long commentId) {
         return ApiResponse.success(adminFacade.deleteComment(commentId));
     }
+
+
 }
