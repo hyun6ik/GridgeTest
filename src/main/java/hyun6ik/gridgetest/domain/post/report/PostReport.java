@@ -1,5 +1,6 @@
 package hyun6ik.gridgetest.domain.post.report;
 
+import hyun6ik.gridgetest.domain.base.BaseTimeEntity;
 import hyun6ik.gridgetest.domain.member.entity.Member;
 import hyun6ik.gridgetest.domain.post.Post;
 import hyun6ik.gridgetest.domain.post.report.constant.ReportReason;
@@ -13,7 +14,7 @@ import java.util.Objects;
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class PostReport {
+public class PostReport extends BaseTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
