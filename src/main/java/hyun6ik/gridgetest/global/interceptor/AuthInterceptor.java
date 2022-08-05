@@ -2,12 +2,14 @@ package hyun6ik.gridgetest.global.interceptor;
 
 import hyun6ik.gridgetest.domain.jwt.constant.GrantType;
 import hyun6ik.gridgetest.domain.jwt.service.TokenManager;
+import hyun6ik.gridgetest.global.annotation.AdminUser;
 import hyun6ik.gridgetest.global.annotation.LoginUser;
 import hyun6ik.gridgetest.global.constant.AuthConstraints;
 import hyun6ik.gridgetest.global.error.exception.AuthenticationException;
 import hyun6ik.gridgetest.global.error.exception.ErrorCode;
 import io.jsonwebtoken.Claims;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
@@ -17,6 +19,7 @@ import org.springframework.web.servlet.HandlerInterceptor;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+@Slf4j
 @Component
 @RequiredArgsConstructor
 public class AuthInterceptor implements HandlerInterceptor {
@@ -48,6 +51,7 @@ public class AuthInterceptor implements HandlerInterceptor {
 
         final Long memberId = tokenManager.getMemberId(accessToken);
         final String memberRole = tokenManager.getRole(accessToken);
+        log.info("memberRole = {}", memberRole);
         request.setAttribute(AuthConstraints.MEMBER_ID, memberId);
         request.setAttribute(AuthConstraints.MEMBER_ROLE, memberRole);
         return true;
@@ -89,7 +93,8 @@ public class AuthInterceptor implements HandlerInterceptor {
 
     private boolean hasNotAuthAnnotation(HandlerMethod handlerMethod) {
         final LoginUser loginUser = handlerMethod.getMethodAnnotation(LoginUser.class);
-        if (loginUser == null) {
+        final AdminUser adminUser = handlerMethod.getMethodAnnotation(AdminUser.class);
+        if (loginUser == null && adminUser == null) {
             return true;
         }
         return false;
