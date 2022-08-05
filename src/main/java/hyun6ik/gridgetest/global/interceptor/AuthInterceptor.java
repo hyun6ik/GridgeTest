@@ -47,7 +47,9 @@ public class AuthInterceptor implements HandlerInterceptor {
         validateTokenExpired(accessToken);
 
         final Long memberId = tokenManager.getMemberId(accessToken);
+        final String memberRole = tokenManager.getRole(accessToken);
         request.setAttribute(AuthConstraints.MEMBER_ID, memberId);
+        request.setAttribute(AuthConstraints.MEMBER_ROLE, memberRole);
         return true;
 
     }
