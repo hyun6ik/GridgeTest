@@ -21,6 +21,7 @@ public enum ErrorCode {
     //POST
     NEED_AT_LEAST_ONE_IMAGE(400, "게시글 등록하기 위해선 최소 1개의 사진이 필요합니다."),
     NOT_FOUND_POST(400, "해당 게시글을 찾을 수 없습니다."),
+    ALREADY_DELETE_POST(400, "이미 삭제한 게시글입니다."),
 
     //LIKE
     DUPLICATED_LIKE(400,"이미 좋아요를 누르셨습니다."),
@@ -31,6 +32,8 @@ public enum ErrorCode {
     ALREADY_REPORT_POST(400, "이미 신고한 게시글입니다."),
     CANNOT_REPORT_MY_COMMENT(400, "내 댓글은 신고할 수 없습니다."),
     ALREADY_REPORT_COMMENT(400, "이미 신고한 댓글입니다."),
+    NOT_REPORT_POST(400, "신고된 게시글이 아닙니다."),
+
 
 
     //FOLLOW

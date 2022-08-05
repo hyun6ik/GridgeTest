@@ -28,7 +28,8 @@ public class AdminQueryRepository {
                         post.id,
                         member.profile.nickName,
                         postReport.createTime,
-                        postReport.reportReason
+                        postReport.reportReason,
+                        post.postStatus
                 ))
                 .from(postReport)
                 .innerJoin(postReport.post, post)
