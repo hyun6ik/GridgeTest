@@ -63,6 +63,9 @@ dependencies {
     //Flyway
     implementation 'org.flywaydb:flyway-core:6.4.2'
 
+    //StringUtils 기능 확장
+    implementation 'org.apache.commons:commons-lang3:3.9'
+
 }
 
 tasks.named('test') {

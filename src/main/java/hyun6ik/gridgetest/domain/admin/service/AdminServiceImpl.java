@@ -1,7 +1,9 @@
 package hyun6ik.gridgetest.domain.admin.service;
 
 import hyun6ik.gridgetest.infrastructure.admin.AdminReader;
+import hyun6ik.gridgetest.interfaces.admin.dto.request.PostSearchDto;
 import hyun6ik.gridgetest.interfaces.admin.dto.response.CommentReportDto;
+import hyun6ik.gridgetest.interfaces.admin.dto.response.PostDto;
 import hyun6ik.gridgetest.interfaces.admin.dto.response.PostReportDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -29,5 +31,11 @@ public class AdminServiceImpl implements AdminService{
     public Page<CommentReportDto> getCommentReportDtos(Optional<Integer> page) {
         final Pageable pageable = PageRequest.of(page.orElse(0), 10);
         return adminReader.getCommentReportDtos(pageable);
+    }
+
+    @Override
+    public Page<PostDto> getPostDtos(PostSearchDto request, Optional<Integer> page) {
+        final Pageable pageable = PageRequest.of(page.orElse(0), 10);
+        return adminReader.getPostDtos(request.getPostStatus(), request.getSearchQuery(), request.getSearchDate(), pageable);
     }
 }

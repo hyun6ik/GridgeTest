@@ -1,23 +1,27 @@
 package hyun6ik.gridgetest.infrastructure.admin.repository;
 
+import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
-import hyun6ik.gridgetest.interfaces.admin.dto.response.CommentReportDto;
-import hyun6ik.gridgetest.interfaces.admin.dto.response.PostReportDto;
-import hyun6ik.gridgetest.interfaces.admin.dto.QCommentReportDto;
-import hyun6ik.gridgetest.interfaces.admin.dto.QPostReportDto;
+import hyun6ik.gridgetest.domain.post.constant.PostStatus;
+import hyun6ik.gridgetest.interfaces.admin.dto.response.*;
 import lombok.RequiredArgsConstructor;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.List;
 
-import static hyun6ik.gridgetest.domain.comment.entity.QComment.*;
-import static hyun6ik.gridgetest.domain.comment.report.QCommentReport.*;
-import static hyun6ik.gridgetest.domain.member.entity.QMember.*;
-import static hyun6ik.gridgetest.domain.post.QPost.*;
-import static hyun6ik.gridgetest.domain.post.report.QPostReport.*;
+import static hyun6ik.gridgetest.domain.comment.entity.QComment.comment;
+import static hyun6ik.gridgetest.domain.comment.report.QCommentReport.commentReport;
+import static hyun6ik.gridgetest.domain.member.entity.QMember.member;
+import static hyun6ik.gridgetest.domain.post.QPost.post;
+import static hyun6ik.gridgetest.domain.post.report.QPostReport.postReport;
+
 
 @Repository
 @RequiredArgsConstructor
@@ -78,4 +82,52 @@ public class AdminQueryRepository {
 
         return new PageImpl<>(content, pageable, size);
     }
+
+    public Page<PostDto> findPostDtosBy(PostStatus postStatus, String searchQuery, LocalDate searchDate, Pageable pageable) {
+        final List<PostDto> content = queryFactory
+                .select(new QPostDto(
+                        post.id,
+                        member.id,
+                        member.profile.nickName,
+                        post.postContent.content,
+                        post.postStatus,
+                        post.createTime,
+                        post.updateTime
+                ))
+                .from(post)
+                .innerJoin(post.member, member)
+                .where(containPostStatus(postStatus), containNickName(searchQuery), betweenSearchDate(searchDate))
+                .orderBy(post.createTime.desc())
+                .offset(pageable.getOffset())
+                .limit(pageable.getPageSize())
+                .fetch();
+
+        final int size = queryFactory
+                .select(post.count())
+                .from(post)
+                .fetch()
+                .size();
+
+        return new PageImpl<>(content, pageable, size);
+    }
+
+    private BooleanExpression containPostStatus(PostStatus postStatus) {
+        return postStatus == null ? null : post.postStatus.eq(postStatus);
+    }
+
+    private BooleanExpression containNickName(String searchQuery) {
+        return StringUtils.isBlank(searchQuery) ? null : post.member.profile.nickName.containsIgnoreCase(searchQuery);
+    }
+
+    private BooleanExpression betweenSearchDate(LocalDate searchDate) {
+        if (searchDate == null) {
+            return null;
+        }
+        final LocalDateTime startDate = searchDate.atStartOfDay();
+        final LocalDateTime endDate = LocalDateTime.of(searchDate, LocalTime.MAX).withNano(0);
+        return post.createTime.between(startDate, endDate);
+    }
+
+
+
 }

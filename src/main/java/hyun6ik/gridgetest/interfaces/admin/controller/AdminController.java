@@ -3,10 +3,8 @@ package hyun6ik.gridgetest.interfaces.admin.controller;
 import hyun6ik.gridgetest.application.admin.AdminFacade;
 import hyun6ik.gridgetest.domain.admin.service.AdminService;
 import hyun6ik.gridgetest.global.annotation.AdminUser;
-import hyun6ik.gridgetest.interfaces.admin.dto.response.CommentDeleteDto;
-import hyun6ik.gridgetest.interfaces.admin.dto.response.CommentReportDto;
-import hyun6ik.gridgetest.interfaces.admin.dto.response.PostDeleteDto;
-import hyun6ik.gridgetest.interfaces.admin.dto.response.PostReportDto;
+import hyun6ik.gridgetest.interfaces.admin.dto.request.PostSearchDto;
+import hyun6ik.gridgetest.interfaces.admin.dto.response.*;
 import hyun6ik.gridgetest.interfaces.common.ApiResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
@@ -51,5 +49,10 @@ public class AdminController {
         return ApiResponse.success(adminFacade.deleteComment(commentId));
     }
 
-
+    @Operation(summary = "관리자 - 게시글 전체 조회하기 API", security = {@SecurityRequirement(name = "BearerKey")})
+    @AdminUser
+    @GetMapping("/posts")
+    public ApiResponse<Page<PostDto>> getPostDtos(PostSearchDto request, Optional<Integer> page) {
+        return ApiResponse.success(adminService.getPostDtos(request, page));
+    }
 }
