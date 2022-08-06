@@ -14,4 +14,6 @@ public interface AdminService {
     Page<CommentReportDto> getCommentReportDtos(Optional<Integer> page);
 
     Page<PostDto> getPostDtos(PostSearchDto request, Optional<Integer> page);
+
+    PostDto getPostDto(Long postId);
 }

@@ -38,4 +38,9 @@ public class AdminServiceImpl implements AdminService{
         final Pageable pageable = PageRequest.of(page.orElse(0), 10);
         return adminReader.getPostDtos(request.getPostStatus(), request.getSearchQuery(), request.getSearchDate(), pageable);
     }
+
+    @Override
+    public PostDto getPostDto(Long postId) {
+        return adminReader.getPostDto(postId);
+    }
 }

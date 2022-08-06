@@ -55,4 +55,11 @@ public class AdminController {
     public ApiResponse<Page<PostDto>> getPostDtos(PostSearchDto request, Optional<Integer> page) {
         return ApiResponse.success(adminService.getPostDtos(request, page));
     }
+
+    @Operation(summary = "관리자 - 게시글 상세 조회하기 API", security = {@SecurityRequirement(name = "BearerKey")})
+    @AdminUser
+    @GetMapping("/posts/{postId}")
+    public ApiResponse<PostDto> getPostDto(@PathVariable Long postId) {
+        return ApiResponse.success(adminService.getPostDto(postId));
+    }
 }

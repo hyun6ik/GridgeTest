@@ -3,6 +3,7 @@ package hyun6ik.gridgetest.infrastructure.admin.repository;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import hyun6ik.gridgetest.domain.post.constant.PostStatus;
+import hyun6ik.gridgetest.domain.post.like.QLike;
 import hyun6ik.gridgetest.interfaces.admin.dto.response.*;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
@@ -15,11 +16,13 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.List;
+import java.util.Optional;
 
 import static hyun6ik.gridgetest.domain.comment.entity.QComment.comment;
 import static hyun6ik.gridgetest.domain.comment.report.QCommentReport.commentReport;
 import static hyun6ik.gridgetest.domain.member.entity.QMember.member;
 import static hyun6ik.gridgetest.domain.post.QPost.post;
+import static hyun6ik.gridgetest.domain.post.like.QLike.*;
 import static hyun6ik.gridgetest.domain.post.report.QPostReport.postReport;
 
 
@@ -129,5 +132,58 @@ public class AdminQueryRepository {
     }
 
 
+    public Optional<PostDto> findPostDtoBy(Long postId) {
+        return Optional.ofNullable(
+                queryFactory
+                        .select(new QPostDto(
+                                post.id,
+                                member.id,
+                                member.profile.nickName,
+                                post.postContent.content,
+                                post.postStatus,
+                                post.createTime,
+                                post.updateTime
+                        ))
+                        .from(post)
+                        .innerJoin(post.member, member)
+                        .where(post.id.eq(postId))
+                        .orderBy(post.createTime.desc())
+                        .fetchOne()
+        );
+    }
 
+    public List<PostLikeDto> findPostLikeDtosBy(Long postId) {
+        return queryFactory
+                .select(new QPostLikeDto(
+                        like.id,
+                        post.id,
+                        member.id,
+                        like.createTime,
+                        like.updateTime
+                ))
+                .from(like)
+                .innerJoin(like.post, post)
+                .innerJoin(like.member, member)
+                .where(like.post.id.eq(postId))
+                .orderBy(like.createTime.desc())
+                .fetch();
+    }
+
+    public List<PostReportDto> findPostReportDtosBy(Long postId) {
+        return queryFactory
+                .select(new QPostReportDto(
+                        postReport.id,
+                        post.id,
+                        member.profile.nickName,
+                        postReport.createTime,
+                        postReport.reportReason,
+                        post.postStatus
+                ))
+                .from(postReport)
+                .innerJoin(postReport.post, post)
+                .innerJoin(postReport.member, member)
+                .where(postReport.post.id.eq(postId))
+                .orderBy(postReport.createTime.desc())
+                .fetch();
+    }
 }
