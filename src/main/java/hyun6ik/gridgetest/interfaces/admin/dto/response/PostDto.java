@@ -24,6 +24,7 @@ public class PostDto {
     private LocalDateTime updateTime;
     private List<PostLikeDto> postLikeDtos;
     private List<PostReportDto> postReportDtos;
+    private List<CommentDto> commentDtos;
 
     @QueryProjection
     public PostDto(Long postId, Long memberId,String nickName, String content, PostStatus postStatus, LocalDateTime creatTime, LocalDateTime updateTime) {
@@ -42,5 +43,9 @@ public class PostDto {
 
     public void addPostReportDtos(List<PostReportDto> postReportDtos) {
         this.postReportDtos = postReportDtos;
+    }
+
+    public void addCommentDtos(List<CommentDto> commentDtos) {
+        this.commentDtos = commentDtos;
     }
 }

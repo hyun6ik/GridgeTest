@@ -4,10 +4,7 @@ import hyun6ik.gridgetest.domain.post.constant.PostStatus;
 import hyun6ik.gridgetest.global.error.exception.ErrorCode;
 import hyun6ik.gridgetest.global.error.exception.NotFoundException;
 import hyun6ik.gridgetest.infrastructure.admin.repository.AdminQueryRepository;
-import hyun6ik.gridgetest.interfaces.admin.dto.response.CommentReportDto;
-import hyun6ik.gridgetest.interfaces.admin.dto.response.PostDto;
-import hyun6ik.gridgetest.interfaces.admin.dto.response.PostLikeDto;
-import hyun6ik.gridgetest.interfaces.admin.dto.response.PostReportDto;
+import hyun6ik.gridgetest.interfaces.admin.dto.response.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -39,6 +36,7 @@ public class AdminReader {
                 .orElseThrow(() -> new NotFoundException(ErrorCode.NOT_FOUND_POST));
         postDto.addPostLikeDtos(adminQueryRepository.findPostLikeDtosBy(postId));
         postDto.addPostReportDtos(adminQueryRepository.findPostReportDtosBy(postId));
+        postDto.addCommentDtos(adminQueryRepository.findCommentDtosBy(postId));
         return postDto;
     }
 }

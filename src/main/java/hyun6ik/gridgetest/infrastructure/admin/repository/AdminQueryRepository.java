@@ -2,6 +2,7 @@ package hyun6ik.gridgetest.infrastructure.admin.repository;
 
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
+import hyun6ik.gridgetest.domain.comment.entity.QComment;
 import hyun6ik.gridgetest.domain.post.constant.PostStatus;
 import hyun6ik.gridgetest.domain.post.like.QLike;
 import hyun6ik.gridgetest.interfaces.admin.dto.response.*;
@@ -184,6 +185,27 @@ public class AdminQueryRepository {
                 .innerJoin(postReport.member, member)
                 .where(postReport.post.id.eq(postId))
                 .orderBy(postReport.createTime.desc())
+                .fetch();
+    }
+
+    public List<CommentDto> findCommentDtosBy(Long postId) {
+        return queryFactory
+                .select(new QCommentDto(
+                        comment.id,
+                        post.id,
+                        member.id,
+                        member.profile.nickName,
+                        comment.commentContent.content,
+                        comment.commentStatus,
+                        post.comments.comments.size(),
+                        comment.commentLikes.commentLikes.size(),
+                        comment.createTime,
+                        comment.updateTime
+                ))
+                .from(comment)
+                .innerJoin(comment.post, post)
+                .innerJoin(comment.member, member)
+                .where(comment.post.id.eq(postId))
                 .fetch();
     }
 }
