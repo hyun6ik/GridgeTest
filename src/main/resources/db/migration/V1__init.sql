@@ -120,6 +120,8 @@ create table comment_report
 (
     id            bigint auto_increment
         primary key,
+    create_time    datetime(6)  not null,
+    update_time    datetime(6)  not null,
     report_reason varchar(255) null,
     comment_id    bigint       null,
     member_id     bigint       null,
@@ -160,6 +162,8 @@ create table post_report
 (
     id            bigint auto_increment
         primary key,
+    create_time    datetime(6)  not null,
+    update_time    datetime(6)  not null,
     report_reason varchar(255) null,
     member_id     bigint       null,
     post_id       bigint       null,
