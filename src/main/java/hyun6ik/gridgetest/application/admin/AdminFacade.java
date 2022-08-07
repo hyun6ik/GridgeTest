@@ -1,6 +1,5 @@
 package hyun6ik.gridgetest.application.admin;
 
-import hyun6ik.gridgetest.domain.admin.service.AdminService;
 import hyun6ik.gridgetest.domain.comment.entity.Comment;
 import hyun6ik.gridgetest.domain.comment.service.CommentService;
 import hyun6ik.gridgetest.domain.post.Post;
@@ -16,12 +15,11 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 public class AdminFacade {
 
-    private final AdminService adminService;
     private final PostService postService;
     private final CommentService commentService;
 
     @Transactional
-    public PostDeleteDto deletePost(Long postId) {
+    public PostDeleteDto deleteReportPost(Long postId) {
         final Post post = postService.getPostBy(postId);
         post.validateIsReported();
         post.deletePost();;

@@ -4,6 +4,7 @@ import com.querydsl.jpa.JPAExpressions;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import hyun6ik.gridgetest.domain.post.Post;
 import hyun6ik.gridgetest.domain.post.constant.PostStatus;
+import hyun6ik.gridgetest.domain.post.like.QLike;
 import hyun6ik.gridgetest.interfaces.post.dto.response.PostFeedDto;
 import hyun6ik.gridgetest.interfaces.post.dto.response.QPostFeedDto;
 import lombok.RequiredArgsConstructor;
@@ -101,4 +102,6 @@ public class PostQueryRepository {
 
         return new PageImpl<>(content, pageable, count);
     }
+
+
 }

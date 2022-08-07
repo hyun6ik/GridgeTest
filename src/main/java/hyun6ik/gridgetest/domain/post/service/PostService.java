@@ -20,4 +20,5 @@ public interface PostService {
     PostFeedDto getPostFeedDtoBy(Long postId);
 
     Page<PostFeedDto> getHomeFeedDtosBy(Long memberId, Optional<Integer> page);
+
 }

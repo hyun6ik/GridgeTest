@@ -82,6 +82,7 @@ public class Comment extends BaseTimeEntity {
             throw new CommentException(ErrorCode.ALREADY_DELETE_COMMENT);
         }
         this.commentStatus = CommentStatus.DELETE;
+        this.commentLikes.getCommentLikes().clear();
     }
 
     public void report(Member member, ReportReason reportReason) {

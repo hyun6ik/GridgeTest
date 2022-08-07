@@ -1,7 +1,9 @@
 package hyun6ik.gridgetest.domain.post;
 
 import hyun6ik.gridgetest.domain.base.BaseTimeEntity;
+import hyun6ik.gridgetest.domain.comment.entity.Comment;
 import hyun6ik.gridgetest.domain.comment.entity.Comments;
+import hyun6ik.gridgetest.domain.comment.like.CommentLikes;
 import hyun6ik.gridgetest.domain.member.entity.Member;
 import hyun6ik.gridgetest.domain.post.constant.PostStatus;
 import hyun6ik.gridgetest.domain.post.content.PostContent;
@@ -72,6 +74,8 @@ public class Post extends BaseTimeEntity {
             throw new PostException(ErrorCode.ALREADY_DELETE_POST);
         }
         this.postStatus = PostStatus.DELETE;
+        this.likes.getLikes().clear();
+        this.comments.getComments().forEach(Comment::delete);
     }
 
     public void updatePost(String content) {

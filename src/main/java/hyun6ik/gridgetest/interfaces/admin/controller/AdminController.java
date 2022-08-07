@@ -32,7 +32,7 @@ public class AdminController {
     @Operation(summary = "관리자 - 신고된 게시글 삭제하기 API", security = {@SecurityRequirement(name = "BearerKey")})
     @PatchMapping("/reports/posts/{postId}")
     public ApiResponse<PostDeleteDto> deletePost(@PathVariable Long postId) {
-        return ApiResponse.success(adminFacade.deletePost(postId));
+        return ApiResponse.success(adminFacade.deleteReportPost(postId));
     }
 
     @Operation(summary = "관리자 - 신고된 댓글 조회 API", security = {@SecurityRequirement(name = "BearerKey")})
