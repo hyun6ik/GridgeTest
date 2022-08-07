@@ -13,6 +13,7 @@ import hyun6ik.gridgetest.domain.post.like.Likes;
 import hyun6ik.gridgetest.domain.post.report.PostReport;
 import hyun6ik.gridgetest.domain.post.report.PostReports;
 import hyun6ik.gridgetest.domain.post.report.constant.ReportReason;
+import hyun6ik.gridgetest.global.error.exception.CannotException;
 import hyun6ik.gridgetest.global.error.exception.ErrorCode;
 import hyun6ik.gridgetest.global.error.exception.PostException;
 import hyun6ik.gridgetest.global.error.exception.ReportException;
@@ -97,6 +98,9 @@ public class Post extends BaseTimeEntity {
     }
 
     public void block() {
+        if (this.postStatus == PostStatus.BLOCK) {
+            throw new CannotException(ErrorCode.ALREADY_BLOCK_POST);
+        }
         this.postStatus = PostStatus.BLOCK;
     }
 

@@ -27,6 +27,7 @@ public enum ErrorCode {
     NEED_AT_LEAST_ONE_IMAGE(400, "게시글 등록하기 위해선 최소 1개의 사진이 필요합니다."),
     NOT_FOUND_POST(400, "해당 게시글을 찾을 수 없습니다."),
     ALREADY_DELETE_POST(400, "이미 삭제한 게시글입니다."),
+    ALREADY_BLOCK_POST(400, "이미 신고된 게시글입니다."),
 
     //LIKE
     DUPLICATED_LIKE(400,"이미 좋아요를 누르셨습니다."),
