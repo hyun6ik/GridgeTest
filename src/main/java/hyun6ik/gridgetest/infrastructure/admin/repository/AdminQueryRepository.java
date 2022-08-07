@@ -3,6 +3,7 @@ package hyun6ik.gridgetest.infrastructure.admin.repository;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import hyun6ik.gridgetest.domain.comment.entity.QComment;
+import hyun6ik.gridgetest.domain.member.constant.MemberCondition;
 import hyun6ik.gridgetest.domain.post.constant.PostStatus;
 import hyun6ik.gridgetest.domain.post.like.QLike;
 import hyun6ik.gridgetest.interfaces.admin.dto.response.*;
@@ -115,24 +116,6 @@ public class AdminQueryRepository {
         return new PageImpl<>(content, pageable, size);
     }
 
-    private BooleanExpression containPostStatus(PostStatus postStatus) {
-        return postStatus == null ? null : post.postStatus.eq(postStatus);
-    }
-
-    private BooleanExpression containNickName(String searchQuery) {
-        return StringUtils.isBlank(searchQuery) ? null : post.member.profile.nickName.containsIgnoreCase(searchQuery);
-    }
-
-    private BooleanExpression betweenSearchDate(LocalDate searchDate) {
-        if (searchDate == null) {
-            return null;
-        }
-        final LocalDateTime startDate = searchDate.atStartOfDay();
-        final LocalDateTime endDate = LocalDateTime.of(searchDate, LocalTime.MAX).withNano(0);
-        return post.createTime.between(startDate, endDate);
-    }
-
-
     public Optional<PostDto> findPostDtoBy(Long postId) {
         return Optional.ofNullable(
                 queryFactory
@@ -207,5 +190,64 @@ public class AdminQueryRepository {
                 .innerJoin(comment.member, member)
                 .where(comment.post.id.eq(postId))
                 .fetch();
+    }
+
+    public Page<MemberDto> findMemberDtosBy(MemberCondition memberCondition, String searchName, String searchNickName, LocalDate searchDate, Pageable pageable) {
+        final List<MemberDto> content = queryFactory
+                .select(new QMemberDto(
+                        member.id,
+                        member.profile.name,
+                        member.profile.nickName,
+                        member.phoneNumber,
+                        member.birthDay,
+                        member.memberStatus.memberCondition,
+                        member.memberStatus.memberRole,
+                        member.memberStatus.memberScope,
+                        member.memberStatus.memberType,
+                        member.profile.image,
+                        member.profile.introduce,
+                        member.profile.webSite,
+                        member.createTime,
+                        member.updateTime
+                ))
+                .from(member)
+                .where(eqMemberCondition(memberCondition), containName(searchName), containNickName(searchNickName), betweenSearchDate(searchDate))
+                .orderBy(member.createTime.desc())
+                .offset(pageable.getOffset())
+                .limit(pageable.getPageSize())
+                .fetch();
+
+        final int size = queryFactory
+                .select(member.count())
+                .from(member)
+                .fetch()
+                .size();
+
+        return new PageImpl<>(content, pageable, size);
+    }
+
+    private BooleanExpression eqMemberCondition(MemberCondition memberCondition) {
+        return memberCondition == null ? null : member.memberStatus.memberCondition.eq(memberCondition);
+    }
+
+    private BooleanExpression containName(String searchName) {
+        return StringUtils.isBlank(searchName) ? null : member.profile.name.containsIgnoreCase(searchName);
+    }
+
+    private BooleanExpression containPostStatus(PostStatus postStatus) {
+        return postStatus == null ? null : post.postStatus.eq(postStatus);
+    }
+
+    private BooleanExpression containNickName(String searchQuery) {
+        return StringUtils.isBlank(searchQuery) ? null : member.profile.nickName.containsIgnoreCase(searchQuery);
+    }
+
+    private BooleanExpression betweenSearchDate(LocalDate searchDate) {
+        if (searchDate == null) {
+            return null;
+        }
+        final LocalDateTime startDate = searchDate.atStartOfDay();
+        final LocalDateTime endDate = LocalDateTime.of(searchDate, LocalTime.MAX).withNano(0);
+        return post.createTime.between(startDate, endDate);
     }
 }

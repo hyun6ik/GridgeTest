@@ -3,6 +3,7 @@ package hyun6ik.gridgetest.interfaces.admin.controller;
 import hyun6ik.gridgetest.application.admin.AdminFacade;
 import hyun6ik.gridgetest.domain.admin.service.AdminService;
 import hyun6ik.gridgetest.global.annotation.AdminUser;
+import hyun6ik.gridgetest.interfaces.admin.dto.request.MemberSearchDto;
 import hyun6ik.gridgetest.interfaces.admin.dto.request.PostSearchDto;
 import hyun6ik.gridgetest.interfaces.admin.dto.response.*;
 import hyun6ik.gridgetest.interfaces.common.ApiResponse;
@@ -35,7 +36,7 @@ public class AdminController {
         return ApiResponse.success(adminFacade.deleteReportPost(postId));
     }
 
-    @Operation(summary = "관리자 - 신고된 댓글 조회 API", security = {@SecurityRequirement(name = "BearerKey")})
+    @Operation(summary = "관리자 - 신고된 댓글 조회하기 API", security = {@SecurityRequirement(name = "BearerKey")})
     @AdminUser
     @GetMapping("/reports/comments")
     public ApiResponse<Page<CommentReportDto>> getCommentReports(Optional<Integer> page) {
@@ -67,5 +68,12 @@ public class AdminController {
     @DeleteMapping("/posts/{postId}")
     public ApiResponse<PostDeleteDto> deletePost(@PathVariable Long postId) {
         return ApiResponse.success(adminFacade.deletePost(postId));
+    }
+
+    @Operation(summary = "관리자 - 회원 전체 조회하기 API", security = {@SecurityRequirement(name = "BearerKey")})
+    @AdminUser
+    @GetMapping("/members")
+    public ApiResponse<Page<MemberDto>> getPostDtos(MemberSearchDto request, Optional<Integer> page) {
+        return ApiResponse.success(adminService.getMemberDtos(request, page));
     }
 }

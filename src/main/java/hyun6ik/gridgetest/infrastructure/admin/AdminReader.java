@@ -1,5 +1,6 @@
 package hyun6ik.gridgetest.infrastructure.admin;
 
+import hyun6ik.gridgetest.domain.member.constant.MemberCondition;
 import hyun6ik.gridgetest.domain.post.constant.PostStatus;
 import hyun6ik.gridgetest.global.error.exception.ErrorCode;
 import hyun6ik.gridgetest.global.error.exception.NotFoundException;
@@ -38,5 +39,9 @@ public class AdminReader {
         postDto.addPostReportDtos(adminQueryRepository.findPostReportDtosBy(postId));
         postDto.addCommentDtos(adminQueryRepository.findCommentDtosBy(postId));
         return postDto;
+    }
+
+    public Page<MemberDto> getMemberDtos(MemberCondition memberCondition, String searchName, String searchNickName, LocalDate searchDate, Pageable pageable) {
+        return adminQueryRepository.findMemberDtosBy(memberCondition, searchName, searchNickName, searchDate, pageable);
     }
 }
