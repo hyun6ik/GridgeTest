@@ -31,7 +31,7 @@ public class AdminController {
 
     @Operation(summary = "관리자 - 신고된 게시글 삭제하기 API", security = {@SecurityRequirement(name = "BearerKey")})
     @PatchMapping("/reports/posts/{postId}")
-    public ApiResponse<PostDeleteDto> deletePost(@PathVariable Long postId) {
+    public ApiResponse<PostDeleteDto> deleteReportPost(@PathVariable Long postId) {
         return ApiResponse.success(adminFacade.deleteReportPost(postId));
     }
 
@@ -61,5 +61,11 @@ public class AdminController {
     @GetMapping("/posts/{postId}")
     public ApiResponse<PostDto> getPostDto(@PathVariable Long postId) {
         return ApiResponse.success(adminService.getPostDto(postId));
+    }
+
+    @Operation(summary = "관리자 - 게시글 삭제하기 API", security = {@SecurityRequirement(name = "BearerKey")})
+    @DeleteMapping("/posts/{postId}")
+    public ApiResponse<PostDeleteDto> deletePost(@PathVariable Long postId) {
+        return ApiResponse.success(adminFacade.deletePost(postId));
     }
 }

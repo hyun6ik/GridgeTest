@@ -33,4 +33,11 @@ public class AdminFacade {
         comment.delete();
         return new CommentDeleteDto(comment.getId());
     }
+
+    @Transactional
+    public PostDeleteDto deletePost(Long postId) {
+        final Post post = postService.getPostBy(postId);
+        post.deletePost();;
+        return new PostDeleteDto(post.getId());
+    }
 }
