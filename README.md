@@ -2,7 +2,7 @@
 ## 애플리케이션 
 - Language : Java 11
 - Framework : Spring Framework(Spring Boot, Spring MVC)
-- Data : JPA/Hibernate, Querydsl, MySQL
+- Data : JPA/Hibernate, Querydsl, MySQL, Redis
 - Build Tool : Gradle 
 
 ## 프로젝트 Layer 구조 
