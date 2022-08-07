@@ -31,6 +31,7 @@ public class AdminController {
     }
 
     @Operation(summary = "관리자 - 신고된 게시글 삭제하기 API", security = {@SecurityRequirement(name = "BearerKey")})
+    @AdminUser
     @PatchMapping("/reports/posts/{postId}")
     public ApiResponse<PostDeleteDto> deleteReportPost(@PathVariable Long postId) {
         return ApiResponse.success(adminFacade.deleteReportPost(postId));
@@ -65,6 +66,7 @@ public class AdminController {
     }
 
     @Operation(summary = "관리자 - 게시글 삭제하기 API", security = {@SecurityRequirement(name = "BearerKey")})
+    @AdminUser
     @DeleteMapping("/posts/{postId}")
     public ApiResponse<PostDeleteDto> deletePost(@PathVariable Long postId) {
         return ApiResponse.success(adminFacade.deletePost(postId));
@@ -75,5 +77,12 @@ public class AdminController {
     @GetMapping("/members")
     public ApiResponse<Page<MemberDto>> getPostDtos(MemberSearchDto request, Optional<Integer> page) {
         return ApiResponse.success(adminService.getMemberDtos(request, page));
+    }
+
+    @Operation(summary = "관리자 - 회원 정지시키기 API", security = {@SecurityRequirement(name = "BearerKey")})
+    @AdminUser
+    @PatchMapping("/members/{memberId}")
+    public ApiResponse<MemberBlockDto> blockMember(@PathVariable Long memberId) {
+        return ApiResponse.success(adminFacade.blockMember(memberId));
     }
 }

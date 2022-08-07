@@ -2,9 +2,12 @@ package hyun6ik.gridgetest.application.admin;
 
 import hyun6ik.gridgetest.domain.comment.entity.Comment;
 import hyun6ik.gridgetest.domain.comment.service.CommentService;
+import hyun6ik.gridgetest.domain.member.entity.Member;
+import hyun6ik.gridgetest.domain.member.service.MemberService;
 import hyun6ik.gridgetest.domain.post.Post;
 import hyun6ik.gridgetest.domain.post.service.PostService;
 import hyun6ik.gridgetest.interfaces.admin.dto.response.CommentDeleteDto;
+import hyun6ik.gridgetest.interfaces.admin.dto.response.MemberBlockDto;
 import hyun6ik.gridgetest.interfaces.admin.dto.response.PostDeleteDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -17,6 +20,7 @@ public class AdminFacade {
 
     private final PostService postService;
     private final CommentService commentService;
+    private final MemberService memberService;
 
     @Transactional
     public PostDeleteDto deleteReportPost(Long postId) {
@@ -39,5 +43,12 @@ public class AdminFacade {
         final Post post = postService.getPostBy(postId);
         post.deletePost();;
         return new PostDeleteDto(post.getId());
+    }
+
+    @Transactional
+    public MemberBlockDto blockMember(Long memberId) {
+        final Member member = memberService.getMemberBy(memberId);
+        member.blockMember();
+        return new MemberBlockDto(member.getId());
     }
 }

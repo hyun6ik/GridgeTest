@@ -7,7 +7,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public enum MemberCondition {
 
-    NORMAL("정상"), DISABLED("비활성화"), RESIGNED("탈퇴");
+    NORMAL("정상"), DISABLED("비활성화"), RESIGNED("탈퇴"), BLOCK("정지");
 
     private final String description;
 }

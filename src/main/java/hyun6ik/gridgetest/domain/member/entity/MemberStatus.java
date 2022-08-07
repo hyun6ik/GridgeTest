@@ -4,6 +4,8 @@ import hyun6ik.gridgetest.domain.member.constant.MemberCondition;
 import hyun6ik.gridgetest.domain.member.constant.MemberRole;
 import hyun6ik.gridgetest.domain.member.constant.MemberScope;
 import hyun6ik.gridgetest.domain.member.constant.MemberType;
+import hyun6ik.gridgetest.global.error.exception.CannotException;
+import hyun6ik.gridgetest.global.error.exception.ErrorCode;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -39,10 +41,23 @@ public class MemberStatus {
     }
 
     public void changePrivateAccount() {
+        if (this.memberScope == MemberScope.PRIVATE) {
+            throw new CannotException(ErrorCode.ALREADY_PRIVATE_MEMBER);
+        }
         this.memberScope = MemberScope.PRIVATE;
     }
 
     public void resignMember() {
+        if (this.memberCondition == MemberCondition.RESIGNED) {
+            throw new CannotException(ErrorCode.ALREADY_RESIGNED_MEMBER);
+        }
         this.memberCondition = MemberCondition.RESIGNED;
+    }
+
+    public void blockMember() {
+        if (this.memberCondition == MemberCondition.BLOCK) {
+            throw new CannotException(ErrorCode.ALREADY_BLOCK_MEMBER);
+        }
+        this.memberCondition = MemberCondition.BLOCK;
     }
 }

@@ -18,6 +18,11 @@ public enum ErrorCode {
     LENGTH_PASSWORD(400,"비밀번호는 6자 이상 20자 이하입니다." ),
     NOT_FOUND_USER(400, "해당 유저를 찾을 수 없습니다."),
 
+    //MEMBER
+    ALREADY_BLOCK_MEMBER(400, "이미 정지된 회원입니다."),
+    ALREADY_PRIVATE_MEMBER(400, "이미 비활성화된 회원입니다."),
+    ALREADY_RESIGNED_MEMBER(400, "이미 탈퇴한 회원입니다"),
+
     //POST
     NEED_AT_LEAST_ONE_IMAGE(400, "게시글 등록하기 위해선 최소 1개의 사진이 필요합니다."),
     NOT_FOUND_POST(400, "해당 게시글을 찾을 수 없습니다."),
@@ -34,8 +39,6 @@ public enum ErrorCode {
     ALREADY_REPORT_COMMENT(400, "이미 신고한 댓글입니다."),
     NOT_REPORT_POST(400, "신고된 게시글이 아닙니다."),
     NOT_REPORT_COMMENT(400, "신고된 댓글이 아닙니다"),
-
-
 
     //FOLLOW
     CANNOT_FOLLOW_MYSELF(400, "자기 자신은 팔로우 할 수 없습니다."),

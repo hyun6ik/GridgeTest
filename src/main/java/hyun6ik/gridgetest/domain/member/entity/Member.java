@@ -111,6 +111,10 @@ public class Member extends BaseTimeEntity {
         this.memberStatus.resignMember();
     }
 
+    public void blockMember() {
+        this.memberStatus.blockMember();
+    }
+
     public Follow follow(Member toMember) {
         final Follow follow = new Follow(this, toMember);
         this.followings.add(follow);
