@@ -36,7 +36,7 @@ public class MemberQueryRepository {
     public Optional<Member> findSocialMemberBy(SocialUserInfo socialUserInfo) {
         return Optional.ofNullable(queryFactory
                 .selectFrom(member)
-                .where(member.profile.name.eq(socialUserInfo.getName()),
+                .where(member.profile.nickName.eq(socialUserInfo.getName()),
                         member.memberStatus.memberType.eq(socialUserInfo.getMemberType()),
                         member.memberStatus.memberCondition.ne(MemberCondition.RESIGNED))
                 .fetchOne());
